@@ -1,19 +1,9 @@
 {
-<<<<<<< Updated upstream
-  "name": "api-erpp",
-=======
   "name": "backend",
->>>>>>> Stashed changes
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-<<<<<<< Updated upstream
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Leonel Aguilar",
-  "license": "ISC",
-=======
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index"
   },
@@ -22,8 +12,10 @@
   "engines": {
     "node": "12.x"
   },
->>>>>>> Stashed changes
   "dependencies": {
-    "express": "^4.17.1"
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.10.1"
   }
 }
