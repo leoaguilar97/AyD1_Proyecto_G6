@@ -1,13 +1,28 @@
 {
+<<<<<<< Updated upstream
   "name": "api-erpp",
+=======
+  "name": "backend",
+>>>>>>> Stashed changes
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+<<<<<<< Updated upstream
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Leonel Aguilar",
   "license": "ISC",
+=======
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index"
+  },
+  "author": "Leonel Aguilar",
+  "license": "ISC",
+  "engines": {
+    "node": "12.x"
+  },
+>>>>>>> Stashed changes
   "dependencies": {
     "express": "^4.17.1"
   }
