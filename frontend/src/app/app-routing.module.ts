@@ -17,9 +17,13 @@ import { DropdownComponent } from './dropdown/dropdown.component';
 import { TooltipsComponent } from './tooltips/tooltips.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { TabsComponent } from './tabs/tabs.component';
+import { UsuariosComponent } from './usuarios/usuarios.component';
+import { ProductosComponent } from './productos/productos.component';
+import { BodegasComponent } from './bodegas/bodegas.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'forms', component: FormsComponent },
   { path: 'buttons', component: ButtonsComponent },
@@ -35,7 +39,11 @@ const routes: Routes = [
   { path: 'dropdowns', component: DropdownComponent },
   { path: 'tooltips', component: TooltipsComponent },
   { path: 'carousel', component: CarouselComponent },
-  { path: 'tabs', component: TabsComponent }
+  { path: 'tabs', component: TabsComponent },
+  { path: 'usuarios', component: UsuariosComponent },
+  { path: 'productos', component: ProductosComponent },
+  { path: 'bodegas', component: BodegasComponent },
+  { path: 'home', component: HomeComponent }
 ];
 
 @NgModule({
