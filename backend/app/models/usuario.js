@@ -4,7 +4,7 @@ module.exports = mongoose => {
         nombre: String,
         apellido: String,
         dpi: { type: Number, unique: true },
-        correo: { type: Number, unique: true },
+        correo: { type: String, unique: true },
         fechaNacimiento: Date,
         direccion: String,
         numeroCelular: Number,
