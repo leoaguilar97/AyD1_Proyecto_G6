@@ -31,13 +31,13 @@ app.get("/", (req, res) => {
   res.json({ mensaje: "Sitio Funcionando" });
 });
 
-
-require("./app/routes/tutorial.routes")(app);
 require("./app/routes/usuario")(app);
 require("./app/routes/producto")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
+
+module.exports = server;
