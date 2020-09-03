@@ -26,6 +26,10 @@ import { DropdownComponent } from './dropdown/dropdown.component';
 import { TooltipsComponent } from './tooltips/tooltips.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { TabsComponent } from './tabs/tabs.component';
+import { UsuariosComponent } from './usuarios/usuarios.component';
+import { BodegasComponent } from './bodegas/bodegas.component';
+import { ProductosComponent } from './productos/productos.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +52,11 @@ import { TabsComponent } from './tabs/tabs.component';
     DropdownComponent,
     TooltipsComponent,
     CarouselComponent,
-    TabsComponent
+    TabsComponent,
+    UsuariosComponent,
+    BodegasComponent,
+    ProductosComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
