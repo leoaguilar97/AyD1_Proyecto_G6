@@ -33,6 +33,7 @@ app.get("/", (req, res) => {
 
 require("./app/routes/usuario")(app);
 require("./app/routes/producto")(app);
+require("./app/routes/login")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 3000;

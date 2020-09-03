@@ -19,7 +19,7 @@ exports.create = (req, res) => {
     fechaNacimiento: req.body.fechaNacimiento,
     direccion: req.body.direccion,
     numeroCelular: req.body.numeroCelular,
-    password: req.body.password,
+    password: bcrypt.hashSync(req.body.password, 8),
     roles: req.body.roles || []
   });
 
