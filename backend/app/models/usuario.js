@@ -3,8 +3,8 @@ module.exports = mongoose => {
       {
         nombre: String,
         apellido: String,
-        dpi: Number,
-        correo: String,
+        dpi: { type: Number, unique: true },
+        correo: { type: Number, unique: true },
         fechaNacimiento: Date,
         direccion: String,
         numeroCelular: Number,
