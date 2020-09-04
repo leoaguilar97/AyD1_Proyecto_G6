@@ -84,7 +84,7 @@ afterEach(function () {
     }
 });
 
-describe('Usuarios', () => {
+describe('Historia 3: Usuarios', () => {
     describe('POST /', () => {
         it("Guardar un usuario con datos correctos", done => {
             chai
@@ -109,36 +109,36 @@ describe('Usuarios', () => {
                     done();
                 });
         });
+    });
 
-        describe('LOGIN', () => {
-            it("Realiza el login de un usuario dado su correo y password", done => {
-                chai
-                    .request(app)
-                    .post(loginRoute)
-                    .send({ correo: CorrectUserInfo.correo, password: CorrectUserInfo.password })
-                    .end((err, res) => {
-                        expect(res).to.have.status(200);
-                        expect(res.body).to.be.a('object');
-                        expect(res.body.accessToken).to.be.a("string");
-                        expect(res.body.roles).to.be.a("array");
-                        expect(res.body.id).to.be.a("string");
-                        done();
-                    });
-            });
+    describe('Historia: Autenticación', () => {
+        it("Realiza el login de un usuario dado su correo y password", done => {
+            chai
+                .request(app)
+                .post(loginRoute)
+                .send({ correo: CorrectUserInfo.correo, password: CorrectUserInfo.password })
+                .end((err, res) => {
+                    expect(res).to.have.status(200);
+                    expect(res.body).to.be.a('object');
+                    expect(res.body.accessToken).to.be.a("string");
+                    expect(res.body.roles).to.be.a("array");
+                    expect(res.body.id).to.be.a("string");
+                    done();
+                });
+        });
 
-            it("Rechaza el login de un usuario", done => {
-                chai
-                    .request(app)
-                    .post(loginRoute)
-                    .send({ correo: CorrectUserInfo.correo, password: "33" })
-                    .end((err, res) => {
-                        expect(res).to.have.status(401);
-                        expect(res.body).to.be.a('object');
-                        expect(res.body.accessToken).to.be.a("null");
-                        expect(res.body.message).to.be.a("string");
-                        done();
-                    });
-            });
+        it("Rechaza el login de un usuario", done => {
+            chai
+                .request(app)
+                .post(loginRoute)
+                .send({ correo: CorrectUserInfo.correo, password: "33" })
+                .end((err, res) => {
+                    expect(res).to.have.status(401);
+                    expect(res.body).to.be.a('object');
+                    expect(res.body.accessToken).to.be.a("null");
+                    expect(res.body.message).to.be.a("string");
+                    done();
+                });
         });
     });
 
@@ -218,7 +218,7 @@ describe('Usuarios', () => {
     });
 });
 
-describe('Productos', () => {
+describe('Historia 4: Productos', () => {
     let productId = 0;
     describe('POST /', () => {
         it("Guardar un producto con datos correctos", done => {
