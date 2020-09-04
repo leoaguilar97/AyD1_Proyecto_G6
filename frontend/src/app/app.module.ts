@@ -31,7 +31,8 @@ import { BodegasComponent } from './bodegas/bodegas.component';
 import { ProductosComponent } from './productos/productos.component';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
-import { EditarUsuarioComponent } from './editar-usuario/editar-usuario.component';
+import { EditarUsuarioComponent } from './editarUsuario/editar-usuario.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { EditarUsuarioComponent } from './editar-usuario/editar-usuario.componen
     BodegasComponent,
     ProductosComponent,
     HomeComponent,
-    EditarUsuarioComponent
+    EditarUsuarioComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
