@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UsuariosComponent } from './usuarios.component';
+import { assert } from 'console';
 
 describe('UsuariosComponent', () => {
   let component: UsuariosComponent;
@@ -21,5 +22,9 @@ describe('UsuariosComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('prueba_getUsuarios', () => {
+    expect(component.cargarUsuarios()).toEqual(true);
   });
 });

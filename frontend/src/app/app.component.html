@@ -1,5 +1,7 @@
 <div class="container-scroller">
-  <app-navbar></app-navbar>
+  <nav *ngIf="this.currentRoute!=='login'" navigation>
+    <app-navbar></app-navbar>
+  </nav>
   <div class="container-fluid page-body-wrapper">
     <app-sidebar></app-sidebar>
     <div class="main-panel">

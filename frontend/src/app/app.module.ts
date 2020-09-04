@@ -30,6 +30,9 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 import { BodegasComponent } from './bodegas/bodegas.component';
 import { ProductosComponent } from './productos/productos.component';
 import { HomeComponent } from './home/home.component';
+import { HttpClientModule } from '@angular/common/http';
+import { EditarUsuarioComponent } from './editarUsuario/editar-usuario.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -56,14 +59,17 @@ import { HomeComponent } from './home/home.component';
     UsuariosComponent,
     BodegasComponent,
     ProductosComponent,
-    HomeComponent
+    HomeComponent,
+    EditarUsuarioComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     RouterModule,
     AppRoutingModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
