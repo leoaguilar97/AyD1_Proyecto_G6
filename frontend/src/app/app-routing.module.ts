@@ -22,6 +22,7 @@ import { ProductosComponent } from './productos/productos.component';
 import { BodegasComponent } from './bodegas/bodegas.component';
 import { HomeComponent } from './home/home.component';
 import { EditarUsuarioComponent } from './editar-usuario/editar-usuario.component';
+import { EditarProductoComponent } from './editar-producto/editar-producto.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -45,7 +46,8 @@ const routes: Routes = [
   { path: 'productos', component: ProductosComponent },
   { path: 'bodegas', component: BodegasComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'editarUsuario/:dpi_usuario', component: EditarUsuarioComponent }
+  { path: 'editarUsuario/:dpi_usuario', component: EditarUsuarioComponent },
+  { path: 'editarProducto/:id', component: EditarProductoComponent }
 ];
 
 @NgModule({
