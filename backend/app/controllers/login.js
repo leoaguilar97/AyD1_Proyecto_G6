@@ -17,7 +17,7 @@ exports.signin = (req, res) => {
         return;
     } 
     if (!user) {
-      return res.status(404).send({ message: "User Not found." });
+      return res.status(401).send({ message: "User Not found." });
     }
     bcrypt.genSaltSync(8);
 
@@ -54,6 +54,6 @@ exports.signin = (req, res) => {
   .catch(err => {
     res
       .status(500)
-      .send({ message: "Loguin error whit correo=" + req.body.correo });
+      .send({ message: "Login error whit correo=" + req.body.correo });
   });
 };

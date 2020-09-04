@@ -2,11 +2,13 @@ const assert = require('assert');
 const chai = require('chai');
 const app = require('../');
 const chaiHttp = require('chai-http');
+const login = require('../app/routes/login');
 
 chai.use(chaiHttp);
 
 const usersRoute = "/api/usuario";
 const prodsRoute = "/api/producto";
+const loginRoute = "/api/auth/signin";
 
 const CorrectUserDPI = 3000000000000;
 
@@ -95,7 +97,6 @@ describe('Usuarios', () => {
                 });
         });
 
-
         it("Rechaza la información de un usuario con datos incorrectos", done => {
             chai
                 .request(app)
@@ -104,6 +105,35 @@ describe('Usuarios', () => {
                 .end((err, res) => {
                     expect(res).to.have.status(400);
                     expect(res.body).to.be.a('object');
+                    done();
+                });
+        });
+
+        it("Realiza el login de un usuario dado su correo y password", done=> {
+            chai
+                .request(app)
+                .post(loginRoute)
+                .send({ correo: CorrectUserInfo.correo, password: CorrectUserInfo.password })
+                .end((err, res) => {
+                    expect(res).to.have.status(200);
+                    expect(res.body).to.be.a('object');
+                    expect(res.body.accessToken).to.be.a("string");
+                    expect(res.body.roles).to.be.a("array");
+                    expect(res.body.id).to.be.a("string");
+                    done();
+                });
+        });
+        
+        it("Rechaza el login de un usuario", done=> {
+            chai
+                .request(app)
+                .post(loginRoute)
+                .send({ correo: CorrectUserInfo.correo, password: "33" })
+                .end((err, res) => {
+                    expect(res).to.have.status(401);
+                    expect(res.body).to.be.a('object');
+                    expect(res.body.accessToken).to.be.a("null");
+                    expect(res.body.message).to.be.a("string");
                     done();
                 });
         });
@@ -276,7 +306,7 @@ describe('Productos', () => {
     });
 
     describe('DELETE /', () => {
-        it("Elimina los datos del usuario", done => {
+        it("Elimina los datos del producto", done => {
             chai
                 .request(app)
                 .delete(`${prodsRoute}/${productId}`)
