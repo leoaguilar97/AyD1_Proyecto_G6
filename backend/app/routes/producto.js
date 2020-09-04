@@ -2,6 +2,9 @@ module.exports = app => {
     const producto = require("../controllers/producto");
 
     var router = require("express").Router();
+
+    // Obtener todos los usuarios
+    router.get("/", producto.getAll);
   
     // Create a new Productos
     router.post("/", producto.create);
@@ -14,8 +17,6 @@ module.exports = app => {
   
     // Delete a Productos with id
     router.delete("/:codigo", producto.delete);
-
-
 
     app.use("/api/producto", router);
   };
