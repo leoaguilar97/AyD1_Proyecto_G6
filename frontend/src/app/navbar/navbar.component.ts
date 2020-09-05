@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -13,15 +14,18 @@ export class NavbarComponent implements OnInit {
     this.sidebarOpened = !this.sidebarOpened;
     if (this.sidebarOpened) {
       document.querySelector('.sidebar-offcanvas').classList.add('active');
-    }
-    else {
+    } else {
       document.querySelector('.sidebar-offcanvas').classList.remove('active');
     }
   }
-  constructor(config: NgbDropdownConfig) {
+  constructor(config: NgbDropdownConfig, private router: Router) {
     config.placement = 'bottom-right';
   }
   ngOnInit() {
+  }
+  cerrarSesion() {
+    localStorage.clear();
+    this.router.navigate(['login']);
   }
 
 }
