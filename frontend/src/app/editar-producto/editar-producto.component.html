@@ -40,57 +40,9 @@
                         </div>
                     </div>
                 </div>
-                <button type="submit" (click)="agregar()" class="btn btn-success mr-2">Agregar</button>
+                <button type="submit" (click)="editarProducto()" class="btn btn-success mr-2">Guardar Cambios</button>
                 <button class="btn btn-light" (click)="cancelar()" >Cancelar</button>
             </form>
         </div>
     </div>
 </div>
-
-<!-- Tabla de Productos-->
-<div class="col-lg-12 grid-margin stretch-card">
-    <div class="card">
-        <div class="card-body">
-            <h4 class="card-title">PRODUCTOS</h4>
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th> </th>
-                            <th> Nombre Producto </th>
-                            <th> Categorías </th>
-                            <th> Proveedores </th>
-                            <th> Acciones </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Repitencia-->
-                        <tr *ngFor="let producto of productos">
-                            <td>
-                                <img class="mr-2" src="assets/images/menu_icons/88.png" alt="image" />
-                            </td>
-                            <td>
-                                {{producto.nombre}}
-                            </td>
-                            <td>
-                                <!--{{producto.categorias}}-->
-                                Categoría 1
-                            </td>
-                            <td>
-                                {{producto.proveedores}}
-                            </td>
-                            <td>
-                                <button type="button" class="btn social-btn btn-primary py-0 px-0 mr-2"><i
-                                        class="mdi mdi-36px mdi-account-edit" (click)="editar(producto.id)"></i></button>
-                                <button type="button" class="btn social-btn btn-danger  py-0 px-0 "><i
-                                        class="mdi mdi-36px mdi-delete" (click)="eliminar(producto.id)"></i></button>
-                            </td>
-
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-
