@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     if (localStorage.getItem('id') === null) {
-      this.logueado = false;
+      this.logueado = true;  // Cambiar para deploy
     } else {
       this.logueado = true;
     }

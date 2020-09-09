@@ -49,6 +49,8 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'editarUsuario/:dpi_usuario', component: EditarUsuarioComponent },
   { path: 'editarProducto/:id', component: EditarProductoComponent },
+  { path: 'editarProducto/:id', component: EditarProductoComponent },
+  { path: 'login', component: LoginComponent }
 ];
 
 @NgModule({
