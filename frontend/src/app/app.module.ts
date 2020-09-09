@@ -62,7 +62,8 @@ import { EditarProductoComponent } from './editar-producto/editar-producto.compo
     ProductosComponent,
     HomeComponent,
     EditarUsuarioComponent,
-    EditarProductoComponent
+    EditarProductoComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
