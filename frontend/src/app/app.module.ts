@@ -34,6 +34,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { EditarUsuarioComponent } from './editarUsuario/editar-usuario.component';
 import { LoginComponent } from './login/login.component';
 import { EditarProductoComponent } from './editar-producto/editar-producto.component';
+import { ProveedoresComponent } from './proveedores/proveedores.component';
+import { CategoriasComponent } from './categorias/categorias.component';
+import { SedesComponent } from './sedes/sedes.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +66,10 @@ import { EditarProductoComponent } from './editar-producto/editar-producto.compo
     HomeComponent,
     EditarUsuarioComponent,
     EditarProductoComponent,
-    LoginComponent
+    LoginComponent,
+    ProveedoresComponent,
+    CategoriasComponent,
+    SedesComponent
   ],
   imports: [
     BrowserModule,
