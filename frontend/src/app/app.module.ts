@@ -37,6 +37,7 @@ import { EditarProductoComponent } from './editar-producto/editar-producto.compo
 import { ProveedoresComponent } from './proveedores/proveedores.component';
 import { CategoriasComponent } from './categorias/categorias.component';
 import { SedesComponent } from './sedes/sedes.component';
+import { EditarCategoriasComponent } from './editar-categorias/editar-categorias.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { SedesComponent } from './sedes/sedes.component';
     LoginComponent,
     ProveedoresComponent,
     CategoriasComponent,
-    SedesComponent
+    SedesComponent,
+    EditarCategoriasComponent
   ],
   imports: [
     BrowserModule,
