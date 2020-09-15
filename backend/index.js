@@ -34,9 +34,10 @@ app.get("/", (req, res) => {
 require("./app/routes/usuario")(app);
 require("./app/routes/producto")(app);
 require("./app/routes/login")(app);
+require("./app/routes/bodega")(app);
 
 // set port, listen for requests
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 const server = app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
