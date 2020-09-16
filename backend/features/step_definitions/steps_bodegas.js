@@ -146,3 +146,13 @@ Then('retornada en forma de objeto con los datos modificados', function () {
     hj.assertThat(body.bodega.id, hj.equalTo(bodega.id));
 });
 
+When('se hace un http delete a {string} y se envía como parámetro :id un identificador de bodega', async function (route) {
+    const result = (await got.delete(route.replace(':id', bodega.id), { responseType: 'json' }));
+    body = result.body;
+    hj.assertThat(result.statusCode, hj.equalTo(200));
+});
+
+Then('la bodega es eliminada de la base de datos', function () {
+    hj.assertThat(body.message, hj.equalTo('deleted'));
+});
+

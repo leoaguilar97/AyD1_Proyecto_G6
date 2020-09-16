@@ -4,17 +4,20 @@ module.exports = app => {
 
     var router = require("express").Router();
 
-    // Obtener todas las bodegas
+    // Obtiene todas las bodegas
     router.get("/", bodega.getAll);
     
-    // Retrieve a single Productos with id
+    // Retorna una bodega a partir de su codigo
     router.get("/:codigo", bodega.findOne);
 
-    // Create a new Bodega
+    // Crea una bodega
     router.post("/", bodega.create);
 
-    // Update a Productos with id
+    // Modifica una bodega a partir de su codigo
     router.put("/:codigo", bodega.update);
+
+    // Elimina una bodega a partir de su codigo
+    router.delete("/:codigo", bodega.delete);
 
     app.use("/api/bodega", router);
 };

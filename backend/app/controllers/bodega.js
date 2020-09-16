@@ -1,7 +1,7 @@
 const db = require("../models");
 const Bodega = db.bodega;
 
-// Create and Save a new bodega
+// Crear y guardar una bodega
 exports.create = (req, res) => {
 
     if (!req.body.nombre || !req.body.direccion) {
@@ -27,7 +27,7 @@ exports.create = (req, res) => {
         });
 };
 
-// Obtener todos los productos de la bd
+// Obtener todas las bodegas de la base de datos
 exports.getAll = (req, res) => {
     Bodega.find({})
         .then(data => {
@@ -40,8 +40,7 @@ exports.getAll = (req, res) => {
         });
 };
 
-
-// Find a single Bodega with an codigo
+// Obtiene una bodega de la base de datos
 exports.findOne = (req, res) => {
     const codigo = req.params.codigo;
 
@@ -67,7 +66,7 @@ exports.findOne = (req, res) => {
         });
 };
 
-// Update a bodega by the codigo in the request
+// Modifica una bodega a partir de su codigo
 exports.update = (req, res) => {
 
     if (!req.body) {
@@ -80,7 +79,7 @@ exports.update = (req, res) => {
 
     Bodega.findOneAndUpdate({ _id: codigo }, req.body, { useFindAndModify: false, new: true })
         .then(data => {
-            
+
             if (!data) {
                 res.status(404).send({
                     message: `La bodega ${codigo} no fue encontrada`
@@ -90,6 +89,30 @@ exports.update = (req, res) => {
         .catch(err => {
             res.status(500).send({
                 message: 'Error al modificar la bodega' + codigo
+            });
+        });
+};
+
+
+// Elimina una bodega a partir de su codigo
+exports.delete = (req, res) => {
+    const codigo = req.params.codigo;
+
+    Bodega.findOneAndRemove({ _id: codigo })
+        .then(data => {
+            if (!data) {
+                res.status(404).send({
+                    message: `No se puede eliminar la bodega ${codigo}`
+                });
+            } else {
+                res.send({
+                    message: 'deleted'
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: `No se pudo eliminar la bodega ${codigo} ${err}`
             });
         });
 };
