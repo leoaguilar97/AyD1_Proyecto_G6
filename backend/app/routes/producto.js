@@ -3,7 +3,7 @@ module.exports = app => {
 
     var router = require("express").Router();
 
-    // Obtener todos los usuarios
+    // Obtener todos los productos
     router.get("/", producto.getAll);
   
     // Create a new Productos

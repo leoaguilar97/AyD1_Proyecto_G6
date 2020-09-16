@@ -105,7 +105,7 @@ exports.delete = (req, res) => {
     });
 };
 
-// Obtener todos los usuarios de la bd
+// Obtener todos los productos de la bd
 exports.getAll = (req, res) => {
   Producto.find({})
     .then(data => {
