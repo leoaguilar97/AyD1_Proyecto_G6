@@ -14,13 +14,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const db = require("./app/models");
 
+db.mongoose.set('useNewUrlParser', true);
+db.mongoose.set('useFindAndModify', false);
+db.mongoose.set('useCreateIndex', true);
+
 db.mongoose
   .connect(process.env.TESTING ? db.testUrl : db.url, {
     useNewUrlParser: true,
     useUnifiedTopology: true
-  })
-  .then(() => {
-    console.log("Conectado a la base de datos exitosamente");
   })
   .catch(err => {
     console.log("No se pudo conectar a la base de datos", err);
