@@ -48,21 +48,19 @@ exports.findOne = (req, res) => {
         if (err) {
             res
                 .status(500)
-                .send({ message: "Error al obtener la bodega " + codigo });
+                .json({ message: "Error al obtener la bodega " + codigo });
         } else {
             if (!data) {
-                res
-                    .status(404)
-                    .send({ message: "La bodega " + codigo + " no existe" });
+                res.status(404).json({ message: 'No existe'});
             } else {
-                res.json({ message: 'retrieved', bodega: data });
+                res.json({ message: 'retrieved', bodega: data }).send();
             }
         }
     })
         .catch(err => {
             res
                 .status(500)
-                .send({ message: "Error retrieving Producto with codigo=" + codigo });
+                .json({ message: "Error retrieving Producto with codigo=" + codigo });
         });
 };
 
@@ -79,12 +77,13 @@ exports.update = (req, res) => {
 
     Bodega.findOneAndUpdate({ _id: codigo }, req.body, { useFindAndModify: false, new: true })
         .then(data => {
-
             if (!data) {
-                res.status(404).send({
-                    message: `La bodega ${codigo} no fue encontrada`
+                return res.status(404).send({
+                    message: `La bodega ${codigo} No existe`
                 });
-            } else res.send({ message: 'modified', bodega: data });
+            } 
+            else 
+                res.send({ message: 'modified', bodega: data });
         })
         .catch(err => {
             res.status(500).send({
@@ -92,7 +91,6 @@ exports.update = (req, res) => {
             });
         });
 };
-
 
 // Elimina una bodega a partir de su codigo
 exports.delete = (req, res) => {
@@ -102,7 +100,7 @@ exports.delete = (req, res) => {
         .then(data => {
             if (!data) {
                 res.status(404).send({
-                    message: `No se puede eliminar la bodega ${codigo}`
+                    message: `La bodega ${codigo} No existe`
                 });
             } else {
                 res.send({

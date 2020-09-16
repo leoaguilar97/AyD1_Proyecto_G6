@@ -7,32 +7,64 @@ const hj = require('hamjest');
 
 process.env.TESTING = true;
 
-const app = require('../../index');
-
-const Bodegas = require('../../app/models/bodega');
-const { timeout } = require('../../index');
+// REQUERIR LA APP PARA INICIAR EL SERVER
+require('../../index');
 
 let body;
+let statusCode;
+let message;
 
 let bodega = {
     "nombre": "Departamento de " + faker.commerce.department(),
     "direccion": faker.address.streetAddress(),
 };
 
-When('se hace un http post a {string}, con informacion de la bodega [nombre, direccion]', async function (route) {
+let hooks = {
+    afterResponse: [(response) => {
+        body = response.body;
+        statusCode = response.statusCode;
+        message = body.message;
+        return response;
+    }],
 
-    var data = {
+    beforeError: [
+        error => {
+            const { response } = error;
+
+            body = response.body;
+            statusCode = response.statusCode;
+            message = body.message;
+
+            if (response && response.body) {
+                error.message = `${message} (${statusCode})`;
+            }
+
+            return response;
+        }
+    ]
+};
+
+let postData = () => {
+    return {
         headers: { 'Content-Type': 'application/json' },
         json: bodega,
+        responseType: 'json',
+        hooks: hooks
+    }
+};
+
+let getData = () => {
+    return {
+        hooks: hooks,
         responseType: 'json'
-    };
+    }
+};
 
-    const result = (await got.post(route, data));
+When('se hace un http post a {string}, con informacion de la bodega [nombre, direccion]', async function (route) {
+    await got.post(route, postData());
 
-    body = result.body;
-
-    hj.assertThat(result.statusCode, hj.equalTo(200));
-    hj.assertThat(body.message, hj.equalTo('created'));
+    hj.assertThat(statusCode, hj.equalTo(200));
+    hj.assertThat(message, hj.equalTo('created'));
 });
 
 Then('la bodega es guardada en la base de datos', async function () {
@@ -50,50 +82,29 @@ Then('se asigna un identificador unico a la bodega.', function () {
 });
 
 When('se envian datos incompletos a {string}', async function (route) {
-    let bodega = {
+    let toPost = postData();
+    toPost.json = {
         "nombre": "Departamento de " + faker.commerce.department()
         // hace falta la direccion de la bodega
     };
-    let code;
-
-    var data = {
-        headers: { 'Content-Type': 'application/json' },
-        json: bodega,
-        responseType: 'json',
-        hooks: {
-            beforeError: [
-                error => {
-                    const { response } = error;
-                    if (response && response.body) {
-                        error.message = `${response.body.message} (${response.statusCode})`;
-                    }
-
-                    body = response.body;
-                    code = response.statusCode;
-
-                    return { body: response.body, code: code };
-                }
-            ]
-        }
-    };
 
     try {
-        await got.post(route, data);
+        await got.post(route, toPost);
     }
     catch (error) { /* ERROR ESPERADO */ }
-    hj.assertThat(code, hj.equalTo(400));
+
+    hj.assertThat(statusCode, hj.equalTo(400));
 });
 
 Then('retorna un error.', function () {
-    hj.assertThat(body.message, hj.equalTo('Se enviaron datos incompletos'));
+    hj.assertThat(message, hj.equalTo('Se enviaron datos incompletos'));
 });
 
 When('se hace un http get a {string}', async function (route) {
-    const result = (await got.get(route, { responseType: 'json' }));
-    body = result.body;
+    await got.get(route, { responseType: 'json', hooks: { afterResponse: hooks.afterResponse } });
 
-    hj.assertThat(result.statusCode, hj.equalTo(200));
-    hj.assertThat(body.message, hj.equalTo('retrieved'));
+    hj.assertThat(statusCode, hj.equalTo(200));
+    hj.assertThat(message, hj.equalTo('retrieved'));
 });
 
 Then('las bodegas son retornadas en forma de lista.', function () {
@@ -101,12 +112,10 @@ Then('las bodegas son retornadas en forma de lista.', function () {
 });
 
 When('se hace un http get a {string} y se envia como parametro :id un identificador de bodega', async function (route) {
-    const result = (await got.get(route.replace(':id', bodega.id), { responseType: 'json' }));
+    await got.get(route.replace(':id', bodega.id), getData());
 
-    body = result.body;
-
-    hj.assertThat(result.statusCode, hj.equalTo(200));
-    hj.assertThat(body.message, hj.equalTo('retrieved'));
+    hj.assertThat(statusCode, hj.equalTo(200));
+    hj.assertThat(message, hj.equalTo('retrieved'));
 });
 
 Then('la bodega es retornada en forma de objeto', function () {
@@ -118,26 +127,26 @@ Then('la bodega es retornada en forma de objeto', function () {
     hj.assertThat(body.bodega.id, hj.equalTo(bodega.id));
 });
 
-When('se hace un http put a {string} y se envía como parámetro :id un identificador de bodega y se envian datos nuevos de la bodega [nombre o direccion]', async function (route) {
+When('se hace un http get a {string} y se envia como parametro :id un identificador de bodega que no existe', async function (route) {
+    try {
+        await got.get(route.replace(":id", "000000000000"), getData());
+    }
+    catch (ex) { }
 
+    hj.assertThat(message, hj.containsString('No existe'));
+});
+
+When('se hace un http put a {string} y se envía como parámetro :id un identificador de bodega y se envian datos nuevos de la bodega [nombre o direccion]', async function (route) {
     bodega.nombre = "Departamento de " + faker.commerce.department();
     bodega.direccion = faker.address.streetAddress();
 
-    var data = {
-        headers: { 'Content-Type': 'application/json' },
-        json: bodega,
-        responseType: 'json'
-    };
+    await got.put(route.replace(':id', bodega.id), postData());
 
-    const result = (await got.put(route.replace(':id', bodega.id), data));
-
-    body = result.body;
-
-    hj.assertThat(result.statusCode, hj.equalTo(200));
+    hj.assertThat(statusCode, hj.equalTo(200));
 });
 
 Then('la bodega es modificada exitosamente', function () {
-    hj.assertThat(body.message, hj.equalTo('modified'));
+    hj.assertThat(message, hj.equalTo('modified'));
 });
 
 Then('retornada en forma de objeto con los datos modificados', function () {
@@ -146,13 +155,34 @@ Then('retornada en forma de objeto con los datos modificados', function () {
     hj.assertThat(body.bodega.id, hj.equalTo(bodega.id));
 });
 
+When('se hace un http put a {string} y se envía como parámetro :id un identificador de bodega que no existe', async function (route) {
+    try {
+        await got.get(route.replace(":id", "000000000000"), getData());
+    }
+    catch (ex) { }
+
+    hj.assertThat(message, hj.containsString('No existe'));
+});
+
 When('se hace un http delete a {string} y se envía como parámetro :id un identificador de bodega', async function (route) {
-    const result = (await got.delete(route.replace(':id', bodega.id), { responseType: 'json' }));
-    body = result.body;
-    hj.assertThat(result.statusCode, hj.equalTo(200));
+    await got.delete(route.replace(':id', bodega.id), postData());
+
+    hj.assertThat(statusCode, hj.equalTo(200));
 });
 
 Then('la bodega es eliminada de la base de datos', function () {
-    hj.assertThat(body.message, hj.equalTo('deleted'));
+    hj.assertThat(message, hj.equalTo('deleted'));
 });
 
+When('se hace un http delete a {string} y se envía como parámetro :id un identificador de bodega que no existe', async function (route) {
+    try {
+        await got.get(route.replace(":id", "000000000000"), getData());
+    }
+    catch (ex) { }
+
+    hj.assertThat(message, hj.containsString('No existe'));
+});
+
+Then('devuelve un error {int}', function (code) {
+    hj.assertThat(statusCode, hj.equalTo(code));
+});
