@@ -7,6 +7,7 @@ mongoose.set('useFindAndModify', false);
 const db = {};
 db.mongoose = mongoose;
 db.url = dbConfig.url;
+db.testUrl = dbConfig.testUrl;
 
 db.usuario = require("./usuario.js")(mongoose);
 db.producto = require("./producto")(mongoose);

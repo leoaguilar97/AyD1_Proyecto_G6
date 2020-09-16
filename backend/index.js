@@ -13,16 +13,17 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const db = require("./app/models");
+
 db.mongoose
-  .connect(db.url, {
+  .connect(process.env.TESTING ? db.testUrl : db.url, {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
   .then(() => {
-    console.log("Connected to the database!");
+    console.log("Conectado a la base de datos exitosamente");
   })
   .catch(err => {
-    console.log("Cannot connect to the database!", err);
+    console.log("No se pudo conectar a la base de datos", err);
     process.exit();
   });
 
@@ -39,7 +40,7 @@ require("./app/routes/bodega")(app);
 // set port, listen for requests
 const PORT = process.env.PORT || 5000;
 const server = app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
+  console.log(`API escuchando en el puerto ${PORT}.`);
 });
 
 module.exports = server;

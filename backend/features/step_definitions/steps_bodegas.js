@@ -5,11 +5,17 @@ faker.setLocale('es_MX');
 const got = require('got');
 const hj = require('hamjest');
 
+process.env.TESTING = true;
+
+const app = require('../../index');
+
 const Bodegas = require('../../app/models/bodega');
+const { timeout } = require('../../index');
 
 let body;
 
 When('Se hace un http post a {string}, con informacion de la bodega [nombre, direccion]', async function (route) {
+
     let bodega = {
         "nombre": "Departamento de " + faker.commerce.department(),
         "direccion": faker.address.streetAddress(),
@@ -36,7 +42,7 @@ Then('La bodega es guardada en la base de datos', async function () {
     hj.assertThat(body.bodega, hj.hasProperty('direccion'));
 });
 
-Then('Se asigna un identificador unico a la bodega', function () {
+Then('Se asigna un identificador unico a la bodega.', function () {
     hj.assertThat(body.bodega, hj.hasProperty('id'));
     hj.assertThat(body.bodega.id, hj.hasSize(24));
     hj.assertThat(body.bodega.id, hj.is(hj.string()));

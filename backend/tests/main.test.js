@@ -1,8 +1,10 @@
 const assert = require('assert');
 const chai = require('chai');
+
+process.env.TESTING = true;
+
 const app = require('../');
 const chaiHttp = require('chai-http');
-const login = require('../app/routes/login');
 
 chai.use(chaiHttp);
 
