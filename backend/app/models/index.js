@@ -12,5 +12,6 @@ db.testUrl = dbConfig.testUrl;
 db.usuario = require("./usuario.js")(mongoose);
 db.producto = require("./producto")(mongoose);
 db.bodega = require('./bodega')(mongoose);
+db.categoria = require('./categoria')(mongoose);
 
 module.exports = db;
