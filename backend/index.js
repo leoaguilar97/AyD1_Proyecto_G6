@@ -19,29 +19,30 @@ db.mongoose.set('useFindAndModify', false);
 db.mongoose.set('useCreateIndex', true);
 
 db.mongoose
-  .connect(process.env.TESTING ? db.testUrl : db.url, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
-  .catch(err => {
-    console.log("No se pudo conectar a la base de datos", err);
-    process.exit();
-  });
+    .connect(process.env.TESTING ? db.testUrl : db.url, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    })
+    .catch(err => {
+        console.log("No se pudo conectar a la base de datos", err);
+        process.exit();
+    });
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ mensaje: "Sitio Funcionando" });
+    res.json({ mensaje: "Sitio Funcionando" });
 });
 
 require("./app/routes/usuario")(app);
 require("./app/routes/producto")(app);
 require("./app/routes/login")(app);
 require("./app/routes/bodega")(app);
+require("./app/routes/categoria")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 5000;
 const server = app.listen(PORT, () => {
-  console.log(`API escuchando en el puerto ${PORT}.`);
+    console.log(`API escuchando en el puerto ${PORT}.`);
 });
 
 module.exports = server;
