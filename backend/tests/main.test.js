@@ -50,20 +50,20 @@ const IncorrectUserInfo = {
 
 const CorrectProductInfo = {
     nombre: "producto",
-    categorias: [2, 3, 5],
-    proveedores: [3, 1, 66]
+    categorias: [],
+    proveedores: []
 };
 
 const ModifiedProductInfo = {
     nombre: "productoModificado",
     categorias: [],
-    proveedores: [1, 2]
+    proveedores: []
 };
 
 const IncorrectProductInfo = {
     // FALTA EL NOMBRE
-    categorias: [2, 3, 5],
-    proveedores: [3, 1, 66]
+    categorias: [],
+    proveedores: []
 };
 
 const { expect } = chai;

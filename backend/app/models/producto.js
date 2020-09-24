@@ -1,8 +1,11 @@
-module.exports = mongoose => {
+module.exports = (mongoose) => {
   var schema = mongoose.Schema(
     {
       nombre: String,
-      categorias: [],
+      categorias: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'categoria'
+      }],
       proveedores: [],
     },
     { timestamps: true }
@@ -15,5 +18,6 @@ module.exports = mongoose => {
   });
 
   const Producto = mongoose.model("producto", schema);
+
   return Producto;
 };

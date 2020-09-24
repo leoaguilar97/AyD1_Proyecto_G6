@@ -1,18 +1,43 @@
 # language: es
 
+
 Característica: Vincular características a un producto
+    
+    Antecedentes:
+        Dado que existen los siguientes productos 
+        | Pollo         |
+        | Carne         |
+        | Detergente    |
+        | Arroz         |
+        | Tornillos     |
+        | Televisión    |
+              
+        Y las siguientes categorias
+        | Alimentos         |
+        | Limpieza          |
+        | Mecánica          |
+        | Electrodomésticos |
+        | Perecederos       |
+        | Enlatados         |
+
+        Entonces se utilizarán de prueba en los siguientes escenario
+    
+    @ important
     Escenario: Registrando un producto
-        Cuando se registra un producto, realizando un http post a "http://127.0.0.1:5000/api/producto", y se envia una lista de identificadores de categorias
+        Cuando se registra el producto con las siguientes categorias
+        | producto | categoria   |
+        | Atun     | Perecederos |
+        | Atun     | Alimentos   |
+        | Atun     | Enlatados   |
+
         Entonces se vinculan todas las categorias enviadas al producto registrado
-        Y se agrega a cada categoría enviada el producto creado.
 
+    @ important
     Escenario: Agregando o eliminando categorías a un producto
-        Dado un producto existente en la base de datos
-        Cuando se envia un objeto con el atributo "categorias" con un http put a "http://127.0.0.1:5000/api/producto/:id"
-        Entonces se vinculan todas las categorias enviadas al producto modificado
-        Y se agrega a cada categoría enviada el producto modificado.
+        Dado el producto "Detergente"
+        Cuando se le agrega la categoria "Limpieza"
+        Entonces el producto contiene en su lista la categoria agregada.
 
-    Escenario: Eliminando una categoría
-        Dada una categoría existente en la base de datos
-        Cuando se elimina una categoría realizando una llamada http delete a "http://127.0.0.1:5000/api/categoria/:nombre"
-        Entonces se eliminan todas las referencias a esa categoría en todos los productos vinculados a ella
+        Dado el producto "Atun"
+        Cuando se requiere eliminarle la categoria "Enlatados"
+        Entonces el producto ya no contiene en su lista la categoria agregada

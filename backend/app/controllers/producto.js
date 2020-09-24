@@ -13,8 +13,7 @@ exports.create = (req, res) => {
   const producto = new Producto({
     nombre: req.body.nombre,
     categorias: req.body.categorias || [],
-    proveedores: req.body.proveedores || [],
-    bodegas: req.body.bodegas || []
+    proveedores: req.body.proveedores || []
   });
 
   // Save producto in the database
@@ -35,7 +34,7 @@ exports.create = (req, res) => {
 exports.findOne = (req, res) => {
   const codigo = req.params.codigo;
 
-  Producto.findOne({ _id: codigo }, function (err, data) {
+  Producto.findOne({ _id: codigo }).populate('categorias').exec(function (err, data) {
     if (err) {
       res
         .status(500)
@@ -49,12 +48,7 @@ exports.findOne = (req, res) => {
         res.json(data);
       }
     }
-  })
-    .catch(err => {
-      res
-        .status(500)
-        .send({ message: "Error retrieving Producto with codigo=" + codigo });
-    });
+  });
 };
 
 // Update a Producto by the codigo in the request
@@ -108,10 +102,12 @@ exports.delete = (req, res) => {
 // Obtener todos los productos de la bd
 exports.getAll = (req, res) => {
   Producto.find({})
+    .populate("categorias")
     .then(data => {
       res.send(data);
     })
     .catch(err => {
+      console.error(err);
       res
         .status(500)
         .send({ message: "Error al retornar todos los productos en la BD" })
