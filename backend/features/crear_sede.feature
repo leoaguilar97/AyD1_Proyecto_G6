@@ -30,3 +30,6 @@ Característica: Manipulacion de sedes
     Escenario: Eliminar una sede
         Cuando se hace un http delete a "http://127.0.0.1:5000/api/sede/:id" y se envía como parámetro :id un identificador de sede
         Entonces la sede es eliminada de la base de datos
+
+        Cuando se hace un http delete a "http://127.0.0.1:5000/api/sede/:id" y se envía como parámetro :id un identificador de sede que no existe
+        Entonces devuelve un error 404 de sede
