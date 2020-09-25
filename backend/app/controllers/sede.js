@@ -95,3 +95,28 @@ exports.update = (req, res) => {
             });
         });
 };
+
+
+
+// Elimina una sede a partir de su codigo
+exports.delete = (req, res) => {
+    const codigo = req.params.codigo;
+
+    Sede.findOneAndRemove({ _id: codigo })
+        .then(data => {
+            if (!data) {
+                res.status(404).send({
+                    message: `La sede ${codigo} No existe`
+                });
+            } else {
+                res.send({
+                    message: 'deleted'
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: `No se pudo eliminar la sede ${codigo} ${err}`
+            });
+        });
+};

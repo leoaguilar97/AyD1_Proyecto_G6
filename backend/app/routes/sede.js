@@ -16,5 +16,8 @@ module.exports = app => {
     // Modifica una sede a partir de su codigo
     router.put("/:codigo", sede.update);
 
+    // Elimina una bodega a partir de su codigo
+    router.delete("/:codigo", sede.delete);
+
     app.use("/api/sede", router);
 };
