@@ -13,5 +13,6 @@ db.usuario = require("./usuario.js")(mongoose);
 db.producto = require("./producto")(mongoose);
 db.bodega = require('./bodega')(mongoose);
 db.categoria = require('./categoria')(mongoose);
+db.sede = require('./sede')(mongoose);
 
 module.exports = db;

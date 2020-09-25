@@ -69,5 +69,22 @@ When('se hace un http post a {string}, con informacion de la sede [nombre, direc
     hj.assertThat(message, hj.equalTo('created'));
 });
 
+Then('la sede es guardada en la base de datos', async function () {
+    hj.assertThat(body, hj.hasProperty('sede'));
+    hj.assertThat(body.sede, hj.hasProperty('nombre'));
+    hj.assertThat(body.sede, hj.hasProperty('direccion'));
+    hj.assertThat(body.sede, hj.hasProperty('municipio'));
+    hj.assertThat(body.sede, hj.hasProperty('departamento'));
+    hj.assertThat(body.sede, hj.hasProperty('encargado'));
+});
+
+Then('se asigna un identificador unico a la sede.', function () {
+    hj.assertThat(body.sede, hj.hasProperty('id'));
+    hj.assertThat(body.sede.id, hj.hasSize(24));
+    hj.assertThat(body.sede.id, hj.is(hj.string()));
+
+    sede.id = body.sede.id;
+});
+
 
 
