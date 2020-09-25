@@ -188,3 +188,15 @@ When('se hace un http put a {string} y se envía como parámetro :id un identifi
 
     hj.assertThat(message, hj.containsString('No existe'));
 });
+
+
+
+When('se hace un http delete a {string} y se envía como parámetro :id un identificador de sede', async function (route) {
+    await got.delete(route.replace(':id', sede.id), postData());
+
+    hj.assertThat(statusCode, hj.equalTo(200));
+});
+
+Then('la sede es eliminada de la base de datos', function () {
+    hj.assertThat(message, hj.equalTo('deleted'));
+});
