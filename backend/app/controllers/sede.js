@@ -42,3 +42,27 @@ exports.getAll = (req, res) => {
                 .send({ message: "Error al retornar todas las sedes en la BD" })
         });
 };
+
+// Obtiene una sede de la base de datos
+exports.findOne = (req, res) => {
+    const codigo = req.params.codigo;
+
+    Sede.findOne({ _id: codigo }, function (err, data) {
+        if (err) {
+            res
+                .status(500)
+                .json({ message: "Error al obtener la sede " + codigo });
+        } else {
+            if (!data) {
+                res.status(404).json({ message: 'No existe'});
+            } else {
+                res.json({ message: 'retrieved', sede: data }).send();
+            }
+        }
+    })
+        .catch(err => {
+            res
+                .status(500)
+                .json({ message: "Error retrieving sede with codigo=" + codigo });
+        });
+};

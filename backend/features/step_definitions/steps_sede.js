@@ -126,7 +126,7 @@ When('se hace un http get a {string} y se envia como parametro :id un identifica
     hj.assertThat(message, hj.equalTo('retrieved'));
 });
 
-Then('la sede es retornada en forma de objeto', function () {
+Then('la sede es retornada en forma de objeto.', function () {
     hj.assertThat(body.sede, hj.hasProperty('nombre'));
     hj.assertThat(body.sede, hj.hasProperty('direccion'));
     hj.assertThat(body.sede, hj.hasProperty('municipio'));
@@ -135,7 +135,7 @@ Then('la sede es retornada en forma de objeto', function () {
 
     hj.assertThat(body.sede.nombre, hj.equalTo(sede.nombre));
     hj.assertThat(body.sede.direccion, hj.equalTo(sede.direccion));
-    hj.assertThat(body.sede.id, hj.equalTo(sede.municipio));
-    hj.assertThat(body.sede.id, hj.equalTo(sede.departamento));
-    hj.assertThat(body.sede.id, hj.equalTo(sede.encargado));
+    hj.assertThat(body.sede.municipio, hj.equalTo(sede.municipio));
+    hj.assertThat(body.sede.departamento, hj.equalTo(sede.departamento));
+    hj.assertThat(body.sede.encargado, hj.equalTo(sede.encargado));
 });

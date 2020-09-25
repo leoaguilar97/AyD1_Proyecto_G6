@@ -10,5 +10,8 @@ module.exports = app => {
     // Obtiene todas las sedes
     router.get("/", sede.getAll);
 
+    // Retorna una sede a partir de su codigo
+    router.get("/:codigo", sede.findOne);
+
     app.use("/api/sede", router);
 };

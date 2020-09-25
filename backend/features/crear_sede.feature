@@ -14,4 +14,6 @@ Característica: Manipulacion de sedes
         Entonces las sedes registradas son retornadas en forma de lista.
 
         Cuando se hace un http get a "http://127.0.0.1:5000/api/sede/:id" y se envia como parametro :id un identificador de sede
-        Entonces la sede es retornada en forma de objeto
+        Entonces la sede es retornada en forma de objeto.
+
+        
