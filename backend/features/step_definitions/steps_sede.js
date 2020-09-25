@@ -119,4 +119,23 @@ Then('las sedes registradas son retornadas en forma de lista.', function () {
 });
 
 
+When('se hace un http get a {string} y se envia como parametro :id un identificador de sede', async function (route) {
+    await got.get(route.replace(':id', sede.id), getData());
 
+    hj.assertThat(statusCode, hj.equalTo(200));
+    hj.assertThat(message, hj.equalTo('retrieved'));
+});
+
+Then('la sede es retornada en forma de objeto', function () {
+    hj.assertThat(body.sede, hj.hasProperty('nombre'));
+    hj.assertThat(body.sede, hj.hasProperty('direccion'));
+    hj.assertThat(body.sede, hj.hasProperty('municipio'));
+    hj.assertThat(body.sede, hj.hasProperty('departamento'));
+    hj.assertThat(body.sede, hj.hasProperty('encargado'));
+
+    hj.assertThat(body.sede.nombre, hj.equalTo(sede.nombre));
+    hj.assertThat(body.sede.direccion, hj.equalTo(sede.direccion));
+    hj.assertThat(body.sede.id, hj.equalTo(sede.municipio));
+    hj.assertThat(body.sede.id, hj.equalTo(sede.departamento));
+    hj.assertThat(body.sede.id, hj.equalTo(sede.encargado));
+});
