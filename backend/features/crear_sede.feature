@@ -7,4 +7,4 @@ Característica: Manipulacion de sedes
         Y se asigna un identificador unico a la sede.
 
         Cuando se envian datos incompletos de sede a "http://127.0.0.1:5000/api/sede"
-        Entonces retorna un error de creacion.
+        Entonces retorna un error en las sedes.

@@ -4,7 +4,7 @@ const Sede = db.sede;
 // Crear y guardar una sede
 exports.create = (req, res) => {
 
-    if (!req.body.nombre || !req.body.direccion || !req.body.municipio || !req.body.departamento || !req.body.encargado) {
+    if (!req.body.nombre||!req.body.direccion||!req.body.municipio||!req.body.departamento||!req.body.encargado) {
         return res.status(400).send({ message: "Se enviaron datos incompletos" });
     }
 

@@ -89,10 +89,6 @@ Then('se asigna un identificador unico a la sede.', function () {
 When('se envian datos incompletos de sede a {string}', async function (route) {
     let toPost = postData();
     toPost.json = {
-        "nombre": "Sede " + faker.commerce.productName(),
-        "direccion": faker.address.streetAddress(),
-        "municipio" : faker.address.city(),
-        "departamento" :faker.address.state()
         // hace el encargado de la sede
     };
 
@@ -104,8 +100,10 @@ When('se envian datos incompletos de sede a {string}', async function (route) {
     hj.assertThat(statusCode, hj.equalTo(400));
 });
 
-Then('Entonces retorna un error de creacion.', function () {
+Then('retorna un error en las sedes.', function () {
+
     hj.assertThat(message, hj.equalTo('Se enviaron datos incompletos'));
+    
 });
 
 
