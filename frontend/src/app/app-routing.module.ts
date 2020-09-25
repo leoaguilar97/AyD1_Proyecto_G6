@@ -11,6 +11,7 @@ import { EditarProductoComponent } from './editar-producto/editar-producto.compo
 import { SedesComponent } from './sedes/sedes.component';
 import { CategoriasComponent } from './categorias/categorias.component';
 import { ProveedoresComponent } from './proveedores/proveedores.component';
+import { EditarCategoriasComponent } from './editar-categorias/editar-categorias.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -20,7 +21,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'editarUsuario/:dpi_usuario', component: EditarUsuarioComponent },
   { path: 'editarProducto/:id', component: EditarProductoComponent },
-  { path: 'editarProducto/:id', component: EditarProductoComponent },
+  { path: 'editarCategorias/:id', component: EditarCategoriasComponent },
   { path: 'login', component: LoginComponent },
   { path: 'sedes', component: SedesComponent },
   { path: 'categorias', component: CategoriasComponent },
