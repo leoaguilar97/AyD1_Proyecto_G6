@@ -16,4 +16,5 @@ Característica: Manipulacion de sedes
         Cuando se hace un http get a "http://127.0.0.1:5000/api/sede/:id" y se envia como parametro :id un identificador de sede
         Entonces la sede es retornada en forma de objeto.
 
-        
+        Cuando se hace un http get a "http://127.0.0.1:5000/api/sede/:id" y se envia como parametro :id un identificador de sede que no existe
+        Entonces devuelve un error 404 porque la sede no existe.

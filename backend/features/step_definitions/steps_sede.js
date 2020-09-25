@@ -139,3 +139,13 @@ Then('la sede es retornada en forma de objeto.', function () {
     hj.assertThat(body.sede.departamento, hj.equalTo(sede.departamento));
     hj.assertThat(body.sede.encargado, hj.equalTo(sede.encargado));
 });
+
+
+When('se hace un http get a {string} y se envia como parametro :id un identificador de sede que no existe', async function (route) {
+    try {
+        await got.get(route.replace(":id", "000000000000"), getData());
+    }
+    catch (ex) { }
+
+    hj.assertThat(message, hj.containsString('No existe'));
+});
