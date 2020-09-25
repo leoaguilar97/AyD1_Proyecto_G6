@@ -138,6 +138,7 @@ Then('la sede es retornada en forma de objeto.', function () {
     hj.assertThat(body.sede.municipio, hj.equalTo(sede.municipio));
     hj.assertThat(body.sede.departamento, hj.equalTo(sede.departamento));
     hj.assertThat(body.sede.encargado, hj.equalTo(sede.encargado));
+    hj.assertThat(body.sede.id, hj.equalTo(sede.id));
 });
 
 
@@ -148,4 +149,32 @@ When('se hace un http get a {string} y se envia como parametro :id un identifica
     catch (ex) { }
 
     hj.assertThat(message, hj.containsString('No existe'));
+});
+
+
+
+When('se hace un http put a {string} y se envía como parámetro :id un identificador de sede y se envian datos nuevos de la sede [nombre o direccion o municipio o departamento o encargado]', async function (route) {
+    sede.nombre = "Sede" + faker.commerce.productName();
+    sede.direccion = faker.address.streetAddress();
+    sede.municipio = faker.address.city();
+    sede.departamento = faker.address.state();
+    sede.encargado = faker.name.firstName();
+
+
+    await got.put(route.replace(':id', sede.id), postData());
+
+    hj.assertThat(statusCode, hj.equalTo(200));
+});
+
+Then('la sede es modificada exitosamente', function () {
+    hj.assertThat(message, hj.equalTo('modified'));
+});
+
+Then('retornada la sede en forma de objeto con los datos modificados', function () {
+    hj.assertThat(body.sede.nombre, hj.equalTo(sede.nombre));
+    hj.assertThat(body.sede.direccion, hj.equalTo(sede.direccion));
+    hj.assertThat(body.sede.municipio, hj.equalTo(sede.municipio));
+    hj.assertThat(body.sede.departamento, hj.equalTo(sede.departamento));
+    hj.assertThat(body.sede.encargado, hj.equalTo(sede.encargado));
+    hj.assertThat(body.sede.id, hj.equalTo(sede.id));
 });
