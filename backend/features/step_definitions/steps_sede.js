@@ -86,5 +86,27 @@ Then('se asigna un identificador unico a la sede.', function () {
     sede.id = body.sede.id;
 });
 
+When('se envian datos incompletos de sede a {string}', async function (route) {
+    let toPost = postData();
+    toPost.json = {
+        "nombre": "Sede " + faker.commerce.productName(),
+        "direccion": faker.address.streetAddress(),
+        "municipio" : faker.address.city(),
+        "departamento" :faker.address.state()
+        // hace el encargado de la sede
+    };
+
+    try {
+        await got.post(route, toPost);
+    }
+    catch (error) { /* ERROR ESPERADO */ }
+
+    hj.assertThat(statusCode, hj.equalTo(400));
+});
+
+Then('Entonces retorna un error de creacion.', function () {
+    hj.assertThat(message, hj.equalTo('Se enviaron datos incompletos'));
+});
+
 
 

@@ -6,4 +6,5 @@ Característica: Manipulacion de sedes
         Entonces la sede es guardada en la base de datos
         Y se asigna un identificador unico a la sede.
 
-        
+        Cuando se envian datos incompletos de sede a "http://127.0.0.1:5000/api/sede"
+        Entonces retorna un error de creacion.
