@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cucumber-js -f node_modules/cucumber-pretty --exit  --tags @important ",
+    "test": "cucumber-js -f node_modules/cucumber-pretty --exit ",
     "testMocha": "mocha 'tests/**/*.js' --recursive",
     "start": "node index"
   },
