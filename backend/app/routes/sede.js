@@ -13,5 +13,8 @@ module.exports = app => {
     // Retorna una sede a partir de su codigo
     router.get("/:codigo", sede.findOne);
 
+    // Modifica una sede a partir de su codigo
+    router.put("/:codigo", sede.update);
+
     app.use("/api/sede", router);
 };

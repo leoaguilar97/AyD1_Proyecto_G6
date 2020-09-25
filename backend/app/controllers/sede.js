@@ -66,3 +66,32 @@ exports.findOne = (req, res) => {
                 .json({ message: "Error retrieving sede with codigo=" + codigo });
         });
 };
+
+
+// Modifica una sede a partir de su codigo
+exports.update = (req, res) => {
+
+    if (!req.body) {
+        return res.status(400).send({
+            message: "Los datos a modificar no pueden ser vacios"
+        });
+    }
+
+    const codigo = req.params.codigo;
+
+    Sede.findOneAndUpdate({ _id: codigo }, req.body, { useFindAndModify: false, new: true })
+        .then(data => {
+            if (!data) {
+                return res.status(404).send({
+                    message: `La sede ${codigo} No existe`
+                });
+            } 
+            else 
+                res.send({ message: 'modified', sede: data });
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: 'Error al modificar la sede' + codigo
+            });
+        });
+};
