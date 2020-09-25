@@ -8,3 +8,7 @@ Característica: Manipulacion de sedes
 
         Cuando se envian datos incompletos de sede a "http://127.0.0.1:5000/api/sede"
         Entonces retorna un error en las sedes.
+
+    Escenario: Leer las sedes registradas
+        Cuando se hace un http get a "http://127.0.0.1:5000/api/sede"
+        Entonces las sedes registradas son retornadas en forma de lista.
