@@ -29,3 +29,16 @@ exports.create = (req, res) => {
             });
         });
 };
+
+// Obtener todas las sedes de la base de datos
+exports.getAll = (req, res) => {
+    Sede.find({})
+        .then(data => {
+            res.send({ sedes: data, message: 'retrieved' });
+        })
+        .catch(err => {
+            res
+                .status(500)
+                .send({ message: "Error al retornar todas las sedes en la BD" })
+        });
+};

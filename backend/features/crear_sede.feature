@@ -10,5 +10,5 @@ Característica: Manipulacion de sedes
         Entonces retorna un error en las sedes.
 
     Escenario: Leer las sedes registradas
-        Cuando se hace un http get a "http://127.0.0.1:5000/api/sede"
+        Cuando se hace un http get para obtener las sedes a "http://127.0.0.1:5000/api/sede"
         Entonces las sedes registradas son retornadas en forma de lista.

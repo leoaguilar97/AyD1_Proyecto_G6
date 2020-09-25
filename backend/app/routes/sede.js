@@ -4,8 +4,11 @@ module.exports = app => {
 
     var router = require("express").Router();
 
-    // Crea una categoria
+    // Crea una sede
     router.post("/", sede.create);
+
+    // Obtiene todas las sedes
+    router.get("/", sede.getAll);
 
     app.use("/api/sede", router);
 };

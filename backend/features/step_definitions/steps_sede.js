@@ -108,3 +108,15 @@ Then('retorna un error en las sedes.', function () {
 
 
 
+When('se hace un http get para obtener las sedes a {string}', async function (route) {
+    await got.get(route, { responseType: 'json', hooks: { afterResponse: hooks.afterResponse } });
+    hj.assertThat(statusCode, hj.equalTo(200));
+    hj.assertThat(message, hj.equalTo('retrieved'));
+});
+
+Then('las sedes registradas son retornadas en forma de lista.', function () {
+    hj.assertThat(body.sedes, hj.is(hj.array()));
+});
+
+
+
