@@ -52,8 +52,9 @@ export class CategoriasComponent implements OnInit {
       });
   }
 
-  cancelar() {
+  cancelar():string {
     this.nuevo_nombre = null;
+    return "Formulario Vacio";
   }
 
 }

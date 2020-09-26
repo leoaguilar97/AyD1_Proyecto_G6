@@ -44,5 +44,12 @@ describe('CategoriasComponent', () => {
     expect(component.cargarCategs()).toBeTrue();
   }));
 
+  //Test 2
+  it('Debe retornar -Formulario Vacío- al cancelar', async(() => {
+      expect(component.cancelar()).toEqual("Formulario Vacio");
+  }));
+
+  //Test 3
+
   
 });
