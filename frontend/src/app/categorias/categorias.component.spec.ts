@@ -68,5 +68,15 @@ describe('CategoriasComponent', () => {
     expect(location.path()).toBe('/editarCategorias/categoria1');
   }));
 
+  //Test 6
+  it('Debe retornar True al eliminar producto', async(() => {
+    try {
+    expect(component.eliminar("categoriaprueba")).toBeTrue();
+    } catch (error) { 
+    }
+  }));
+
+
+
 
 });

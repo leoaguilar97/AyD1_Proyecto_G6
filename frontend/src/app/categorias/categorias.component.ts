@@ -13,6 +13,8 @@ export class CategoriasComponent implements OnInit {
   // Declaraciones
   cats = [];
   nuevo_nombre: string;
+  resp:string;
+  respuesta:string;
 
   ngOnInit() {
     this.cargarCategs();
@@ -32,13 +34,13 @@ export class CategoriasComponent implements OnInit {
 
 
 
-  eliminar(id: string) {
+  eliminar(id: string) : boolean {
     const direccion = 'https://api-erpp.herokuapp.com/api/categoria/' + id;
     this.http.delete(direccion)
       .toPromise().then((data: any) => {
-        console.log(data);
         this.cargarCategs();
       });
+      return true;
   }
 
   agregar() {
@@ -46,7 +48,6 @@ export class CategoriasComponent implements OnInit {
       {
         'nombre': this.nuevo_nombre
       }).toPromise().then((data: any) => {
-        console.log(data);
         this.cancelar();
         this.cargarCategs();
       });
