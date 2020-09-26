@@ -34,7 +34,10 @@ Característica: Manipular bodegas
         Cuando se hace un http delete a "http://127.0.0.1:5000/api/bodega/:id" y se envía como parámetro :id un identificador de bodega que no existe
         Entonces devuelve un error 404
 
-    @ important
     Escenario: Agregar producutos a bodegas
         Cuando se hace un http post a "http://127.0.0.1:5000/api/bodega/productos"
         Entonces se espera un error 404 ya que la bodega no existe
+
+        Dado una bodega que se le quieren inserter ciertos productos
+        Cuando se hace un http post a "http://127.0.0.1:5000/api/bodega/productos" para agregar productos
+        Entonces se insertan los productos de manera correcta

@@ -53,6 +53,9 @@ let postData = () => {
     }
 };
 
+
+let post = postData();
+
 let getData = () => {
     return {
         hooks: hooks,
@@ -216,4 +219,38 @@ Then('se espera un error {int} ya que la bodega no existe', function(code) {
     console.log(message);
     hj.assertThat(message, hj.containsString('La bodega 5f6020cde1f24eafd89243b9 No existe'));
     hj.assertThat(statusCode, hj.equalTo(code));
+});
+
+Given('una bodega que se le quieren inserter ciertos productos', async function() {
+    post.json = {
+        "bodega": bodega.id,
+        "productos": [{
+                "producto": "5f6eb928d08aa500178e6e1e",
+                "cantidad": 20
+            },
+            {
+                "producto": "5f6eb8e4d08aa500178e6e1c",
+                "cantidad": 20
+            },
+            {
+                "producto": "5f6e8cbdd99abe00170fb238",
+                "cantidad": 30
+            },
+            {
+                "producto": "5f6e72286e733d0017a8d47e",
+                "cantidad": 40
+            }
+        ]
+    }
+});
+
+
+When('se hace un http post a {string} para agregar productos', async function(route) {
+    try {
+        this.productosAagregados = await got.post(route, this.post);
+    } catch (ex) {}
+});
+
+Then('se insertan los productos de manera correcta', function() {
+    hj.assertThat(statusCode, hj.equalTo(404));
 });
