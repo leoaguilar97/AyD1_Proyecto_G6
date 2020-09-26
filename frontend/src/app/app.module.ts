@@ -23,6 +23,8 @@ import { ProveedoresComponent } from './proveedores/proveedores.component';
 import { CategoriasComponent } from './categorias/categorias.component';
 import { SedesComponent } from './sedes/sedes.component';
 import { EditarCategoriasComponent } from './editar-categorias/editar-categorias.component';
+import { EditarSedesComponent } from './editar-sedes/editar-sedes.component';
+import { EditarBodegasComponent } from './editar-bodegas/editar-bodegas.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,8 @@ import { EditarCategoriasComponent } from './editar-categorias/editar-categorias
     CategoriasComponent,
     SedesComponent,
     EditarCategoriasComponent
+    EditarSedesComponent,
+    EditarBodegasComponent
   ],
   imports: [
     BrowserModule,
