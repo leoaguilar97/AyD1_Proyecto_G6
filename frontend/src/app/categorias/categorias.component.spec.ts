@@ -17,7 +17,7 @@ describe('CategoriasComponent', () => {
   let router: Router;
 
   const routes: Routes = [
-    { path: 'editarProducto/:id', component: EditarCategoriasComponent }
+    { path: 'editarCategorias/:id', component: EditarCategoriasComponent }
   ];
 
   beforeEach(async(() => {
@@ -59,6 +59,13 @@ describe('CategoriasComponent', () => {
   it('Titulo de formulario debe ser -CATEGORIA-', async(() => {
     const title = document.getElementById('titulotabla').innerText;
     expect(title).toContain("CATEGORIAS");
+  }));
+
+  //Test 5
+  it('Debe redireccionar a editarCategorias/categoria1 al recibir el id', fakeAsync(() => {
+    component.editar("categoria1");
+    tick(50);
+    expect(location.path()).toBe('/editarCategorias/categoria1');
   }));
 
 
