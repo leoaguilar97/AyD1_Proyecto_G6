@@ -11,18 +11,17 @@ export class CategoriasComponent implements OnInit {
 
   constructor(private router: Router, private http: HttpClient) { }
   // Declaraciones
-  categorias = [];
+  cats = [];
   nuevo_nombre: string;
-  
 
   ngOnInit() {
-    this.cargarProductos();
+    this.cargarCategs();
   }
 
-  cargarProductos(): boolean {
-    this.http.get('https://api-erpp.herokuapp.com/api/producto')
+  cargarCategs(): boolean {
+    this.http.get('https://api-erpp.herokuapp.com/api/categoria')
       .toPromise().then((data: any) => {
-        this.categorias = data;
+        this.cats = data.categorias;
       });
     return true;
   }
@@ -34,22 +33,22 @@ export class CategoriasComponent implements OnInit {
 
 
   eliminar(id: string) {
-    const direccion = 'https://api-erpp.herokuapp.com/api/producto/' + id;
+    const direccion = 'https://api-erpp.herokuapp.com/api/categoria/' + id;
     this.http.delete(direccion)
       .toPromise().then((data: any) => {
         console.log(data);
-        this.cargarProductos();
+        this.cargarCategs();
       });
   }
 
   agregar() {
-    this.http.post('https://api-erpp.herokuapp.com/api/producto',
+    this.http.post('https://api-erpp.herokuapp.com/api/categoria',
       {
         'nombre': this.nuevo_nombre
       }).toPromise().then((data: any) => {
         console.log(data);
         this.cancelar();
-        this.cargarProductos();
+        this.cargarCategs();
       });
   }
 

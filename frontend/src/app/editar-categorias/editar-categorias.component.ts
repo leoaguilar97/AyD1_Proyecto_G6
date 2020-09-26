@@ -12,28 +12,31 @@ export class EditarCategoriasComponent implements OnInit {
 
   constructor(private router: Router, private http: HttpClient, private route: ActivatedRoute) { }
 
-   // Declaraciones
-   categoria = [];
-   nuevo_nombre=null;
-   id = String(this.route.snapshot.params['id']);
+  // Declaraciones
+  categoria = [];
+  nuevo_nombre = "";
+  id = String(this.route.snapshot.params['id']);
+
+
 
   ngOnInit() {
     this.cargarCategoria();
-    console.log("id es"+this.id);
-    console.log("nombre "+this.nuevo_nombre[0]);
+    console.log("id es " + this.id);
+    //console.log("nombre "+this.nuevo_nombre[0]);
   }
 
   cargarCategoria(): boolean {
-    this.http.get('https://api-erpp.herokuapp.com/api/producto/'+this.id)
+    this.http.get('https://api-erpp.herokuapp.com/api/categoria/' + this.id)
       .toPromise().then((data: any) => {
-        this.nuevo_nombre = data.nombre;
+        this.nuevo_nombre = data.categorias[0].nombre;
+        console.log("nombre es" + this.nuevo_nombre);
       });
     return true;
   }
 
 
-  editarProducto() {
-    this.http.put('https://api-erpp.herokuapp.com/api/categoria/'+this.id,
+  editarCategoria() {
+    this.http.put('https://api-erpp.herokuapp.com/api/categoria/' + this.id,
       {
         'nombre': this.nuevo_nombre
       }).toPromise().then((data: any) => {
@@ -44,8 +47,8 @@ export class EditarCategoriasComponent implements OnInit {
   }
 
   cancelar() {
-    this.nuevo_nombre= null;
-    this.router.navigate(['productos']);
+    this.nuevo_nombre = null;
+    this.router.navigate(['categorias']);
   }
 
 }
