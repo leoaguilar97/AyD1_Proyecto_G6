@@ -21,8 +21,7 @@ exports.create = (req, res) => {
         })
         .catch(err => {
             res.status(500).send({
-                message:
-                    err.message || "Existio un error al agregar la bodega."
+                message: err.message || "Existio un error al agregar la bodega."
             });
         });
 };
@@ -30,6 +29,7 @@ exports.create = (req, res) => {
 // Obtener todas las bodegas de la base de datos
 exports.getAll = (req, res) => {
     Bodega.find({})
+        .populate("productos.producto")
         .then(data => {
             res.send({ bodegas: data, message: 'retrieved' });
         })
@@ -43,20 +43,16 @@ exports.getAll = (req, res) => {
 // Obtiene una bodega de la base de datos
 exports.findOne = (req, res) => {
     const codigo = req.params.codigo;
-
-    Bodega.findOne({ _id: codigo }, function (err, data) {
-        if (err) {
-            res
-                .status(500)
-                .json({ message: "Error al obtener la bodega " + codigo });
-        } else {
+    Bodega
+        .findOne({ _id: codigo })
+        .populate("productos.producto")
+        .then(data => {
             if (!data) {
-                res.status(404).json({ message: 'No existe'});
+                res.status(404).json({ message: 'No existe' });
             } else {
                 res.json({ message: 'retrieved', bodega: data }).send();
             }
-        }
-    })
+        })
         .catch(err => {
             res
                 .status(500)
@@ -81,8 +77,7 @@ exports.update = (req, res) => {
                 return res.status(404).send({
                     message: `La bodega ${codigo} No existe`
                 });
-            } 
-            else 
+            } else
                 res.send({ message: 'modified', bodega: data });
         })
         .catch(err => {
@@ -114,3 +109,28 @@ exports.delete = (req, res) => {
             });
         });
 };
+
+
+exports.insertProductos = (req, res) => {
+
+    if (!req.body.productos || !req.body.bodega) {
+        return res.status(400).send({ message: "Se enviaron datos incompletos" });
+    }
+
+    const codigo = req.body.bodega;
+
+    Bodega.findOneAndUpdate({ _id: codigo }, { productos: req.body.productos }, { useFindAndModify: false, new: true })
+        .then(data => {
+            if (!data) {
+                return res.status(404).send({
+                    message: `La bodega ${codigo} No existe`
+                });
+            } else
+                res.send({ message: 'modified', bodega: data });
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: 'Error al modificar la bodega' + codigo
+            });
+        });
+}

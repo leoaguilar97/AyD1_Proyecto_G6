@@ -6,7 +6,7 @@ module.exports = app => {
 
     // Obtiene todas las bodegas
     router.get("/", bodega.getAll);
-    
+
     // Retorna una bodega a partir de su codigo
     router.get("/:codigo", bodega.findOne);
 
@@ -18,6 +18,9 @@ module.exports = app => {
 
     // Elimina una bodega a partir de su codigo
     router.delete("/:codigo", bodega.delete);
+
+    // Agrega productos a bodegas
+    router.post("/productos", bodega.insertProductos);
 
     app.use("/api/bodega", router);
 };
