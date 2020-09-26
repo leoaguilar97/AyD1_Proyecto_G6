@@ -46,10 +46,20 @@ describe('CategoriasComponent', () => {
 
   //Test 2
   it('Debe retornar -Formulario Vacío- al cancelar', async(() => {
-      expect(component.cancelar()).toEqual("Formulario Vacio");
+    expect(component.cancelar()).toEqual("Formulario Vacio");
   }));
 
   //Test 3
+  it('Titulo de formulario debe ser -AGREGAR CATEGORIA-', async(() => {
+    const title = document.getElementById('titulocategoria').innerText;
+    expect(title).toContain("AGREGAR CATEGORÍA");
+  }));
 
-  
+  //Test 4
+  it('Titulo de formulario debe ser -CATEGORIA-', async(() => {
+    const title = document.getElementById('titulotabla').innerText;
+    expect(title).toContain("CATEGORIAS");
+  }));
+
+
 });
