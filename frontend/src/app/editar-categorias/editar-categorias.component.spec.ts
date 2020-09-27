@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { EditarCategoriasComponent } from './editar-categorias.component';
 import { FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -41,6 +41,12 @@ describe('EditarCategoriasComponent', () => {
    //Test 1
    it('Debe retornar True al cargar los Categorías', async(() => {
     expect(component.cargarCategoria()).toBeTrue();
+  }));
+
+  //Test 2
+  it('Titulo de formulario debe ser -MODIFICAR CATEGORIA-', async(() => {
+    const title = document.getElementById('titulocategoria').innerText;
+    expect(title).toContain("MODIFICAR CATEGORIA"); 
   }));
 
 });
