@@ -1,0 +1,57 @@
+<!-- Formulario de nuevo Ususario-->
+<div class="col-12 grid-margin">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">EDITAR SEDE</h4>
+            <form class="form-sample">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Nombre</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" [(ngModel)]="nuevo_nombre" name="nuevo_nombre"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label" >Dirección</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" [(ngModel)]="nuevo_direccion" name="nuevo_direccion"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Municipio</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" [(ngModel)]="nuevo_municipio" name="nuevo_municipio"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Departamento</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" [(ngModel)]="nuevo_departamento" name="nuevo_departamento"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Encargado</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" [(ngModel)]="nuevo_encargado" name="nuevo_encargado"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" (click)="modificar()" class="btn btn-success mr-2">Modificar</button>
+            </form>
+        </div>
+    </div>
+</div>

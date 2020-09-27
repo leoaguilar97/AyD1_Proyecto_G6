@@ -1,0 +1,95 @@
+<!-- Formulario de nuevo Ususario-->
+<div class="col-12 grid-margin">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">AGREGAR BODEGA</h4>
+            <form class="form-sample">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Nombre</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" [(ngModel)]="nuevo_nombre" name="nuevo_nombre"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label" >Dirección</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" [(ngModel)]="nuevo_direccion" name="nuevo_direccion"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Sede</label>
+                            <div class="col-sm-9">
+                                <select [(ngModel)]="nuevo_sede" name="nuevo_sede" class="form-control">
+                                    <option>Sede1</option>
+                                    <option>Sede2</option>
+                                    <option>Sede3</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" (click)="agregar()" class="btn btn-success mr-2">Agregar</button>
+                <button class="btn btn-light" (click)="cancelar()" >Cancelar</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Tabla de Ususarios-->
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">BODEGAS</h4>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                Nombre
+                            </th>
+                            <th>
+                                Dirección
+                            </th>
+                            <th>
+                                Sede
+                            </th>
+                            <th>
+                                Acciones
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Repitencia-->
+                        <tr *ngFor="let bodega of bodegas">
+                            <td>
+                                {{bodega.nombre}}
+                            </td>
+                            <td>
+                                {{bodega.direccion}}
+                            </td>
+                            <td>
+                                {{bodega.sede}}
+                            </td>
+                            <td>
+                                <button type="button" class="btn social-btn btn-warning py-0 px-0 mr-2"><i
+                                    class="mdi mdi-36px mdi-cube-outline" (click)="inventario(bodega.id)"></i></button>
+                                <button type="button" class="btn social-btn btn-primary py-0 px-0 mr-2"><i
+                                        class="mdi mdi-36px mdi-account-edit" (click)="editar(bodega.id)"></i></button>
+                                <button type="button" class="btn social-btn btn-danger  py-0 px-0 "><i
+                                        class="mdi mdi-36px mdi-delete" (click)="eliminar(bodega.id)"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

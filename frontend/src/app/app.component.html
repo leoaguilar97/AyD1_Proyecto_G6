@@ -1,0 +1,20 @@
+
+<div class="div" *ngIf="logueado">
+<div class="container-scroller">
+  <app-navbar></app-navbar>
+  <div class="container-fluid page-body-wrapper">
+    <app-sidebar></app-sidebar>
+    <div class="main-panel">
+      <div class="content-wrapper">
+        <router-outlet></router-outlet>
+      </div>
+      <app-footer></app-footer>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="div" *ngIf="!logueado">
+          <router-outlet></router-outlet>
+</div>
+

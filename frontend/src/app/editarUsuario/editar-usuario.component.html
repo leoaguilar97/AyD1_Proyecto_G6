@@ -1,0 +1,87 @@
+<!-- Formulario de nuevo Ususario-->
+<div class="col-12 grid-margin">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">EDITAR INFORMACION</h4>
+            <form class="form-sample">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Nombre</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" [(ngModel)]="nuevo_nombre" name="nuevo_nombre"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label" >Apellido</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" [(ngModel)]="nuevo_apellido" name="nuevo_apellido"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">DPI</label>
+                            <div class="col-sm-9">
+                                <input type="text" readonly="readonly" class="form-control" [(ngModel)]="nuevo_dpi" name="nuevo_dpi"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Correo Electronico</label>
+                            <div class="col-sm-9">
+                                <input type="text" readonly="readonly" class="form-control" [(ngModel)]="nuevo_correo" name="nuevo_correo"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Nacimiento</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" placeholder ="dd/mm/aaaa" [(ngModel)]="nuevo_fechaNacimiento" name="nuevo_fechaNacimiento"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Dirección</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" [(ngModel)]="nuevo_direccion" name="nuevo_direccion"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Telefono</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" [(ngModel)]="nuevo_numeroCelular" name="nuevo_numeroCelular"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Rol</label>
+                            <div class="col-sm-9">
+                                <select [(ngModel)]="nuevo_rol" name="nuevo_rol" class="form-control">
+                                    <option>Administrador</option>
+                                    <option>Vendedor</option>
+                                    <option>Bodeguero</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" (click)="modificar()" class="btn btn-success mr-2">Guardar</button>
+            </form>
+        </div>
+    </div>
+</div>
