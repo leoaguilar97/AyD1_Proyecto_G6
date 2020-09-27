@@ -1,1 +1,43 @@
-<p>editar-bodegas works!</p>
+<!-- Formulario de nuevo Ususario-->
+<div class="col-12 grid-margin">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">EDITAR BODEGA</h4>
+            <form class="form-sample">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Nombre</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" [(ngModel)]="nuevo_nombre" name="nuevo_nombre"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label" >Dirección</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" [(ngModel)]="nuevo_direccion" name="nuevo_direccion"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Sede</label>
+                            <div class="col-sm-9">
+                                <select [(ngModel)]="nuevo_sede" name="nuevo_sede" class="form-control">
+                                    <option>Sede1</option>
+                                    <option>Sede2</option>
+                                    <option>Sede3</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" (click)="modificar()" class="btn btn-success mr-2">Modificar</button>
+            </form>
+        </div>
+    </div>
+</div>

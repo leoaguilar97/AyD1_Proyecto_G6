@@ -2,7 +2,7 @@
 <div class="col-12 grid-margin">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">AGREGAR USUARIO</h4>
+            <h4 class="card-title">AGREGAR BODEGA</h4>
             <form class="form-sample">
                 <div class="row">
                     <div class="col-md-6">
@@ -15,43 +15,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label" >Apellido</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" [(ngModel)]="nuevo_apellido" name="nuevo_apellido"/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">DPI</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" [(ngModel)]="nuevo_dpi" name="nuevo_dpi"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Correo Electronico</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" [(ngModel)]="nuevo_correo" name="nuevo_correo"/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Nacimiento</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" placeholder ="dd/mm/aaaa" [(ngModel)]="nuevo_fechaNacimiento" name="nuevo_fechaNacimiento"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Dirección</label>
+                            <label class="col-sm-3 col-form-label" >Dirección</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" [(ngModel)]="nuevo_direccion" name="nuevo_direccion"/>
                             </div>
@@ -61,38 +25,12 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Contraseña</label>
+                            <label class="col-sm-3 col-form-label">Sede</label>
                             <div class="col-sm-9">
-                                <input type="password" class="form-control" [(ngModel)]="nuevo_password1" name="nuevo_password1"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Repetir Contraseña</label>
-                            <div class="col-sm-9">
-                                <input type="password" class="form-control" [(ngModel)]="nuevo_password2" name="nuevo_password2"/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Telefono</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" [(ngModel)]="nuevo_numeroCelular" name="nuevo_numeroCelular"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Rol</label>
-                            <div class="col-sm-9">
-                                <select [(ngModel)]="nuevo_rol" name="nuevo_rol" class="form-control">
-                                    <option>Administrador</option>
-                                    <option>Vendedor</option>
-                                    <option>Bodeguero</option>
+                                <select [(ngModel)]="nuevo_sede" name="nuevo_sede" class="form-control">
+                                    <option>Sede1</option>
+                                    <option>Sede2</option>
+                                    <option>Sede3</option>
                                 </select>
                             </div>
                         </div>
@@ -109,22 +47,19 @@
 <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">USUARIOS</h4>
+            <h4 class="card-title">BODEGAS</h4>
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
                         <tr>
                             <th>
-                                Rol
-                            </th>
-                            <th>
                                 Nombre
                             </th>
                             <th>
-                                Apellido
+                                Dirección
                             </th>
                             <th>
-                                Usuario
+                                Sede
                             </th>
                             <th>
                                 Acciones
@@ -133,27 +68,24 @@
                     </thead>
                     <tbody>
                         <!-- Repitencia-->
-                        <tr *ngFor="let usuario of usuarios">
+                        <tr *ngFor="let bodega of bodegas">
                             <td>
-                                <img class="mr-2" src="assets/images/faces-clipart/pic-1.png" alt="image" />
-                                {{usuario.roles}}
+                                {{bodega.nombre}}
                             </td>
                             <td>
-                                {{usuario.nombre}}
+                                {{bodega.direccion}}
                             </td>
                             <td>
-                                {{usuario.apellido}}
+                                {{bodega.sede}}
                             </td>
                             <td>
-                                {{usuario.correo}}
-                            </td>
-                            <td>
+                                <button type="button" class="btn social-btn btn-warning py-0 px-0 mr-2"><i
+                                    class="mdi mdi-36px mdi-cube-outline" (click)="inventario(bodega.id)"></i></button>
                                 <button type="button" class="btn social-btn btn-primary py-0 px-0 mr-2"><i
-                                        class="mdi mdi-36px mdi-account-edit" (click)="editar(usuario.dpi)"></i></button>
+                                        class="mdi mdi-36px mdi-account-edit" (click)="editar(bodega.id)"></i></button>
                                 <button type="button" class="btn social-btn btn-danger  py-0 px-0 "><i
-                                        class="mdi mdi-36px mdi-delete" (click)="eliminar(usuario.dpi)"></i></button>
+                                        class="mdi mdi-36px mdi-delete" (click)="eliminar(bodega.id)"></i></button>
                             </td>
-
                         </tr>
                     </tbody>
                 </table>
