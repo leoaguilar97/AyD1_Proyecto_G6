@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
-
 @Component({
   selector: 'app-sedes',
   templateUrl: './sedes.component.html',
@@ -29,7 +28,6 @@ export class SedesComponent implements OnInit {
         console.log(data);
         this.sedes = data.sedes;
       });
-    return true;
   }
   editar(id: string) {
     this.router.navigate(['editarSede', id]);
