@@ -20,9 +20,7 @@
                             <label class="col-sm-3 col-form-label">Categoría</label>
                             <div class="col-sm-9">
                                 <select [(ngModel)]="nueva_categoria" name="nueva_categoria" class="form-control">
-                                    <option>Categoría 1</option>
-                                    <option>Categoría 2</option>
-                                    <option>Categoría 3</option>
+                                    <option *ngFor="let cate of cats" value="{{cate.id}}">{{cate.nombre}}</option>
                                 </select>
                             </div>
                         </div>
@@ -72,9 +70,9 @@
                             <td>
                                 {{producto.nombre}}
                             </td>
-                            <td>
+                            <td  *ngFor="let pr of producto.categorias">
                                 <!--{{producto.categorias}}-->
-                                Categoría 1
+                                {{pr.nombre}}
                             </td>
                             <td>
                                 {{producto.proveedores}}
