@@ -13,12 +13,17 @@ export class ProductosComponent implements OnInit {
   constructor(private router: Router, private http: HttpClient) { }
   // Declaraciones
   productos = [];
+  cats = [];
+  cats2 = [];
   nuevo_nombre: string;
-  nueva_categoria = null;
-  nuevo_proveedor = null;
+  nueva_categoria = "";
+  nuevo_proveedor = "";
+  nueva_data="";
+  httpdata;
 
   ngOnInit() {
     this.cargarProductos();
+    this.cargarCategs();
   }
 
   cargarProductos(): boolean {
@@ -29,11 +34,24 @@ export class ProductosComponent implements OnInit {
     return true;
   }
 
+  cargarCategs() {
+    this.http.get("https://api-erpp.herokuapp.com/api/categoria")
+      .subscribe((data) => this.displaydata(data)
+      );    
+  }
+
+  displaydata(data) {
+    this.httpdata = data;
+    console.log(this.httpdata);
+    this.httpdata.categorias.forEach(element => {
+      this.cats.push(element);
+    });
+    console.log(this.cats);
+  }
+
   editar(id: string) {
     this.router.navigate(['editarProducto', id]);
   }
-
-
 
   eliminar(id: string) {
     const direccion = 'https://api-erpp.herokuapp.com/api/producto/' + id;
@@ -45,22 +63,24 @@ export class ProductosComponent implements OnInit {
   }
 
   agregar() {
+    console.log("BANDERA"+this.nueva_categoria);
     this.http.post('https://api-erpp.herokuapp.com/api/producto',
-      {
-        'nombre': this.nuevo_nombre,
-        'categoria': [this.nueva_categoria],
-        'proveedores': [this.nuevo_proveedor]
-      }).toPromise().then((data: any) => {
-        console.log(data);
-        this.cancelar();
-        this.cargarProductos();
-      });
+    {
+      'nombre': this.nuevo_nombre,
+      'categorias': [this.nueva_categoria],
+      'proveedores': [this.nuevo_proveedor]
+    }).toPromise().then((data: any) => {
+      console.log(data);
+      this.cancelar();
+      this.cargarProductos();
+    });
+
   }
 
   cancelar() {
-    this.nuevo_nombre = null;
-    this.nueva_categoria = null;
-    this.nuevo_proveedor = null;
+    this.nuevo_nombre = "";
+    this.nueva_categoria = "";
+    this.nuevo_proveedor = "";
   }
 
 }
