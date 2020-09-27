@@ -20,10 +20,9 @@
                             <label class="col-sm-3 col-form-label">Categoría</label>
                             <div class="col-sm-9">
                                 <select [(ngModel)]="nueva_categoria" name="nueva_categoria" class="form-control">
-                                    <option>Categoría 1</option>
-                                    <option>Categoría 2</option>
-                                    <option>Categoría 3</option>
+                                    <option *ngFor="let cate of cats" value="{{cate.id}}">{{cate.nombre}}</option>
                                 </select>
+                                <label class="col-form-label">Actual: {{nueva_categoria2}}</label>
                             </div>
                         </div>
                     </div>
