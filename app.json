@@ -4,7 +4,11 @@
         "scripts": {
           "test-setup": "cd backend && npm install",
           "test": "npm test"
-        }
+        },
+        
+        "buildpacks": [
+            {"url": "https://github.com/heroku/heroku-buildpack-nodejs"}
+        ]
       }
     }
   }
