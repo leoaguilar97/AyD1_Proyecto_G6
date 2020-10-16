@@ -1,0 +1,10 @@
+{
+    "environments": {
+      "test": {
+        "scripts": {
+          "test-setup": "cd backend && npm install",
+          "test": "npm test"
+        }
+      }
+    }
+  }
