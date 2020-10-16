@@ -5,10 +5,15 @@
           "test-setup": "cd backend && npm install",
           "test": "npm test"
         },
-        
+
         "buildpacks": [
+            {"url": "https://github.com/timanovsky/subdir-heroku-buildpack"},
             {"url": "https://github.com/heroku/heroku-buildpack-nodejs"}
-        ]
+        ],
+
+        "env": {
+            "PROJECT_PATH": "backend"
+        }
       }
     }
   }
