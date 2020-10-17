@@ -2,7 +2,7 @@
 
 Característica: Manipular bodegas
     Escenario: Registrar una nueva bodega
-        Cuando se hace un http post a "http://127.0.0.1:5000/api/bodega", con informacion de la bodega [nombre, direccion]
+        Cuando se hace un http post a "/api/bodega", con informacion de la bodega [nombre, direccion]
         Entonces la bodega es guardada en la base de datos
         Y se asigna un identificador unico a la bodega.
 
