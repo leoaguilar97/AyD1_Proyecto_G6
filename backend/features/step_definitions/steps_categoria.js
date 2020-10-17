@@ -10,6 +10,11 @@ process.env.TESTING = true;
 // REQUERIR LA APP PARA INICIAR EL SERVER
 require('../../index');
 
+let ip = "http://localhost"
+let port = process.env.PORT || 5000;
+
+let uri = `${ip}:${port}`;
+
 let body;
 let statusCode;
 let message;
@@ -60,7 +65,7 @@ let getData = () => {
 };
 
 When('se hace un http post a {string}, con informacion de la categoria [nombre]', async function(route) {
-    await got.post(route, postData());
+    await got.post(uri + route, postData());
 
     hj.assertThat(statusCode, hj.equalTo(200));
     hj.assertThat(message, hj.equalTo('created'));
@@ -86,7 +91,7 @@ When('se envian datos incompletos a la url {string}', async function(route) {
     };
 
     try {
-        await got.post(route, toPost);
+        await got.post(uri + route, toPost);
     } catch (error) { /* ERROR ESPERADO */ }
 
     hj.assertThat(statusCode, hj.equalTo(400));
@@ -97,7 +102,7 @@ Then('retorna un error al intentar ingresar una categoria.', function() {
 });
 
 When('se hace un http get a categoria {string}', async function(route) {
-    await got.get(route, { responseType: 'json', hooks: { afterResponse: hooks.afterResponse } });
+    await got.get(uri + route, { responseType: 'json', hooks: { afterResponse: hooks.afterResponse } });
 
     hj.assertThat(statusCode, hj.equalTo(200));
     hj.assertThat(message, hj.equalTo('retrieved'));
@@ -109,7 +114,7 @@ Then('las categorias son retornadas en forma de lista.', function() {
 
 
 When('se hace un http get a categoria {string} y se envia como parametro :consulta una expresion regular de categoria', async function(route) {
-    await got.get(route.replace(':consulta', categoria.nombre), getData());
+    await got.get(uri + route.replace(':consulta', categoria.nombre), getData());
 
     hj.assertThat(statusCode, hj.equalTo(200));
     hj.assertThat(message, hj.equalTo('retrieved'));
@@ -121,7 +126,7 @@ Then('la categoria es retornada en forma de lista', function() {
 
 When('se hace un http get a categoria {string} y se envia como parametro :consulta una expresion regular de categoria que no existe', async function(route) {
     try {
-        await got.get(route.replace(":consulta", "000000000000"), getData());
+        await got.get(uri + route.replace(":consulta", "000000000000"), getData());
     } catch (ex) {}
 
     hj.assertThat(message, hj.containsString('No existe'));
@@ -130,7 +135,7 @@ When('se hace un http get a categoria {string} y se envia como parametro :consul
 When('se hace un http put a {string} y se envía como parámetro :nombre de una categoria y se envian el nuevo nombre para la categoria [nombre]', async function(route) {
     categoria.nombre = "lacteos de " + faker.commerce.department();
 
-    await got.put(route.replace(':nombre', categoria.nombre), postData());
+    await got.put(uri + route.replace(':nombre', categoria.nombre), postData());
 
     hj.assertThat(statusCode, hj.equalTo(200));
 });
@@ -145,7 +150,7 @@ Then('retornada en forma de objeto con los datos modificados de categoria', func
 
 When('se hace un http put a {string} y se envía como parámetro :nombre una de categoria que no existe', async function(route) {
     try {
-        await got.get(route.replace(":nombre", "000000000000"), getData());
+        await got.get(uri + route.replace(":nombre", "000000000000"), getData());
     } catch (ex) {}
 
     hj.assertThat(message, hj.containsString('No existe'));
@@ -156,7 +161,7 @@ Then('devuelve un error {int} en categoria', function(code) {
 });
 
 When('se hace un http delete a {string} y se envía como parámetro :nombre un identificador de categoria', async function(route) {
-    await got.delete(route.replace(':nombre', categoria.nombre), postData());
+    await got.delete(uri + route.replace(':nombre', categoria.nombre), postData());
 
     hj.assertThat(statusCode, hj.equalTo(200));
 });
@@ -167,7 +172,7 @@ Then('la categoria es eliminada de la base de datos', function() {
 
 When('se hace un http delete a {string} y se envía como parámetro :nombre un identificador de categoria que no existe', async function(route) {
     try {
-        await got.get(route.replace(":nombre", "000000000000"), getData());
+        await got.get(uri + route.replace(":nombre", "000000000000"), getData());
     } catch (ex) {}
 
     hj.assertThat(message, hj.containsString('No existe'));

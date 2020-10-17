@@ -14,6 +14,12 @@ let body;
 let statusCode;
 let message;
 
+let ip = "http://localhost"
+let port = process.env.PORT || 5000;
+
+let uri = `${ip}:${port}`;
+
+
 let sede = {
     "nombre": "Sede " + faker.commerce.productName(),
     "direccion": faker.address.streetAddress(),
@@ -64,7 +70,7 @@ let getData = () => {
 };
 
 When('se hace un http post a {string}, con informacion de la sede [nombre, direccion, municipio, departamento, encargado]', async function (route) {
-    await got.post(route, postData());
+    await got.post(uri + route, postData());
     hj.assertThat(statusCode, hj.equalTo(200));
     hj.assertThat(message, hj.equalTo('created'));
 });
@@ -93,7 +99,7 @@ When('se envian datos incompletos de sede a {string}', async function (route) {
     };
 
     try {
-        await got.post(route, toPost);
+        await got.post(uri + route, toPost);
     }
     catch (error) { /* ERROR ESPERADO */ }
 
@@ -109,7 +115,7 @@ Then('retorna un error en las sedes.', function () {
 
 
 When('se hace un http get para obtener las sedes a {string}', async function (route) {
-    await got.get(route, { responseType: 'json', hooks: { afterResponse: hooks.afterResponse } });
+    await got.get(uri + route, { responseType: 'json', hooks: { afterResponse: hooks.afterResponse } });
     hj.assertThat(statusCode, hj.equalTo(200));
     hj.assertThat(message, hj.equalTo('retrieved'));
 });
@@ -120,7 +126,7 @@ Then('las sedes registradas son retornadas en forma de lista.', function () {
 
 
 When('se hace un http get a {string} y se envia como parametro :id un identificador de sede', async function (route) {
-    await got.get(route.replace(':id', sede.id), getData());
+    await got.get(uri + route.replace(':id', sede.id), getData());
 
     hj.assertThat(statusCode, hj.equalTo(200));
     hj.assertThat(message, hj.equalTo('retrieved'));
@@ -144,7 +150,7 @@ Then('la sede es retornada en forma de objeto.', function () {
 
 When('se hace un http get a {string} y se envia como parametro :id un identificador de sede que no existe', async function (route) {
     try {
-        await got.get(route.replace(":id", "000000000000"), getData());
+        await got.get(uri + route.replace(":id", "000000000000"), getData());
     }
     catch (ex) { }
 
@@ -161,7 +167,7 @@ When('se hace un http put a {string} y se envía como parámetro :id un identifi
     sede.encargado = faker.name.firstName();
 
 
-    await got.put(route.replace(':id', sede.id), postData());
+    await got.put(uri + route.replace(':id', sede.id), postData());
 
     hj.assertThat(statusCode, hj.equalTo(200));
 });
@@ -182,7 +188,7 @@ Then('retornada la sede en forma de objeto con los datos modificados', function 
 
 When('se hace un http put a {string} y se envía como parámetro :id un identificador de sede que no existe', async function (route) {
     try {
-        await got.get(route.replace(":id", "000000000000"), getData());
+        await got.get(uri + route.replace(":id", "000000000000"), getData());
     }
     catch (ex) { }
 
@@ -192,7 +198,7 @@ When('se hace un http put a {string} y se envía como parámetro :id un identifi
 
 
 When('se hace un http delete a {string} y se envía como parámetro :id un identificador de sede', async function (route) {
-    await got.delete(route.replace(':id', sede.id), postData());
+    await got.delete(uri + route.replace(':id', sede.id), postData());
 
     hj.assertThat(statusCode, hj.equalTo(200));
 });
@@ -204,7 +210,7 @@ Then('la sede es eliminada de la base de datos', function () {
 
 When('se hace un http delete a {string} y se envía como parámetro :id un identificador de sede que no existe', async function (route) {
     try {
-        await got.get(route.replace(":id", "000000000000"), getData());
+        await got.get(uri + route.replace(":id", "000000000000"), getData());
     }
     catch (ex) { }
 
