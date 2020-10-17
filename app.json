@@ -2,7 +2,7 @@
     "environments": {
       "test": {
         "scripts": {
-          "test-setup": "cd backend && npm install",
+          "test-setup": "npm install",
           "test": "npm test"
         },
 
