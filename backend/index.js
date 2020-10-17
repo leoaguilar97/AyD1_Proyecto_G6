@@ -30,7 +30,7 @@ db.mongoose
 
 // simple route
 app.get("/", (req, res) => {
-    res.json({ mensaje: "Sitio Funcionando" });
+    res.json({ mensaje: "Sitio Funcionando V2" });
 });
 
 require("./app/routes/usuario")(app);

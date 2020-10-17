@@ -10,6 +10,14 @@ process.env.TESTING = true;
 // REQUERIR LA APP PARA INICIAR EL SERVER
 require('../../index');
 
+
+let ip = "http://localhost"
+let port = process.env.PORT || 5000;
+
+let uri = `${ip}:${port}`;
+
+console.log("Realizando las pruebas en: " + uri);
+
 let body;
 let statusCode;
 let message;
@@ -64,7 +72,7 @@ let getData = () => {
 };
 
 When('se hace un http post a {string}, con informacion de la bodega [nombre, direccion]', async function(route) {
-    await got.post(route, postData());
+    await got.post(uri + route, postData());
 
     hj.assertThat(statusCode, hj.equalTo(200));
     hj.assertThat(message, hj.equalTo('created'));
@@ -92,7 +100,7 @@ When('se envian datos incompletos a {string}', async function(route) {
     };
 
     try {
-        await got.post(route, toPost);
+        await got.post(uri + route, toPost);
     } catch (error) { /* ERROR ESPERADO */ }
 
     hj.assertThat(statusCode, hj.equalTo(400));
@@ -103,7 +111,7 @@ Then('retorna un error.', function() {
 });
 
 When('se hace un http get a {string}', async function(route) {
-    await got.get(route, { responseType: 'json', hooks: { afterResponse: hooks.afterResponse } });
+    await got.get(uri + route, { responseType: 'json', hooks: { afterResponse: hooks.afterResponse } });
 
     hj.assertThat(statusCode, hj.equalTo(200));
     hj.assertThat(message, hj.equalTo('retrieved'));
@@ -114,7 +122,7 @@ Then('las bodegas son retornadas en forma de lista.', function() {
 });
 
 When('se hace un http get a {string} y se envia como parametro :id un identificador de bodega', async function(route) {
-    await got.get(route.replace(':id', bodega.id), getData());
+    await got.get(uri + route.replace(':id', bodega.id), getData());
 
     hj.assertThat(statusCode, hj.equalTo(200));
     hj.assertThat(message, hj.equalTo('retrieved'));
@@ -131,7 +139,7 @@ Then('la bodega es retornada en forma de objeto', function() {
 
 When('se hace un http get a {string} y se envia como parametro :id un identificador de bodega que no existe', async function(route) {
     try {
-        await got.get(route.replace(":id", "000000000000"), getData());
+        await got.get(uri + route.replace(":id", "000000000000"), getData());
     } catch (ex) {}
 
     hj.assertThat(message, hj.containsString('No existe'));
@@ -141,7 +149,7 @@ When('se hace un http put a {string} y se envía como parámetro :id un identifi
     bodega.nombre = "Departamento de " + faker.commerce.department();
     bodega.direccion = faker.address.streetAddress();
 
-    await got.put(route.replace(':id', bodega.id), postData());
+    await got.put(uri + route.replace(':id', bodega.id), postData());
 
     hj.assertThat(statusCode, hj.equalTo(200));
 });
@@ -158,14 +166,14 @@ Then('retornada en forma de objeto con los datos modificados', function() {
 
 When('se hace un http put a {string} y se envía como parámetro :id un identificador de bodega que no existe', async function(route) {
     try {
-        await got.get(route.replace(":id", "000000000000"), getData());
+        await got.get(uri + route.replace(":id", "000000000000"), getData());
     } catch (ex) {}
 
     hj.assertThat(message, hj.containsString('No existe'));
 });
 
 When('se hace un http delete a {string} y se envía como parámetro :id un identificador de bodega', async function(route) {
-    await got.delete(route.replace(':id', bodega.id), postData());
+    await got.delete(uri + route.replace(':id', bodega.id), postData());
 
     hj.assertThat(statusCode, hj.equalTo(200));
 });
@@ -176,7 +184,7 @@ Then('la bodega es eliminada de la base de datos', function() {
 
 When('se hace un http delete a {string} y se envía como parámetro :id un identificador de bodega que no existe', async function(route) {
     try {
-        await got.get(route.replace(":id", "000000000000"), getData());
+        await got.get(uri + route.replace(":id", "000000000000"), getData());
     } catch (ex) {}
 
     hj.assertThat(message, hj.containsString('No existe'));
@@ -209,7 +217,7 @@ When('se hace un http post a {string}', async function(route) {
         ]
     }
     try {
-        this.productosAagregados = await got.post(route, post);
+        this.productosAagregados = await got.post(uri + route, post);
     } catch (ex) {}
 
     hj.assertThat(message, hj.containsString('La bodega 5f6020cde1f24eafd89243b9 No existe'));
@@ -247,7 +255,7 @@ Given('una bodega que se le quieren inserter ciertos productos', async function(
 
 When('se hace un http post a {string} para agregar productos', async function(route) {
     try {
-        this.productosAagregados = await got.post(route, this.post);
+        this.productosAagregados = await got.post(uri + route, this.post);
     } catch (ex) {}
 });
 
