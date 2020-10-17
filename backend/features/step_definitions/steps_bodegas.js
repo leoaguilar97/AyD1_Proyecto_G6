@@ -10,6 +10,14 @@ process.env.TESTING = true;
 // REQUERIR LA APP PARA INICIAR EL SERVER
 require('../../index');
 
+
+let ip = "http://localhost"
+let port = process.env.PORT || 5000;
+
+let uri = `${ip}:${port}`;
+
+console.log("Realizando las pruebas en: " + uri);
+
 let body;
 let statusCode;
 let message;
@@ -64,7 +72,7 @@ let getData = () => {
 };
 
 When('se hace un http post a {string}, con informacion de la bodega [nombre, direccion]', async function(route) {
-    await got.post(route, postData());
+    await got.post(host + route, postData());
 
     hj.assertThat(statusCode, hj.equalTo(200));
     hj.assertThat(message, hj.equalTo('created'));
