@@ -22,7 +22,6 @@ Característica: Vincular características a un producto
 
         Entonces se utilizarán de prueba en los siguientes escenario
     
-    @ important
     Escenario: Registrando un producto
         Cuando se registra el producto con las siguientes categorias
         | producto | categoria   |
@@ -32,7 +31,6 @@ Característica: Vincular características a un producto
 
         Entonces se vinculan todas las categorias enviadas al producto registrado
 
-    @ important
     Escenario: Agregando o eliminando categorías a un producto
         Dado el producto "Detergente"
         Cuando se le agrega la categoria "Limpieza"
