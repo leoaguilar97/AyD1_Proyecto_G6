@@ -234,19 +234,23 @@ Given('una bodega que se le quieren inserter ciertos productos', async function(
         "bodega": bodega.id,
         "productos": [{
                 "producto": "5f6eb928d08aa500178e6e1e",
-                "cantidad": 20
+                "cantidad": 20,
+                "precio": 10.00
             },
             {
                 "producto": "5f6eb8e4d08aa500178e6e1c",
-                "cantidad": 20
+                "cantidad": 20,
+                "precio": 12.50
             },
             {
                 "producto": "5f6e8cbdd99abe00170fb238",
-                "cantidad": 30
+                "cantidad": 30,
+                "precio": 18.60
             },
             {
                 "producto": "5f6e72286e733d0017a8d47e",
-                "cantidad": 40
+                "cantidad": 40,
+                "precio": 15.35
             }
         ]
     }
