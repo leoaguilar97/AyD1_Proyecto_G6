@@ -19,7 +19,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { EditarUsuarioComponent } from './editarUsuario/editar-usuario.component';
 import { LoginComponent } from './login/login.component';
 import { EditarProductoComponent } from './editar-producto/editar-producto.component';
-import { ProveedoresComponent } from './proveedores/proveedores.component';
 import { CategoriasComponent } from './categorias/categorias.component';
 import { SedesComponent } from './sedes/sedes.component';
 import { EditarCategoriasComponent } from './editar-categorias/editar-categorias.component';
@@ -41,7 +40,6 @@ import { VentaComponent } from './venta/venta.component';
     EditarUsuarioComponent,
     EditarProductoComponent,
     LoginComponent,
-    ProveedoresComponent,
     CategoriasComponent,
     SedesComponent,
     EditarCategoriasComponent,
