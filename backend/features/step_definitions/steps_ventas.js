@@ -1,10 +1,15 @@
-const { Given, When, Then, After } = require('cucumber');
+const { Given, When, Then, After, Before } = require('cucumber');
 const faker = require('faker');
 faker.setLocale('es_MX');
 
 const got = require('got');
 const chai = require('chai');
-const bodega = require('../../app/models/bodega');
+const {
+    create,
+    dbVenta
+} = require('../../app/controllers/venta');
+
+const sinon = require('sinon');
 
 const { expect } = chai;
 
@@ -16,6 +21,15 @@ const bodegas = [];
 const productos = [];
 const vendedores = [];
 const clientes = [];
+
+var sandbox;
+Before(function() {
+    sandbox = sinon.createSandbox();
+});
+
+After(function() {
+    sandbox.restore();
+});
 
 Given('la bodega', function(dataTable) {
     if (loadData) {
@@ -86,9 +100,9 @@ function procesarProductosCompra(dataTable) {
     dataTable.rawTable.forEach((pc, index) => {
         if (index > 0) {
             productosCompra.push({
-                producto: pc[0],
+                //producto: pc[0],
                 cantidad: pc[1],
-                id: pc[2]
+                producto: pc[2]
             });
         }
     });
@@ -107,13 +121,38 @@ When('el cliente realiza la siguiente compra', async function(dataTable) {
     venta.bodega = bodegas[0].id;
 });
 
-Then('el vendedor realiza un ticket de venta', async function() {
+Then('el vendedor realiza un ticket de venta', function(done) {
 
-    console.log(venta);
+    let res = {
+        send: () => {},
+        status: sinon.stub().returnsThis()
+    };
 
+    const mock = sinon.mock(res);
+
+    mock.expects("send").once().withArgs({
+        message: "created",
+        venta: {}
+    });
+
+    sandbox.stub(dbVenta, 'create').returns({
+        then: (cb) => {
+            cb({});
+
+            mock.verify();
+
+            expect(res.status.calledOnce).to.be.true;
+            expect(res.status.firstCall.calledWithExactly(201)).to.be.true;
+
+            done();
+
+            return { catch: () => {} }
+        },
+    });
+
+    create({ body: venta }, res);
 });
 
 Then('se asigna la fecha de hoy, un código único y el total de la compra.', async function() {
-
-    console.log(venta);
+    //console.log(venta);
 });
