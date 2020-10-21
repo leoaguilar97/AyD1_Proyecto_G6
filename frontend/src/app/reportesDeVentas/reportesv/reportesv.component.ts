@@ -27,14 +27,15 @@ export class ReportesvComponent implements OnInit {
   public show: boolean = false;
   public show2: boolean = false;
   public show3: boolean = false;
+  public showChart: boolean = false;
+  public showChart2: boolean = false;
+  public showChart3: boolean = false;
   httpdata;
 
   ngOnInit(): void {
     this.cargarProductos();
     this.cargarCategs();
-    this.graficaBarras();
-    this.graficaPie();
-    this.graficaLineal();
+    
   }
 
   toggle() {
@@ -50,6 +51,25 @@ export class ReportesvComponent implements OnInit {
       this.show = false;
       this.show2 = false;
       this.show3 = true;
+    }
+  }
+
+  toggle2() {
+    if (this.tipo == "Pie") {
+      this.showChart = true;
+      this.graficaPie();
+      this.showChart2 = false;
+      this.showChart3 = false;
+    } else if (this.tipo == "Lineal") {
+      this.showChart = false;
+      this.showChart2 = true;
+      this.graficaLineal();
+      this.showChart3 = false;
+    } else {
+      this.showChart = false;
+      this.showChart2 = false;
+      this.showChart3 = true;
+      this.graficaBarras();
     }
   }
 
