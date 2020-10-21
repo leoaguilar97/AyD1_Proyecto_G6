@@ -224,7 +224,6 @@ When('se hace un http post a {string}', async function(route) {
 });
 
 Then('se espera un error {int} ya que la bodega no existe', function(code) {
-    console.log(message);
     hj.assertThat(message, hj.containsString('La bodega 5f6020cde1f24eafd87243b9 No existe'));
     hj.assertThat(statusCode, hj.equalTo(code));
 });

@@ -14,8 +14,8 @@ Característica: Un vendedor puede registrar compras
         | Cerdo         | 15                | 25.00             | 5f8f6976771cac1e242ce933  |
 
         Y el vendedor a cargo de las ventas de la bodega es
-        | Nombre            | Correo                    | Id
-        | Jose Martinez     | "josemartinez@gmail.com"  | 5f8f6ccb6c818b0aa4868c70
+        | Nombre            | Correo                    | Id                        |
+        | Jose Martinez     | "josemartinez@gmail.com"  | 5f8f6ccb6c818b0aa4868c70  |
         
         Y atendera a un cliente, con los siguientes datos
         | Nombre         | Dirección     | NIT              |

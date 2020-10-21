@@ -4,6 +4,7 @@ faker.setLocale('es_MX');
 
 const got = require('got');
 const chai = require('chai');
+const bodega = require('../../app/models/bodega');
 
 const { expect } = chai;
 
@@ -73,18 +74,6 @@ Given('atendera a un cliente, con los siguientes datos', function(dataTable) {
 
         loadData = false;
     }
-
-    console.log("Bodegas: ");
-    console.table(bodegas);
-
-    console.log("Productos: ");
-    console.table(productos);
-
-    console.log("Vendedores: ");
-    console.table(vendedores);
-
-    console.log("Clientes: ");
-    console.table(clientes);
 });
 
 
@@ -107,17 +96,21 @@ function procesarProductosCompra(dataTable) {
     return productosCompra;
 }
 
+let venta = {};
+
 When('el cliente realiza la siguiente compra', async function(dataTable) {
-
-    const productosCompra = procesarProductosCompra(dataTable);
-    console.log("Productos a comprar: ");
-    console.log(productosCompra);
-
+    venta.nombre_cliente = clientes[0].nombre;
+    venta.nit = clientes[0].nit;
+    venta.direccion = clientes[0].direccion;
+    venta.vendedor = vendedores[0].id;
+    venta.productos = procesarProductosCompra(dataTable);
+    venta.bodega = bodegas[0].id;
 });
 
 Then('el vendedor realiza un ticket de venta', async function() {
 
-    return 'pending';
+    console.log(venta);
+
 });
 
 Then('se asigna la fecha de hoy, un código único y el total de la compra.', async function() {
