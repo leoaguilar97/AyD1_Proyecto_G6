@@ -34,8 +34,8 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Vendedor</label>
                             <div class="col-sm-9">
-                                <select [(ngModel)]="nueva_categoria" name="nueva_categoria" class="form-control">
-                                    <option *ngFor="let cate of cats" value="{{cate.id}}">{{cate.nombre}}</option>
+                                <select [(ngModel)]="vendedor" name="vendedor" class="form-control">
+                                    <option *ngFor="let persona of personas" value="{{persona.id}}">{{persona.nombre}} {{persona.apellido}}</option>
                                 </select>
                             </div>
                         </div>
@@ -46,8 +46,8 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Bodega</label>
                             <div class="col-sm-9">
-                                <select [(ngModel)]="nueva_categoria" name="nueva_categoria" class="form-control">
-                                    <option *ngFor="let cate of cats" value="{{cate.id}}">{{cate.nombre}}</option>
+                                <select [(ngModel)]="bodega" name="bodega" class="form-control">
+                                    <option *ngFor="let bodega of bodegas" value="{{bodega.id}}">{{bodega.nombre}}</option>
                                 </select>
                             </div>
                         </div>
