@@ -115,5 +115,5 @@ Then('el vendedor realiza un ticket de venta', async function() {
 
 Then('se asigna la fecha de hoy, un código único y el total de la compra.', async function() {
 
-    return 'pending';
+    console.log(venta);
 });
