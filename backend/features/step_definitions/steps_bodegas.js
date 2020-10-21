@@ -197,7 +197,7 @@ Then('devuelve un error {int}', function(code) {
 When('se hace un http post a {string}', async function(route) {
     let post = postData();
     post.json = {
-        "bodega": "5f6020cde1f24eafd89243b9",
+        "bodega": "5f6020cde1f24eafd87243b9",
         "productos": [{
                 "producto": "5f6eb928d08aa500178e6e1e",
                 "cantidad": 20
@@ -220,12 +220,12 @@ When('se hace un http post a {string}', async function(route) {
         this.productosAagregados = await got.post(uri + route, post);
     } catch (ex) {}
 
-    hj.assertThat(message, hj.containsString('La bodega 5f6020cde1f24eafd89243b9 No existe'));
+    hj.assertThat(message, hj.containsString('La bodega 5f6020cde1f24eafd87243b9 No existe'));
 });
 
 Then('se espera un error {int} ya que la bodega no existe', function(code) {
     console.log(message);
-    hj.assertThat(message, hj.containsString('La bodega 5f6020cde1f24eafd89243b9 No existe'));
+    hj.assertThat(message, hj.containsString('La bodega 5f6020cde1f24eafd87243b9 No existe'));
     hj.assertThat(statusCode, hj.equalTo(code));
 });
 

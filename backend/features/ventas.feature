@@ -24,10 +24,10 @@ Característica: Un vendedor puede registrar compras
     @important
     Escenario: Se realiza una venta
         Cuando el cliente realiza la siguiente compra
-        
-        | Producto | Cantidad comprada  | IdProducto
-        | Pollo    | 5                  | 5f6d138cf3e1670edc6aef07
-        | Carne    | 10                 | 5f6d13a29c48f710d40e1ed6
+
+        | Producto | Cantidad comprada  | IdProducto                |
+        | Pollo    | 5                  | 5f6d138cf3e1670edc6aef07  |
+        | Carne    | 10                 | 5f6d13a29c48f710d40e1ed6  |
                         
         Entonces el vendedor realiza un ticket de venta
         Y se asigna la fecha de hoy, un código único y el total de la compra. 

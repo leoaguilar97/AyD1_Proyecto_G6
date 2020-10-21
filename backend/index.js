@@ -19,7 +19,7 @@ db.mongoose.set('useFindAndModify', false);
 db.mongoose.set('useCreateIndex', true);
 
 db.mongoose
-    .connect(!process.env.TESTING ? db.testUrl : db.url, {
+    .connect(process.env.TESTING ? db.testUrl : db.url, {
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
