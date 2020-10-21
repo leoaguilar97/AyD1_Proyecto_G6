@@ -7,6 +7,6 @@ Característica: Reporte Ventas
         Entonces la bodega es guardada en la base de datos
         Y se asigna un identificador unico a la bodega.
 
-        Escenario: Leer registros de bodegass
-        Cuando se hace un http get a "/api/bodega"s
-        Entonces las bodegas son retornadas en forma de listas.
+        Escenario: Leer registros de bodegas
+        Cuando se hace un http get a "/api/bodega"
+        Entonces las bodegas son retornadas en forma de lista.
