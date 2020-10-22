@@ -14,8 +14,7 @@ export class DetalleVentaComponent implements OnInit {
 
   constructor(private router: Router, private http: HttpClient,private DetalleventaService: DetalleventaService) { }
 
-  ventas = [];
-  vents = Array<any>();
+  vents = [];
   dataservice;
   ngOnInit() {
     this.getDetalleVentas();

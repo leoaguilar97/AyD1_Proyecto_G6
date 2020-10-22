@@ -8,23 +8,38 @@
                     <thead>
                         <tr>
                             <th> </th>
-                            <th> Nombre  </th>
-                            <th> Acciones </th>
+                            <th> ID Venta </th>
+                            <th> Nombre cliente</th>
+                            <th> NIT </th>
+                            <th> Dirección </th>
+                            <th> Vendedor </th>
+                            <th> Total </th>
                         </tr>
                     </thead>
                     <tbody>
                         <!-- Repitencia-->
-                        <tr *ngFor="let categ of cats">
+                        <tr *ngFor="let venta of vents">
                             <td>
-                                <img class="mr-2" src="https://visualpharm.com/assets/446/Tags-595b40b65ba036ed117d45e6.svg" alt="image" />
+                                <img class="mr-2" src="https://image.flaticon.com/icons/png/512/61/61584.png" alt="image" />
                             </td>
                             <td>
-                                x
+                                {{venta.id}}
                             </td>
                             <td>
-                                
+                                {{venta.nombre_cliente}}
                             </td>
-
+                            <td>
+                                {{venta.nit}}
+                            </td>
+                            <td>
+                                {{venta.direccion}}
+                            </td>
+                            <td>
+                                {{venta.vendedor.nombre}} {{venta.vendedor.apellido}}
+                            </td>
+                            <td>
+                                {{venta.total}}
+                            </td>
                         </tr>
                     </tbody>
                 </table>
