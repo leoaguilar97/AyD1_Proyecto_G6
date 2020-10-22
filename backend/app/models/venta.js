@@ -7,7 +7,7 @@ module.exports = mongoose => {
         total: Number,
         vendedor: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'vendedor'
+            ref: 'usuario'
         },
 
         bodega: {

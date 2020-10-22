@@ -104,3 +104,49 @@ exports.create = async(req, res) => {
             });
         });
 };
+
+exports.getAll = (req, res) => {
+    Venta
+        .find({})
+        .populate({
+            path: "bodega",
+            select: ['nombre', 'direccion']
+        })
+        .populate({
+            path: "vendedor",
+            select: ['nombre', 'apellido', 'dpi', 'direccion', 'correo', 'fechaNacimiento']
+        })
+        //.populate("productos.producto")
+        .populate({
+            path: 'productos.producto',
+            populate: {
+                path: 'categorias',
+                select: ['nombre']
+            },
+            select: ['nombre', 'categorias', 'precio', 'createdAt']
+        })
+        .then(data => {
+            return res.send({ ventas: data, message: 'retrieved' });
+        })
+        .catch(err => {
+            console.log(err);
+            return res
+                .status(500)
+                .send({ message: "Error al retornar todos los productos en la BD" })
+        });
+};
+
+exports.deleteAll = (_req, res) => {
+    Venta.deleteMany({})
+        .then(data => {
+            res.send({
+                message: 'deleted'
+            });
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: `No se elimino el historial de ventas`,
+                error: err
+            });
+        });
+};
