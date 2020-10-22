@@ -1,5 +1,5 @@
 const db = require("../models");
-const categoria = require("../models/categoria");
+const controllerVenta = require("../controllers/venta	");
 const Venta = db.venta;
 
 exports.Venta = Venta;
@@ -70,4 +70,20 @@ exports.categorias = (req, res) => {
                 .status(500)
                 .send({ message: "Error al retornar los datos." })
         });
+};
+
+
+exports.productos = (req, res) => {
+    var res = {
+        status: (code) => {
+            stcode = code;
+        },
+        send: (data) => {
+            reportData = data;
+        }
+    };
+    await controllerVenta.ventas({}, res);
+
+    return res.status(200).send({ data: res, message: 'retrieved', });
+
 };

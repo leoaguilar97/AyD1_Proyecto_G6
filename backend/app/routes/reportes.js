@@ -5,6 +5,9 @@ module.exports = app => {
 
     // Reporte categorias
     router.get("/categoria", reportes.categorias);
-  
+
+    // Reporte producto
+    router.get("/producto", reportes.productos);
+
     app.use("/api/reporte", router);
-  };
+};
