@@ -4,6 +4,7 @@ module.exports = mongoose => {
         nombre_cliente: String,
         nit: String,
         direccion: String,
+        total: Number,
         vendedor: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'vendedor'

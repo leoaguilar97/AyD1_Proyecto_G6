@@ -14,8 +14,8 @@ Característica: Un vendedor puede registrar compras
         | Cerdo         | 15                | 25.00             | 5f8f6976771cac1e242ce933  |
 
         Y el vendedor a cargo de las ventas de la bodega es
-        | Nombre            | Correo                    | Id                        |
-        | Jose Martinez     | "josemartinez@gmail.com"  | 5f8f6ccb6c818b0aa4868c70  |
+        | Nombre            | Correo                    | Id             |
+        | Jose Martinez     | "josemartinez@gmail.com"  | 3001381800101  |
         
         Y atendera a un cliente, con los siguientes datos
         | Nombre         | Dirección     | NIT              |
@@ -29,7 +29,6 @@ Característica: Un vendedor puede registrar compras
         | Pollo    | 5                  | 5f6d138cf3e1670edc6aef07  |
         | Carne    | 10                 | 5f6d13a29c48f710d40e1ed6  |
                         
-        Entonces el vendedor realiza un ticket de venta
-        Y se asigna la fecha de hoy, un código único y el total de la compra. 
+        Entonces el vendedor realiza un ticket de venta y es guardada exitosamente
 		
 		

@@ -2,8 +2,6 @@ const db = require("../models");
 const Venta = db.venta;
 const Bodega = db.bodega;
 const Vendedor = db.usuario;
-const Producto = db.producto;
-
 
 exports.dbVenta = db.venta;
 
@@ -20,7 +18,8 @@ exports.create = async(req, res) => {
         direccion: req.body.direccion,
         vendedor: req.body.vendedor,
         productos: req.body.productos,
-        bodega: req.body.bodega
+        bodega: req.body.bodega,
+        total: 0
     };
 
     let vendedor;
@@ -56,9 +55,6 @@ exports.create = async(req, res) => {
 
     let message;
 
-    console.log("INICIALES: ");
-    console.table(productos);
-
     let todosEnBodega = venta.productos.reduce((accumulator, currentValue) => {
         let pindex = productos_ids.indexOf(currentValue.producto);
         let existeEnBodega = pindex > -1;
@@ -67,6 +63,7 @@ exports.create = async(req, res) => {
 
         if (haySuficientes) {
             productos[pindex].cantidad -= currentValue.cantidad;
+            venta.total += currentValue.cantidad * productos[pindex].precio;
         }
 
         if (!message && !valido) {
@@ -81,9 +78,6 @@ exports.create = async(req, res) => {
 
     }, true);
 
-    console.log("FINAL");
-    console.table(productos);
-
     if (!todosEnBodega) {
         return res.status(400).send({ message: message, status: 'error' });
     }
@@ -96,9 +90,6 @@ exports.create = async(req, res) => {
         bodega = data;
     });
 
-    console.log("VENTA FINAL: ");
-    console.table(venta);
-
     // Guardar venta
     Venta
         .create(venta)
@@ -110,4 +101,4 @@ exports.create = async(req, res) => {
                 message: err.message || "Existio un error al agregar la venta."
             });
         });
-}
+};

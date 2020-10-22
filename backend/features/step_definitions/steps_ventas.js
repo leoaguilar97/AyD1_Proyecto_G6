@@ -101,7 +101,7 @@ function procesarProductosCompra(dataTable) {
         if (index > 0) {
             productosCompra.push({
                 //producto: pc[0],
-                cantidad: pc[1],
+                cantidad: 0,
                 producto: pc[2]
             });
         }
@@ -121,21 +121,15 @@ When('el cliente realiza la siguiente compra', async function(dataTable) {
     venta.bodega = bodegas[0].id;
 });
 
-Then('el vendedor realiza un ticket de venta', function(done) {
+Then('el vendedor realiza un ticket de venta y es guardada exitosamente', function(done) {
 
     let res = {
         send: () => {},
         status: sinon.stub().returnsThis()
     };
 
-    console.log(JSON.stringify(venta));
-
     const mock = sinon.mock(res);
-
-    mock.expects("send").once().withArgs({
-        message: "created",
-        venta: {}
-    });
+    mock.expects("send").once();
 
     sandbox.stub(dbVenta, 'create').returns({
         then: (cb) => {
@@ -153,8 +147,4 @@ Then('el vendedor realiza un ticket de venta', function(done) {
     });
 
     create({ body: venta }, res);
-});
-
-Then('se asigna la fecha de hoy, un código único y el total de la compra.', async function() {
-    //console.log(venta);
 });
