@@ -1,10 +1,10 @@
 module.exports = app => {
-    const producto = require("../controllers/fecha");
+    const reportes = require("../controllers/reportes");
 
     var router = require("express").Router();
 
-    // Obtener todos los productos
-    //router.get("/", producto.getAll);
+    // Reporte categorias
+    router.get("/categoria", reportes.categorias);
   
     app.use("/api/reporte", router);
   };

@@ -7,7 +7,8 @@
         "test": "cucumber-js -f node_modules/cucumber-pretty --exit ",
         "testMocha": "mocha 'tests/**/*.js' --recursive",
         "testImportant": "cucumber-js -f node_modules/cucumber-pretty --exit --tags @important",
-        "start": "node index"
+        "start": "node index",
+        "startEdgar": "cucumber-js -f node_modules/cucumber-pretty --exit --tags @edgar"
     },
     "author": "Leonel Aguilar",
     "license": "ISC",
