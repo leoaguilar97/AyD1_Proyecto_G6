@@ -48,7 +48,7 @@ export class VentaComponent implements OnInit {
     this.bodegaSeleccionada = true;
     this.http.get('https://api-erpp.herokuapp.com/api/bodega/' + this.bodega)
       .toPromise().then((data: any) => {
-        this.productos = data.bodega.productos;
+        
       });
   console.log(this.productos);
   }
