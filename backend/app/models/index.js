@@ -14,5 +14,6 @@ db.producto = require("./producto")(mongoose);
 db.bodega = require('./bodega')(mongoose);
 db.categoria = require('./categoria')(mongoose);
 db.sede = require('./sede')(mongoose);
+db.venta = require('./venta')(mongoose);
 
 module.exports = db;

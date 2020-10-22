@@ -8,6 +8,7 @@ module.exports = mongoose => {
                 ref: 'producto'
             },
             "cantidad": Number,
+            "precio": Number
         }]
     }, { timestamps: true });
 

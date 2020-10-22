@@ -39,6 +39,8 @@ require("./app/routes/login")(app);
 require("./app/routes/bodega")(app);
 require("./app/routes/categoria")(app);
 require("./app/routes/sede")(app);
+require("./app/routes/venta")(app);
+
 
 // set port, listen for requests
 const PORT = process.env.PORT || 5000;
