@@ -128,6 +128,8 @@ Then('el vendedor realiza un ticket de venta', function(done) {
         status: sinon.stub().returnsThis()
     };
 
+    console.log(JSON.stringify(venta));
+
     const mock = sinon.mock(res);
 
     mock.expects("send").once().withArgs({

@@ -1,13 +1,17 @@
 const db = require("../models");
 const Venta = db.venta;
+const Bodega = db.bodega;
+const Vendedor = db.usuario;
+const Producto = db.producto;
+
 
 exports.dbVenta = db.venta;
 
 // Crear una venta
-exports.create = (req, res) => {
+exports.create = async(req, res) => {
 
     if (!req.body.nombre_cliente || !req.body.vendedor || !req.body.productos || !req.body.bodega) {
-        return res.status(400).send({ message: "Se enviaron datos incompletos" });
+        return res.status(400).send({ message: "Se enviaron datos incompletos", status: 'error' });
     }
 
     const venta = {
@@ -19,14 +23,91 @@ exports.create = (req, res) => {
         bodega: req.body.bodega
     };
 
+    let vendedor;
+    await Vendedor.findOne({ dpi: venta.vendedor }).then(data => {
+        vendedor = data
+    });
+
+    if (!vendedor) {
+        return res.status(400).send({ message: `El vendedor ${venta.vendedor} no existe`, status: 'error' });
+    }
+
+    venta.vendedor = vendedor.id;
+
+    let bodega;
+    await Bodega.findOne({
+            _id: venta.bodega
+        })
+        .populate("productos.producto")
+        .then(data => {
+            bodega = data;
+        });
+
+    if (!bodega) {
+        return res.status(400).send({ message: `La bodega ${venta.bodega} no existe`, status: 'error' });
+    }
+
+    // Validar productos
+    let productos = bodega.productos.map(p => { return { producto: "" + p.producto._id, cantidad: p.cantidad, precio: p.precio } });
+
+    // Revisar que todos los productos esten en la bodega
+
+    let productos_ids = productos.map(p => { return p.producto });
+
+    let message;
+
+    console.log("INICIALES: ");
+    console.table(productos);
+
+    let todosEnBodega = venta.productos.reduce((accumulator, currentValue) => {
+        let pindex = productos_ids.indexOf(currentValue.producto);
+        let existeEnBodega = pindex > -1;
+        let haySuficientes = !existeEnBodega ? false : currentValue.cantidad >= 0 && currentValue.cantidad <= productos[pindex].cantidad;
+        let valido = existeEnBodega && haySuficientes;
+
+        if (haySuficientes) {
+            productos[pindex].cantidad -= currentValue.cantidad;
+        }
+
+        if (!message && !valido) {
+            if (!existeEnBodega) {
+                message = `El producto ${currentValue.producto} no existe en la bodega ${bodega.nombre}`;
+            } else if (!haySuficientes) {
+                message = `No hay suficientes unidades del producto ${currentValue.producto}, se desean ${currentValue.cantidad} pero en la bodega solo hay ${productos[pindex].cantidad}`;
+            }
+        }
+
+        return accumulator && existeEnBodega && haySuficientes;
+
+    }, true);
+
+    console.log("FINAL");
+    console.table(productos);
+
+    if (!todosEnBodega) {
+        return res.status(400).send({ message: message, status: 'error' });
+    }
+
+    bodega.productos = productos;
+    await bodega.save((err, data) => {
+        if (err) {
+            return res.status(500).send({ message: `Hubo un error guardando los datos de la bodega, intente de nuevo.`, status: 'error' });
+        }
+        bodega = data;
+    });
+
+    console.log("VENTA FINAL: ");
+    console.table(venta);
+
+    // Guardar venta
     Venta
         .create(venta)
         .then(data => {
-            return res.status(201).send({ message: "created", venta: data });
+            return res.status(201).send({ message: "Venta realizada correctamente", venta: data, bodega: bodega });
         })
         .catch(err => {
             return res.status(500).send({
                 message: err.message || "Existio un error al agregar la venta."
             });
         });
-};
+}
