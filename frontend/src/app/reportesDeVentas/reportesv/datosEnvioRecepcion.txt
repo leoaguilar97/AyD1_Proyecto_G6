@@ -1,6 +1,6 @@
 *********************CATEGORIAS************************
 
-Yo te voy a mandar esto: {tipo:"Categorias", grafica:"Lineal"}
+Yo te voy a mandar esto: {tipo:"Categorias", grafica:"Lineal",rango: "SinRango"}
 
 y vos me mandas esto: 
 
@@ -13,7 +13,7 @@ y vos me mandas esto:
 
 **********************PRODUCTOS***************************
 
-Yo te voy a mandar esto: {tipo:"Productos", grafica:"Pie"}
+Yo te voy a mandar esto: {tipo:"Productos", grafica:"Pie",rango: "SinRango"}
 
 y vos me mandas esto: 
 
@@ -27,7 +27,7 @@ y vos me mandas esto:
 
 **********************VENDEDOR*****************************
 
-Yo te voy a mandar esto: {tipo:"Vendedor", grafica:"Barras"}
+Yo te voy a mandar esto: {tipo:"Vendedor", grafica:"Barras", rango: "SinRango"}
 
 y vos me mandas esto: 
 
@@ -40,7 +40,7 @@ y vos me mandas esto:
 
 *************************FECHA POR DIA*********************
 
-Yo te voy a mandar esto: {tipo:"Dia", grafica:"Lineal"}
+Yo te voy a mandar esto: {tipo:"Dia", grafica:"Lineal", rango:"22/10/2020"}
 
 y vos me mandas esto: 
 
@@ -52,7 +52,7 @@ y vos me mandas esto:
 }
 **************************FECHA POR MES********************
 
-Yo te voy a mandar esto: {tipo:"Mes", grafica:"Pie"}
+Yo te voy a mandar esto: {tipo:"Mes", grafica:"Pie", rango:"Octubre"}
 
 y vos me mandas esto: 
 
@@ -65,7 +65,7 @@ y vos me mandas esto:
 
 **************************FECHA POR AÑO********************
 
-Yo te voy a mandar esto: {tipo:"Anio", grafica:"Barras"}
+Yo te voy a mandar esto: {tipo:"Anio", grafica:"Barras", rango:"2020"}
 
 y vos me mandas esto: 
 

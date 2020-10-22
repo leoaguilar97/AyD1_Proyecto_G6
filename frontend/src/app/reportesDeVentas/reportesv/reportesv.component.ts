@@ -12,18 +12,12 @@ export class ReportesvComponent implements OnInit {
   constructor(private router: Router, private http: HttpClient) {}
 
   // Declaraciones
-  productos = [];
-  cats = [];
-  cats2 = [];
-  nuevo_nombre: string;
-  nueva_categoria = "";
-  nuevo_proveedor = "";
-  nueva_data = "";
   tipo = "";
   filtro = "";
   dia = "";
   mes = "";
   anio = "";
+  rango = "";
   public show: boolean = false;
   public show2: boolean = false;
   public show3: boolean = false;
@@ -33,8 +27,6 @@ export class ReportesvComponent implements OnInit {
   httpdata;
 
   ngOnInit(): void {
-    this.cargarProductos();
-    this.cargarCategs();
     
   }
 
@@ -47,14 +39,19 @@ export class ReportesvComponent implements OnInit {
       this.show = false;
       this.show2 = true;
       this.show3 = false;
-    } else {
+    } else if (this.filtro == "Anio") {
       this.show = false;
       this.show2 = false;
       this.show3 = true;
+    } else {
+      this.show = false;
+      this.show2 = false;
+      this.show3 = false;
     }
   }
 
   toggle2() {
+    console.log(this.rango);
     if (this.tipo == "Pie") {
       this.showChart = true;
       this.graficaPie();
@@ -73,66 +70,9 @@ export class ReportesvComponent implements OnInit {
     }
   }
 
-  cargarProductos(): boolean {
-    this.http
-      .get("https://api-erpp.herokuapp.com/api/producto")
-      .toPromise()
-      .then((data: any) => {
-        this.productos = data;
-      });
-    return true;
-  }
-
-  cargarCategs() {
-    this.http
-      .get("https://api-erpp.herokuapp.com/api/categoria")
-      .subscribe((data) => this.displaydata(data));
-  }
-
-  displaydata(data) {
-    this.httpdata = data;
-    console.log(this.httpdata);
-    this.httpdata.categorias.forEach((element) => {
-      this.cats.push(element);
-    });
-    console.log(this.cats);
-  }
-
-  editar(id: string) {
-    this.router.navigate(["editarProducto", id]);
-  }
-
-  eliminar(id: string) {
-    const direccion = "https://api-erpp.herokuapp.com/api/producto/" + id;
-    this.http
-      .delete(direccion)
-      .toPromise()
-      .then((data: any) => {
-        console.log(data);
-        this.cargarProductos();
-      });
-  }
-
-  agregar() {
-    console.log("BANDERA" + this.nueva_categoria);
-    this.http
-      .post("https://api-erpp.herokuapp.com/api/producto", {
-        nombre: this.nuevo_nombre,
-        categorias: [this.nueva_categoria],
-        proveedores: [this.nuevo_proveedor],
-      })
-      .toPromise()
-      .then((data: any) => {
-        console.log(data);
-        this.cancelar();
-        this.cargarProductos();
-      });
-  }
+  
 
   cancelar() {
-    this.nuevo_nombre = "";
-    this.nueva_categoria = "";
-    this.nuevo_proveedor = "";
     this.tipo = "";
     this.filtro = "";
   }

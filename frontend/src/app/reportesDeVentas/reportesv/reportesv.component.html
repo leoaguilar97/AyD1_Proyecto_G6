@@ -24,7 +24,10 @@
                                 <select [(ngModel)]="filtro" name="filtro" class="form-control">
                                     <option>Dia</option>
                                     <option>Mes</option>
-                                    <option>Año</option>
+                                    <option>Anio</option>
+                                    <option>Categorias</option>
+                                    <option>Productos</option>
+                                    <option>Vendedor</option>
                                 </select>
                             </div>
                         </div>
@@ -48,7 +51,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Dia</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" placeholder ="dd/mm/aaaa" [(ngModel)]="dia" name="dia"/>
+                                    <input type="text" class="form-control" placeholder ="dd/mm/aaaa" [(ngModel)]="rango" name="rango"/>
                                 </div>
                             </div>
                         </div>
@@ -58,7 +61,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Mes</label>
                                 <div class="col-sm-9">
-                                    <select [(ngModel)]="mes" name="mes" class="form-control">
+                                    <select [(ngModel)]="rango" name="rango" class="form-control">
                                         <option>Enero</option>
                                         <option>Febrero</option>
                                         <option>Marzo</option>
@@ -81,7 +84,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Año</label>
                                 <div class="col-sm-9">
-                                    <select [(ngModel)]="anio" name="anio" class="form-control">
+                                    <select [(ngModel)]="rango" name="rango" class="form-control">
                                         <option>2020</option>
                                         <option>2019</option>
                                         <option>2018</option>
