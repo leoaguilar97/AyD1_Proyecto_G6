@@ -12,11 +12,13 @@ export class VentaComponent implements OnInit {
   constructor(private router: Router, private http: HttpClient) { }
   bodegas = [];
   personas = [];
+  productos = [];
   nombre_cliente: String;
   direccion_cliente: String;
   nit_cliente: String;
   vendedor: String;
   bodega: String;
+  bodegaSeleccionada = false;
 
   ngOnInit(): void {
     this.cargarBodegas();
@@ -40,5 +42,14 @@ export class VentaComponent implements OnInit {
     console.log(this.nit_cliente);
     console.log(this.vendedor);
     console.log(this.bodega);
+  }
+  seleccionBodega() {
+    console.log(this.bodega);
+    this.bodegaSeleccionada = true;
+    this.http.get('https://api-erpp.herokuapp.com/api/bodega/' + this.bodega)
+      .toPromise().then((data: any) => {
+        this.productos = data.bodega.productos;
+      });
+  console.log(this.productos);
   }
 }
