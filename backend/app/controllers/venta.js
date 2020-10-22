@@ -56,6 +56,7 @@ exports.create = async(req, res) => {
     let message;
 
     let todosEnBodega = venta.productos.reduce((accumulator, currentValue) => {
+        currentValue.cantidad = currentValue.cantidad * 1;
         let pindex = productos_ids.indexOf(currentValue.producto);
         let existeEnBodega = pindex > -1;
         let haySuficientes = !existeEnBodega ? false : currentValue.cantidad >= 0 && currentValue.cantidad <= productos[pindex].cantidad;
@@ -63,7 +64,8 @@ exports.create = async(req, res) => {
 
         if (haySuficientes) {
             productos[pindex].cantidad -= currentValue.cantidad;
-            venta.total += currentValue.cantidad * productos[pindex].precio;
+            venta.total += currentValue.cantidad * ((productos[pindex].precio * 1) || 0);
+            console.log(venta.total);
         }
 
         if (!message && !valido) {
