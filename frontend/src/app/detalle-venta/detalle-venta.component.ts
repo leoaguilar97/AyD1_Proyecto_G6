@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { DetalleventaService } from '../services/detalleventa.service';
+import { first } from 'rxjs/operators';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-detalle-venta',
@@ -9,20 +12,32 @@ import { HttpClient } from '@angular/common/http';
 })
 export class DetalleVentaComponent implements OnInit {
 
-  constructor(private router: Router, private http: HttpClient) { }
+  constructor(private router: Router, private http: HttpClient,private DetalleventaService: DetalleventaService) { }
 
-  //
   ventas = [];
+  vents = Array<any>();
+  dataservice;
   ngOnInit() {
-    this.cargarVentas();
+    this.getDetalleVentas();
   }
 
-  cargarVentas(): boolean {
-    this.http.get('https://api-erpp.herokuapp.com/api/venta')
-      .toPromise().then((data: any) => {
-        this.ventas = data.ventas;
+  getDetalleVentas(){
+    this.DetalleventaService.getVentas()
+    .pipe(first())
+    .subscribe(
+      data => {
+        if (data.message == "retrieved") {
+          this.vents = data.ventas;
+          console.log(this.vents);
+        } else {
+          console.log("Error")
+        }
+      },
+      error => {
+        console.log(error);
       });
-    return true;
   }
+  
 
+  
 }
