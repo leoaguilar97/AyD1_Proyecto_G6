@@ -117,6 +117,7 @@ Then('se devuelven los datos para el reporte del mes.', { timeout: 7 * 1000 }, a
     const mockR = sinon.mock(res);
     mockR.expects("send").once();
 
+    await controllerReportes.mes({ params: { mes: reporteMes } }, res);
 
     expect(res.status.calledOnce).to.be.true;
     expect(res.status.firstCall.calledWithExactly(200)).to.be.true;
