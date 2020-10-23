@@ -27,6 +27,7 @@ import { EditarSedesComponent } from './editar-sedes/editar-sedes.component';
 import { EditarBodegasComponent } from './editar-bodegas/editar-bodegas.component';
 import { VerInventarioComponent } from './ver-inventario/ver-inventario.component';
 import { ReportesvComponent } from './reportesDeVentas/reportesv/reportesv.component';
+import { ServicioReportesService } from './reportesDeVentas/reportesv/servicioReportes/servicio-reportes.service';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,7 @@ import { ReportesvComponent } from './reportesDeVentas/reportesv/reportesv.compo
     NgbModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [ServicioReportesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

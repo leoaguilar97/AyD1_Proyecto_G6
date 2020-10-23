@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
 import * as CanvasJS from "./canvasjs.min";
+import { ServicioReportesService } from './servicioReportes/servicio-reportes.service'
 
 @Component({
   selector: "app-reportesv",
@@ -9,9 +10,10 @@ import * as CanvasJS from "./canvasjs.min";
   styleUrls: ["./reportesv.component.css"],
 })
 export class ReportesvComponent implements OnInit {
-  constructor(private router: Router, private http: HttpClient) {}
+  constructor(private router: Router, private http: HttpClient, private servicio: ServicioReportesService) {}
 
   // Declaraciones
+  posts = [];
   tipo = "";
   filtro = "";
   dia = "";
@@ -27,7 +29,9 @@ export class ReportesvComponent implements OnInit {
   httpdata;
 
   ngOnInit(): void {
-    
+    this.servicio.getPosts().subscribe((result)=>{
+      console.log("result",result)
+    })
   }
 
   toggle() {
