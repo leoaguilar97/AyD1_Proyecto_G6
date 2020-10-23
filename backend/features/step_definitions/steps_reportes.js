@@ -28,43 +28,37 @@ After(function() {
     sandbox.restore();
 });
 
-
-When('se hace un http get a {string} se devuelve una lista de categorias con el porcentaje de venta.', function(ruta) {
+When('el usuario realiza un reporte por categorias y se devuelven los datos del reporte.', { timeout: 7 * 1000 }, async function() {
     let res = {
         send: () => {},
         status: sinon.stub().returnsThis()
     };
 
-    const mock = sinon.mock(res);
-    mock.expects("send").once();
+    const mockR = sinon.mock(res);
+    mockR.expects("send").once();
 
-    sandbox.stub(controllerReportes.Venta, 'find').returns({
-        populate: () => {
-            return {
-                populate: () => {
-                    return {
-                        populate: () => {
-                            return {
-                                then: (cb) => {
-                                    cb([])
-                                    mock.verify();
+    await controllerReportes.categorias({ body: {} }, res);
 
-                                    expect(res.status.calledOnce).to.be.true;
-                                    expect(res.status.firstCall.calledWithExactly(200)).to.be.true;
+    expect(res.status.calledOnce).to.be.true;
+    expect(res.status.firstCall.calledWithExactly(200)).to.be.true;
 
-                                    return {
-                                        catch: (cb) => {
-                                            cb({})
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-    });
+    mockR.verify();
+});
 
-    controllerReportes.categorias({ body: {} }, res);
+
+When('el usuario realiza un reporte por productos y se devuelven los datos para el reporte.', { timeout: 7 * 1000 }, async function() {
+    let res = {
+        send: () => {},
+        status: sinon.stub().returnsThis()
+    };
+
+    const mockR = sinon.mock(res);
+    mockR.expects("send").once();
+
+    await controllerReportes.categorias({ body: {} }, res);
+
+    expect(res.status.calledOnce).to.be.true;
+    expect(res.status.firstCall.calledWithExactly(200)).to.be.true;
+
+    mockR.verify();
 });
