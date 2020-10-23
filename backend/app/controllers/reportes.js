@@ -57,7 +57,6 @@ exports.categorias = async(req, res) => {
     return res.status(200).send({ data: listaCategoria, message: 'retrieved', });
 };
 
-
 exports.productos = async(req, res) => {
     let reportData = [];
     var request = {
@@ -99,4 +98,31 @@ exports.productos = async(req, res) => {
     })
 
     return res.status(200).send({ data: listaProducto, message: 'retrieved', });
+};
+
+exports.vendedores = async(req, res) => {
+    let reportData = [];
+    var request = {
+        send: (data) => {
+            reportData = data;
+        }
+    };
+
+    request.status = () => { return request }
+
+    await controllerVenta.getVentas(request);
+    var listaVendedores = [];
+    reportData.ventas.forEach(venta => {
+        let NoExisteProducto = true;
+        listaVendedores.forEach(dato => {
+            if (dato.nombre == `${venta.vendedor.nombre} ${venta.vendedor.apellido}`) {
+                NoExisteProducto = false
+                dato.cantidad += venta.total
+            }
+        });
+        if (NoExisteProducto) {
+            listaVendedores.push({ nombre: `${venta.vendedor.nombre} ${venta.vendedor.apellido}`, cantidad: venta.total });
+        }
+    });
+    return res.status(200).send({ data: listaVendedores, message: 'retrieved', });
 };

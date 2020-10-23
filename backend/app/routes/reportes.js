@@ -9,5 +9,8 @@ module.exports = app => {
     // Reporte producto
     router.get("/producto", reportes.productos);
 
+    // Reporte vendedores
+    router.get("/vendedor", reportes.vendedores);
+
     app.use("/api/reporte", router);
 };
