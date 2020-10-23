@@ -12,4 +12,5 @@ Característica: Un usuario genere reportes de Ventas
         Cuando el usuario realiza un reporte por vendedores y se devuelven los datos para el reporte.
 
     Escenario: Reporte por dia
-        Cuando el usuario realiza un reporte por dia y se devuelven los datos para el reporte.
+        Cuando el usuario realiza un reporte por dia, el dia "2020-10-21" por ejemplo.
+        Entonces se devuelven los datos para el reporte.

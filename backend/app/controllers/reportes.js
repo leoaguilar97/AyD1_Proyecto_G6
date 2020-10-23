@@ -126,3 +126,29 @@ exports.vendedores = async(req, res) => {
     });
     return res.status(200).send({ data: listaVendedores, message: 'retrieved', });
 };
+
+exports.dias = async(req, res) => {
+    if (!req.params.dia) {
+        return res.status(400).send({ message: 'Error, no se envio el dia', });
+    }
+    let reportData = [];
+    var request = {
+        send: (data) => {
+            reportData = data;
+        }
+    };
+
+    let dia = req.params.dia
+
+    request.status = () => { return request }
+
+    await controllerVenta.getVentas(request);
+    var ventas = [];
+    reportData.ventas.forEach(venta => {
+        let fecha = venta.createdAt.toLocaleDateString("es-ES", dia);
+        if (fecha == dia) {
+            ventas.push(venta.total)
+        }
+    });
+    return res.status(200).send({ data: ventas, message: 'retrieved', });
+};

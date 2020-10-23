@@ -12,5 +12,8 @@ module.exports = app => {
     // Reporte vendedores
     router.get("/vendedor", reportes.vendedores);
 
+    // Reporte vendedores
+    router.get("/dia/:dia", reportes.dias);
+
     app.use("/api/reporte", router);
 };
