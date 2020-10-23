@@ -150,3 +150,43 @@ exports.deleteAll = (_req, res) => {
             });
         });
 };
+
+exports.getOne = (req, res) => {
+    const codigo = req.params.codigo;
+    if (codigo.length != 24) {
+        return res.status(400).send({
+            message: `El codigo ${codigo} debe de tener 24 caracteres de largo`,
+            status: 'error'
+        })
+    }
+
+    Venta
+        .findOne({ _id: codigo })
+        .populate({
+            path: "bodega",
+            select: ['nombre', 'direccion']
+        })
+        .populate({
+            path: "vendedor",
+            select: ['nombre', 'apellido', 'dpi', 'direccion', 'correo', 'fechaNacimiento']
+        })
+        .populate({
+            path: 'productos.producto',
+            populate: {
+                path: 'categorias',
+                select: ['nombre']
+            },
+            select: ['nombre', 'categorias', 'precio', 'createdAt']
+        })
+        .then(data => {
+            return res.send({ venta: data, message: 'retrieved' });
+        })
+        .catch(err => {
+            console.log(err);
+            return res
+                .status(500)
+                .send({
+                    message: `Error al retornar la venta ${codigo}`
+                })
+        });
+};
