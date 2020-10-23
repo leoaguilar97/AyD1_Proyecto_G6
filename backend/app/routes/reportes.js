@@ -12,11 +12,14 @@ module.exports = app => {
     // Reporte vendedores
     router.get("/vendedor", reportes.vendedores);
 
-    // Reporte vendedores
+    // Reporte dia
     router.get("/dia/:dia", reportes.dias);
 
-    // Reporte vendedores
+    // Reporte mes
     router.get("/mes/:mes", reportes.mes);
+
+    // Reporte ano
+    router.get("/ano/:ano", reportes.ano);
 
     app.use("/api/reporte", router);
 };

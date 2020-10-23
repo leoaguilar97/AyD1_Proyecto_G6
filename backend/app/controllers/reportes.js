@@ -157,7 +157,7 @@ exports.dias = async(req, res) => {
 
 exports.mes = async(req, res) => {
     if (!req.params.mes) {
-        return res.status(400).send({ message: 'Error, no se envio el dia', });
+        return res.status(400).send({ message: 'Error, no se envio el mes', });
     }
     let reportData = [];
     var request = {
@@ -188,5 +188,53 @@ exports.mes = async(req, res) => {
             ventas.push({ dia: fecha, total: venta.total })
         }
     });
+    return res.status(200).send({ data: ventas, message: 'retrieved', });
+};
+
+exports.ano = async(req, res) => {
+    if (!req.params.ano) {
+        return res.status(400).send({ message: 'Error, no se envio el año', });
+    }
+    let reportData = [];
+    var request = {
+        send: (data) => {
+            reportData = data;
+        }
+    };
+
+    let ano = req.params.ano
+
+    request.status = () => { return request }
+
+    const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+
+    await controllerVenta.getVentas(request);
+    var ventas = [];
+    reportData.ventas.forEach(venta => {
+        let fecha = venta.createdAt.toLocaleDateString("es-ES", options);
+        let exsteMes = true
+        ventas.forEach(mes => {
+            if (mes.mes.split("-")[0] == fecha.split("-")[0] &&
+                mes.mes.split("-")[1] == fecha.split("-")[1]) {
+                exsteMes = false
+                mes.total += venta.total;
+            }
+        })
+
+        if (fecha.includes(ano) && exsteMes) {
+            ventas.push({ mes: fecha, total: venta.total })
+        }
+    });
+
+    let totalVentas = 0;
+
+    ventas.forEach(ventas => {
+        totalVentas += ventas.total
+    })
+
+    ventas.forEach(mes => {
+        mes.total = (mes.total / totalVentas) * 100
+    })
+
     return res.status(200).send({ data: ventas, message: 'retrieved', });
 };

@@ -126,7 +126,7 @@ Then('se devuelven los datos para el reporte del mes.', { timeout: 7 * 1000 }, a
 });
 
 var reporteAno = "";
-When('el usuario realiza un reporte por ano, el ano "2020" por ejemplo..', function(ano) {
+When('el usuario realiza un reporte por ano, el ano {string} por ejemplo.', function(ano) {
     reporteAno = ano
 });
 
@@ -139,6 +139,7 @@ Then('se devuelven los datos para el reporte del ano.', { timeout: 7 * 1000 }, a
     const mockR = sinon.mock(res);
     mockR.expects("send").once();
 
+    await controllerReportes.ano({ params: { ano: reporteAno } }, res);
 
     expect(res.status.calledOnce).to.be.true;
     expect(res.status.firstCall.calledWithExactly(200)).to.be.true;
