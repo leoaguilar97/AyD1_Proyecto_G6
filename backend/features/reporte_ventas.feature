@@ -18,3 +18,7 @@ Característica: Un usuario genere reportes de Ventas
     Escenario: Reporte por mes
         Cuando el usuario realiza un reporte por mes, el mes "2020-10" por ejemplo.
         Entonces se devuelven los datos para el reporte del mes.
+
+    Escenario: Reporte por año
+        Cuando el usuario realiza un reporte por ano, el ano "2020" por ejemplo.
+        Entonces se devuelven los datos para el reporte del ano.
