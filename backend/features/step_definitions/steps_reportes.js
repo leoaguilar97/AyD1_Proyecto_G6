@@ -102,3 +102,24 @@ Then('se devuelven los datos para el reporte.', { timeout: 7 * 1000 }, async fun
 
     mockR.verify();
 });
+
+var reporteMes = "";
+When('el usuario realiza un reporte por mes, el mes {string} por ejemplo.', function(mes) {
+    reporteMes = mes
+});
+
+Then('se devuelven los datos para el reporte del mes.', { timeout: 7 * 1000 }, async function() {
+    let res = {
+        send: () => {},
+        status: sinon.stub().returnsThis()
+    };
+
+    const mockR = sinon.mock(res);
+    mockR.expects("send").once();
+
+
+    expect(res.status.calledOnce).to.be.true;
+    expect(res.status.firstCall.calledWithExactly(200)).to.be.true;
+
+    mockR.verify();
+});
