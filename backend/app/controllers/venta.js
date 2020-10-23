@@ -105,8 +105,8 @@ exports.create = async(req, res) => {
         });
 };
 
-exports.getAll = (req, res) => {
-    Venta
+function getVentas(res) {
+    return Venta
         .find({})
         .populate({
             path: "bodega",
@@ -126,7 +126,7 @@ exports.getAll = (req, res) => {
             select: ['nombre', 'categorias', 'precio', 'createdAt']
         })
         .then(data => {
-            return res.send({ ventas: data, message: 'retrieved' });
+            return res.status(200).send({ ventas: data, message: 'retrieved' });
         })
         .catch(err => {
             console.log(err);
@@ -134,6 +134,11 @@ exports.getAll = (req, res) => {
                 .status(500)
                 .send({ message: "Error al retornar todos los productos en la BD" })
         });
+}
+exports.getVentas = getVentas;
+
+exports.getAll = (req, res) => {
+    getVentas(res);
 };
 
 exports.deleteAll = (_req, res) => {

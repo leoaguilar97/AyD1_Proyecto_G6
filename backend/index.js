@@ -40,6 +40,7 @@ require("./app/routes/bodega")(app);
 require("./app/routes/categoria")(app);
 require("./app/routes/sede")(app);
 require("./app/routes/venta")(app);
+require("./app/routes/reportes")(app);
 
 
 // set port, listen for requests
