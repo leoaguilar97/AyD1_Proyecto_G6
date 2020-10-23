@@ -80,3 +80,20 @@ When('el usuario realiza un reporte por vendedores y se devuelven los datos para
 
     mockR.verify();
 });
+
+When('el usuario realiza un reporte por dia y se devuelven los datos para el reporte.', { timeout: 7 * 1000 }, async function() {
+    let res = {
+        send: () => {},
+        status: sinon.stub().returnsThis()
+    };
+
+    const mockR = sinon.mock(res);
+    mockR.expects("send").once();
+
+    await controllerReportes.dias({ body: {} }, res);
+
+    expect(res.status.calledOnce).to.be.true;
+    expect(res.status.firstCall.calledWithExactly(200)).to.be.true;
+
+    mockR.verify();
+});

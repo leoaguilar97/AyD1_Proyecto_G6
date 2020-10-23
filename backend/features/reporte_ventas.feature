@@ -10,3 +10,6 @@ Característica: Un usuario genere reportes de Ventas
 
     Escenario: Reporte por vendedores
         Cuando el usuario realiza un reporte por vendedores y se devuelven los datos para el reporte.
+
+    Escenario: Reporte por dia
+        Cuando el usuario realiza un reporte por dia y se devuelven los datos para el reporte.
