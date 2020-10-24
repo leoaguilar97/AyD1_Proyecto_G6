@@ -37,7 +37,7 @@ When('el usuario realiza un reporte por categorias y se devuelven los datos del 
     const mockR = sinon.mock(res);
     mockR.expects("send").once();
 
-    await controllerReportes.categorias({ body: {} }, res);
+    await controllerReportes.categorias({ body: { grafica: "pie" } }, res);
 
     expect(res.status.calledOnce).to.be.true;
     expect(res.status.firstCall.calledWithExactly(200)).to.be.true;
@@ -55,7 +55,7 @@ When('el usuario realiza un reporte por productos y se devuelven los datos para 
     const mockR = sinon.mock(res);
     mockR.expects("send").once();
 
-    await controllerReportes.categorias({ body: {} }, res);
+    await controllerReportes.categorias({ body: { grafica: "pie" } }, res);
 
     expect(res.status.calledOnce).to.be.true;
     expect(res.status.firstCall.calledWithExactly(200)).to.be.true;
@@ -73,7 +73,7 @@ When('el usuario realiza un reporte por vendedores y se devuelven los datos para
     const mockR = sinon.mock(res);
     mockR.expects("send").once();
 
-    await controllerReportes.vendedores({ body: {} }, res);
+    await controllerReportes.vendedores({ body: { grafica: "pie" } }, res);
 
     expect(res.status.calledOnce).to.be.true;
     expect(res.status.firstCall.calledWithExactly(200)).to.be.true;
@@ -95,7 +95,7 @@ Then('se devuelven los datos para el reporte.', { timeout: 7 * 1000 }, async fun
     const mockR = sinon.mock(res);
     mockR.expects("send").once();
 
-    await controllerReportes.dias({ params: { dia: reporteDia } }, res);
+    await controllerReportes.dias({ body: { grafica: "pie" }, params: { dia: reporteDia } }, res);
 
     expect(res.status.calledOnce).to.be.true;
     expect(res.status.firstCall.calledWithExactly(200)).to.be.true;
@@ -117,7 +117,7 @@ Then('se devuelven los datos para el reporte del mes.', { timeout: 7 * 1000 }, a
     const mockR = sinon.mock(res);
     mockR.expects("send").once();
 
-    await controllerReportes.mes({ params: { mes: reporteMes } }, res);
+    await controllerReportes.mes({ body: { grafica: "pie" }, params: { mes: reporteMes } }, res);
 
     expect(res.status.calledOnce).to.be.true;
     expect(res.status.firstCall.calledWithExactly(200)).to.be.true;
@@ -139,7 +139,7 @@ Then('se devuelven los datos para el reporte del ano.', { timeout: 7 * 1000 }, a
     const mockR = sinon.mock(res);
     mockR.expects("send").once();
 
-    await controllerReportes.ano({ params: { ano: reporteAno } }, res);
+    await controllerReportes.ano({ body: { grafica: "pie" }, params: { ano: reporteAno } }, res);
 
     expect(res.status.calledOnce).to.be.true;
     expect(res.status.firstCall.calledWithExactly(200)).to.be.true;
