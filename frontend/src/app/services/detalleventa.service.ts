@@ -8,22 +8,30 @@ import { map } from 'rxjs/operators';
 })
 export class DetalleventaService {
 
-  constructor(private http: HttpClient,private router: Router) { }
-  
+  constructor(private http: HttpClient, private router: Router) { }
+
   getVentas() {
-      let apiUrl = 'https://api-erpp.herokuapp.com/api/venta';
-      return this.http.get<any>(apiUrl, {})
-          .pipe(map(data => {
-              return data;
-          }));
+    let apiUrl = 'https://api-erpp.herokuapp.com/api/venta';
+    return this.http.get<any>(apiUrl, {})
+      .pipe(map(data => {
+        return data;
+      }));
   }
 
   getVentaById(id) {
-    let apiUrl = 'https://api-erpp.herokuapp.com/api/venta/'+id;
+    let apiUrl = 'https://api-erpp.herokuapp.com/api/venta/' + id;
     return this.http.get<any>(apiUrl, {})
-        .pipe(map(data => {
-            return data;
-        }));
-}
+      .pipe(map(data => {
+        return data;
+      }));
+  }
+
+  getProdsBodega(id) {
+    let apiUrl = 'https://api-erpp.herokuapp.com/api/bodega/' + id;
+    return this.http.get<any>(apiUrl, {})
+      .pipe(map(data => {
+        return data;
+      }));
+  }
 
 }
