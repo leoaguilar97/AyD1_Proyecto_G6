@@ -80,18 +80,37 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Producto</label>
                                 <div class="col-sm-9">
-                                    <select [(ngModel)]="nueva_categoria" name="nueva_categoria" class="form-control">
-                                        <option *ngFor="let cate of cats" value="{{cate.id}}">{{cate.nombre}}</option>
+                                    <select [(ngModel)]="id_producto_auxiliar" name="id_producto_auxiliar" class="form-control"
+                                    (ngModelChange)="seleccionProducto()">
+                                        <option *ngFor="let producto of productos" value="{{producto._id}}">{{producto.producto.nombre}}</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Precio</label>
+                                <div class="col-sm-9">
+                                    <label class="col-sm-3 col-form-label">{{precio_producto}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Cantidad</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" [(ngModel)]="direccion_cliente"
-                                        name="direccion_cliente" />
+                                    <input type="text" class="form-control" [(ngModel)]="cantidad_producto"
+                                    name="cantidad_producto" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Disponibilidad</label>
+                                <div class="col-sm-9">
+                                    <label class="col-sm-3 col-form-label">{{disponibles_producto}}</label>
                                 </div>
                             </div>
                         </div>

@@ -13,11 +13,17 @@ export class VentaComponent implements OnInit {
   bodegas = [];
   personas = [];
   productos = [];
+  ventas = [];
   nombre_cliente: String;
   direccion_cliente: String;
   nit_cliente: String;
   vendedor: String;
   bodega: String;
+  id_producto_auxiliar: String;
+  id_producto: String;
+  cantidad_producto: String;
+  disponibles_producto: String;
+  precio_producto: String;
   bodegaSeleccionada = false;
 
   ngOnInit(): void {
@@ -37,19 +43,29 @@ export class VentaComponent implements OnInit {
       });
   }
   finalizar() {
-    console.log(this.nombre_cliente);
-    console.log(this.direccion_cliente);
-    console.log(this.nit_cliente);
-    console.log(this.vendedor);
-    console.log(this.bodega);
+    console.log(this.productos);
   }
   seleccionBodega() {
     console.log(this.bodega);
     this.bodegaSeleccionada = true;
     this.http.get('https://api-erpp.herokuapp.com/api/bodega/' + this.bodega)
       .toPromise().then((data: any) => {
-        
+        this.productos = data.bodega.productos;
       });
-  console.log(this.productos);
+  }
+  seleccionProducto() {
+    this.cantidad_producto = '';
+    this.productos.forEach(producto => {
+      if (producto._id === this.id_producto_auxiliar) {
+        this.disponibles_producto = producto.cantidad;
+        this.precio_producto = producto.precio;
+        this.id_producto = producto.producto._id;
+      }
+    });
+  }
+  agregar() {
+    console.log(this.precio_producto);
+    console.log(this.cantidad_producto);
+    console.log(this.id_producto);
   }
 }
