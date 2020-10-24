@@ -37,7 +37,7 @@
                             <label class="col-sm-3 col-form-label">Vendedor</label>
                             <div class="col-sm-9">
                                 <select [(ngModel)]="vendedor" name="vendedor" class="form-control">
-                                    <option *ngFor="let persona of personas" value="{{persona.id}}">{{persona.nombre}}
+                                    <option *ngFor="let persona of personas" value="{{persona.dpi}}">{{persona.nombre}}
                                         {{persona.apellido}}</option>
                                 </select>
                             </div>
@@ -137,14 +137,39 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th> Cantidad </th>
-                                <th> Nombre Producto </th>
-                                <th> Precio </th>
-                                <th> Importe </th>
+                                <td> Cantidad </td>
+                                <td> Nombre Producto </td>
+                                <td> Precio </td>
+                                <td> Importe </td>
                             </tr>
                         </thead>
                         <tbody>
-
+                            <!-- Repitencia-->
+                            <tr *ngFor="let venta of ventas">
+                                <td>
+                                    {{venta.cantidad}}
+                                </td>
+                                <td>
+                                    {{venta.nombre}}
+                                </td>
+                                <td>
+                                    {{venta.precio | number:'1.2-2'}}
+                                </td>
+                                <td>
+                                    {{venta.precio * venta.cantidad | number:'1.2-2'}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                   
+                                </td>
+                                <td>
+                                    Total
+                                </td>
+                                <td>
+                                    {{total | number:'1.2-2'}}
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
