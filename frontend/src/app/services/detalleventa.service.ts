@@ -18,4 +18,12 @@ export class DetalleventaService {
           }));
   }
 
+  getVentaById(id) {
+    let apiUrl = 'https://api-erpp.herokuapp.com/api/venta/'+id;
+    return this.http.get<any>(apiUrl, {})
+        .pipe(map(data => {
+            return data;
+        }));
+}
+
 }

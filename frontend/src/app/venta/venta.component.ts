@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { DetalleventaService } from '../services/detalleventa.service';
 import { ActivatedRoute } from '@angular/router';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-venta',
@@ -15,13 +16,27 @@ export class VentaComponent implements OnInit {
 
   venta = [];
   id = String(this.route.snapshot.params['id']);
+  //values
+  nuevo_nombre = "";
 
   ngOnInit() {
     this.getVenta();
   }
 
   getVenta(){
-    
+    this.DetalleventaService.getVentaById(this.id)
+    .pipe(first())
+    .subscribe(
+      data => {
+        if (data.message == "retrieved") {
+          this.venta = data.venta;
+          console.log(this.venta);
+        } else {
+          console.log("Error")
+        }
+      },
+      error => {
+        console.log(error);
+      });
   }
-
 }
