@@ -19,7 +19,4 @@ describe('VerInventarioComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
 });
