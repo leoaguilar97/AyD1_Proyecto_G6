@@ -19,7 +19,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { EditarUsuarioComponent } from './editarUsuario/editar-usuario.component';
 import { LoginComponent } from './login/login.component';
 import { EditarProductoComponent } from './editar-producto/editar-producto.component';
-import { ProveedoresComponent } from './proveedores/proveedores.component';
 import { CategoriasComponent } from './categorias/categorias.component';
 import { SedesComponent } from './sedes/sedes.component';
 import { EditarCategoriasComponent } from './editar-categorias/editar-categorias.component';
@@ -27,6 +26,7 @@ import { EditarSedesComponent } from './editar-sedes/editar-sedes.component';
 import { EditarBodegasComponent } from './editar-bodegas/editar-bodegas.component';
 import { VerInventarioComponent } from './ver-inventario/ver-inventario.component';
 import { ReportesvComponent } from './reportesDeVentas/reportesv/reportesv.component';
+import { VentaComponent } from './venta/venta.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +41,6 @@ import { ReportesvComponent } from './reportesDeVentas/reportesv/reportesv.compo
     EditarUsuarioComponent,
     EditarProductoComponent,
     LoginComponent,
-    ProveedoresComponent,
     CategoriasComponent,
     SedesComponent,
     EditarCategoriasComponent,
@@ -49,6 +48,8 @@ import { ReportesvComponent } from './reportesDeVentas/reportesv/reportesv.compo
     EditarBodegasComponent,
     VerInventarioComponent,
     ReportesvComponent
+    VerInventarioComponent,
+    VentaComponent
   ],
   imports: [
     BrowserModule,

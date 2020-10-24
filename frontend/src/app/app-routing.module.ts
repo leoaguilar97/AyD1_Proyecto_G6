@@ -10,11 +10,11 @@ import { LoginComponent } from './login/login.component';
 import { EditarProductoComponent } from './editar-producto/editar-producto.component';
 import { SedesComponent } from './sedes/sedes.component';
 import { CategoriasComponent } from './categorias/categorias.component';
-import { ProveedoresComponent } from './proveedores/proveedores.component';
 import { EditarCategoriasComponent } from './editar-categorias/editar-categorias.component';
 import { EditarSedesComponent } from './editar-sedes/editar-sedes.component';
 import { EditarBodegasComponent } from './editar-bodegas/editar-bodegas.component';
 import { VerInventarioComponent } from './ver-inventario/ver-inventario.component';
+import { VentaComponent } from './venta/venta.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -28,10 +28,10 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'sedes', component: SedesComponent },
   { path: 'categorias', component: CategoriasComponent },
-  { path: 'proveedores', component: ProveedoresComponent },
   { path: 'editarSede/:id', component: EditarSedesComponent},
   { path: 'editarBodegas/:id', component: EditarBodegasComponent},
-  { path: 'verInventario/:id', component: VerInventarioComponent}
+  { path: 'verInventario/:id', component: VerInventarioComponent},
+  { path: 'venta', component: VentaComponent}
 ];
 
 @NgModule({
