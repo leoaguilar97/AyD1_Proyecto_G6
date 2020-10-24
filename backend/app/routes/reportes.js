@@ -4,22 +4,22 @@ module.exports = app => {
     var router = require("express").Router();
 
     // Reporte categorias
-    router.get("/categoria", reportes.categorias);
+    router.post("/categoria", reportes.categorias);
 
     // Reporte producto
-    router.get("/producto", reportes.productos);
+    router.post("/producto", reportes.productos);
 
     // Reporte vendedores
-    router.get("/vendedor", reportes.vendedores);
+    router.post("/vendedor", reportes.vendedores);
 
     // Reporte dia
-    router.get("/dia/:dia", reportes.dias);
+    router.post("/dia", reportes.dias);
 
     // Reporte mes
-    router.get("/mes/:mes", reportes.mes);
+    router.post("/mes", reportes.mes);
 
     // Reporte ano
-    router.get("/ano/:ano", reportes.ano);
+    router.post("/ano", reportes.ano);
 
     app.use("/api/reporte", router);
 };

@@ -5,7 +5,7 @@ const Venta = db.venta;
 
 exports.Venta = Venta;
 
-exports.categorias = async(req, res) => {
+exports.categorias = async (req, res) => {
     if (!req.body.grafica) {
         return res.status(400).send({ message: 'Error, no se envio el tipo de grafica', });
     }
@@ -62,7 +62,7 @@ exports.categorias = async(req, res) => {
     return res.status(200).send({ data: listaCategoria, message: 'retrieved', });
 };
 
-exports.productos = async(req, res) => {
+exports.productos = async (req, res) => {
     if (!req.body.grafica) {
         return res.status(400).send({ message: 'Error, no se envio el tipo de grafica', });
     }
@@ -111,7 +111,7 @@ exports.productos = async(req, res) => {
     return res.status(200).send({ data: listaProducto, message: 'retrieved', });
 };
 
-exports.vendedores = async(req, res) => {
+exports.vendedores = async (req, res) => {
     if (!req.body.grafica) {
         return res.status(400).send({ message: 'Error, no se envio el tipo de grafica', });
     }
@@ -155,14 +155,11 @@ exports.vendedores = async(req, res) => {
     return res.status(200).send({ data: listaVendedores, message: 'retrieved', });
 };
 
-exports.dias = async(req, res) => {
-    if (!req.body.grafica) {
-        return res.status(400).send({ message: 'Error, no se envio el tipo de grafica', });
+exports.dias = async (req, res) => {
+    if (!req.body.grafica || !req.body.dia) {
+        return res.status(400).send({ message: 'Error, no se enviaron los datos necezarios', });
     }
 
-    if (!req.params.dia) {
-        return res.status(400).send({ message: 'Error, no se envio el dia', });
-    }
     let reportData = [];
     var request = {
         send: (data) => {
@@ -170,18 +167,17 @@ exports.dias = async(req, res) => {
         }
     };
 
-    let dia = req.params.dia
+    let dia = new Date(req.body.dia)
 
     request.status = () => { return request }
-
-    const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
 
     await controllerVenta.getVentas(request);
     var ventas = [];
     let cont = 1;
     reportData.ventas.forEach(venta => {
-        let fecha = venta.createdAt.toLocaleDateString("es-ES", options);
-        if (fecha == dia) {
+        let fecha = venta.createdAt;
+        if (fecha.getDate() == dia.getDate() &&
+            fecha.getMonth() == dia.getMonth() ) {
             ventas.push({ total: venta.total, venta: cont })
             cont++;
         }
@@ -202,13 +198,11 @@ exports.dias = async(req, res) => {
     return res.status(200).send({ data: ventas, message: 'retrieved', });
 };
 
-exports.mes = async(req, res) => {
-    if (!req.body.grafica) {
-        return res.status(400).send({ message: 'Error, no se envio el tipo de grafica', });
+exports.mes = async (req, res) => {
+    if (!req.body.grafica || !req.body.mes) {
+        return res.status(400).send({ message: 'Error, no se enviaron los datos necezarios', });
     }
-    if (!req.params.mes) {
-        return res.status(400).send({ message: 'Error, no se envio el mes', });
-    }
+
     let reportData = [];
     var request = {
         send: (data) => {
@@ -216,7 +210,7 @@ exports.mes = async(req, res) => {
         }
     };
 
-    let mes = req.params.mes
+    let mes = new Date(req.body.mes+"-10")
 
     request.status = () => { return request }
 
@@ -225,17 +219,18 @@ exports.mes = async(req, res) => {
     await controllerVenta.getVentas(request);
     var ventas = [];
     reportData.ventas.forEach(venta => {
-        let fecha = venta.createdAt.toLocaleDateString("es-ES", options);
+        let fecha = venta.createdAt;
         let exsteDia = true
         ventas.forEach(dia => {
-            if (dia.dia == fecha) {
+            if (dia.dia == fecha.getDate()+1) {
                 exsteDia = false
                 dia.total += venta.total;
             }
         })
 
-        if (fecha.includes(mes) && exsteDia) {
-            ventas.push({ dia: fecha.split("-")[1], total: venta.total })
+        if (fecha.getMonth() == mes.getMonth() && 
+        fecha.getYear() ==  mes.getYear() && exsteDia) {
+            ventas.push({ dia: fecha.getDate()+1, total: venta.total })
         }
     });
 
@@ -254,21 +249,17 @@ exports.mes = async(req, res) => {
     return res.status(200).send({ data: ventas, message: 'retrieved', });
 };
 
-exports.ano = async(req, res) => {
-    if (!req.body.grafica) {
-        return res.status(400).send({ message: 'Error, no se envio el tipo de grafica', });
-    }
-    if (!req.params.ano) {
-        return res.status(400).send({ message: 'Error, no se envio el año', });
-    }
-    let reportData = [];
+exports.ano = async (req, res) => {
+    if (!req.body.grafica || !req.body.ano) {
+        return res.status(400).send({ message: 'Error, no se enviaron los datos necezarios', });
+    } reportData = [];
     var request = {
         send: (data) => {
             reportData = data;
         }
     };
 
-    let ano = req.params.ano
+    let ano = req.body.ano
 
     request.status = () => { return request }
 
@@ -337,3 +328,9 @@ function obtenerMes(mes) {
 
     return "enero"
 }
+
+
+
+
+
+
