@@ -27,6 +27,8 @@ import { EditarBodegasComponent } from './editar-bodegas/editar-bodegas.componen
 import { VerInventarioComponent } from './ver-inventario/ver-inventario.component';
 import { ReportesvComponent } from './reportesDeVentas/reportesv/reportesv.component';
 import { VentaComponent } from './venta/venta.component';
+import { DetalleVentaComponent } from './detalle-venta/detalle-venta.component';
+import { DesgloseVentaComponent } from './desglose-venta/desglose-venta.component';
 
 @NgModule({
   declarations: [
@@ -46,10 +48,11 @@ import { VentaComponent } from './venta/venta.component';
     EditarCategoriasComponent,
     EditarSedesComponent,
     EditarBodegasComponent,
-    VerInventarioComponent,
     ReportesvComponent
-    VerInventarioComponent,
     VentaComponent
+    DetalleVentaComponent,
+    DesgloseVentaComponent
+    VerInventarioComponent,
   ],
   imports: [
     BrowserModule,
