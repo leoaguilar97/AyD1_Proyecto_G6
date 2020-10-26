@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { fakeAsync, tick, async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DetalleVentaComponent } from './detalle-venta.component';
 import { DetalleventaService } from '../services/detalleventa.service';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
@@ -44,7 +44,15 @@ describe('DetalleVentaComponent', () => {
     fixture.detectChanges();
   });
 
+  it('Debería retornar true al obtener ventas', () => {
+    expect(component.getDetalleVentas()).toBeTruthy;
+  });
 
+  it('Debe redireccionar a editarCategorias/Consolas al recibir el id', fakeAsync(() => {
+    component.verVenta("5f91145b8f444f001752d270");
+    tick(50);
+    expect(location.path()).toBe('/editarCategorias/5f91145b8f444f001752d270');
+  }));
 
 
 });

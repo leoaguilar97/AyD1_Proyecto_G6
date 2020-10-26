@@ -38,7 +38,6 @@ export class DetalleVentaComponent implements OnInit {
   }
   
   verVenta(id: string) {
-    this.router.navigate(['desgloseventa', id]);
   }
 
   
