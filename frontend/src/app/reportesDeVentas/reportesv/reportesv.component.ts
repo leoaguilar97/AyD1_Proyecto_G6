@@ -13,12 +13,9 @@ export class ReportesvComponent implements OnInit {
   constructor(private router: Router, private http: HttpClient, private servicio: ServicioReportesService) {}
 
   // Declaraciones
-  posts = [];
+  posts:any = [];
   tipo = "";
   filtro = "";
-  dia = "";
-  mes = "";
-  anio = "";
   rango = "";
   public show: boolean = false;
   public show2: boolean = false;
@@ -28,11 +25,10 @@ export class ReportesvComponent implements OnInit {
   public showChart3: boolean = false;
   httpdata;
 
-  ngOnInit(): void {
-    this.servicio.getPosts().subscribe((result)=>{
-      console.log("result",result)
-    })
+  ngOnInit() {
+    
   }
+
 
   toggle() {
     if (this.filtro == "Dia") {
@@ -48,6 +44,7 @@ export class ReportesvComponent implements OnInit {
       this.show2 = false;
       this.show3 = true;
     } else {
+      
       this.show = false;
       this.show2 = false;
       this.show3 = false;
@@ -55,22 +52,21 @@ export class ReportesvComponent implements OnInit {
   }
 
   toggle2() {
-    console.log(this.rango);
     if (this.tipo == "Pie") {
       this.showChart = true;
-      this.graficaPie();
       this.showChart2 = false;
       this.showChart3 = false;
+      this.llenarArray();
     } else if (this.tipo == "Lineal") {
       this.showChart = false;
       this.showChart2 = true;
-      this.graficaLineal();
       this.showChart3 = false;
+      this.llenarArray();
     } else {
       this.showChart = false;
       this.showChart2 = false;
       this.showChart3 = true;
-      this.graficaBarras();
+      this.llenarArray();
     }
   }
 
@@ -82,96 +78,586 @@ export class ReportesvComponent implements OnInit {
   }
 
   cancelar2() {
-    this.dia = "";
-    this.mes = "";
-    this.anio = "";
+    this.rango = ""
   }
 
-  graficaBarras() {
-    let chart = new CanvasJS.Chart("chartContainer", {
-      animationEnabled: true,
-      exportEnabled: true,
-      title: {
-        text: "REPORTE DE VENTAS",
-      },
-      data: [
-        {
-          type: "column",
-          dataPoints: [
-            { y: 71, label: "Apple" },
-            { y: 55, label: "Mango" },
-            { y: 50, label: "Orange" },
-            { y: 65, label: "Banana" },
-            { y: 95, label: "Pineapple" },
-            { y: 68, label: "Pears" },
-            { y: 28, label: "Grapes" },
-            { y: 34, label: "Lychee" },
-            { y: 14, label: "Jackfruit" },
+  llenarArray(){
+
+    if(this.filtro == "Dia" && this.tipo == "Barras"){
+
+      this.servicio.getDia("Barras",this.rango).toPromise().then((data: any) => {
+        console.log(data);
+        this.posts = data["data"];
+        let dataPoints = [];
+        let y = 0;
+        let label = "";
+        console.log("ler", this.posts.length)
+        for (var i = 0; i < this.posts.length; i++) {
+          y = data["data"][i]["total"];
+          label = data["data"][i]["venta"];
+          dataPoints.push({ y: y, label: label });
+        }
+        console.log(dataPoints);
+        let chart = new CanvasJS.Chart("chartContainer", {
+          animationEnabled: true,
+          exportEnabled: true,
+          title: {
+            text: "REPORTE DE VENTAS",
+          },
+          data: [
+            {
+              type: "column",
+              
+              dataPoints: dataPoints,
+            },
           ],
-        },
-      ],
-    });
+        });
+    
+        chart.render();
+      });
 
-    chart.render();
-  }
+    } else if (this.filtro == "Dia" && this.tipo == "Lineal"){
 
-  graficaPie() {
-    let chart = new CanvasJS.Chart("chartContainer3", {
-      theme: "light2",
-      animationEnabled: true,
-      exportEnabled: true,
-      title: {
-        text: "REPORTE DE VENTAS",
-      },
-      data: [
-        {
-          type: "pie",
-          showInLegend: true,
-          toolTipContent: "<b>{name}</b>: ${y} (#percent%)",
-          indexLabel: "{name} - #percent%",
-          dataPoints: [
-            { y: 450, name: "Food" },
-            { y: 120, name: "Insurance" },
-            { y: 300, name: "Traveling" },
-            { y: 800, name: "Housing" },
-            { y: 150, name: "Education" },
-            { y: 150, name: "Shopping" },
-            { y: 250, name: "Others" },
+      this.servicio.getDia("Lineal", this.rango).toPromise().then((data: any) => {
+        console.log(data);
+        this.posts = data["data"];
+        let dataPoints = [];
+        let y = 0;
+        let label = "";
+        for (var i = 0; i < this.posts.length; i++) {
+          y = data["data"][i]["total"];
+          label = data["data"][i]["venta"];
+          dataPoints.push({ y: y});
+        }
+        console.log(dataPoints);
+        let chart = new CanvasJS.Chart("chartContainer2", {
+          zoomEnabled: true,
+          animationEnabled: true,
+          exportEnabled: true,
+          title: {
+            text: "REPORTE DE VENTAS",
+          },
+          subtitles: [
+            {
+              text: "",
+            },
           ],
-        },
-      ],
-    });
+          data: [
+            {
+              type: "line",
+              dataPoints: dataPoints,
+            },
+          ],
+        });
+    
+        chart.render();
+      });
+      
+    } else if (this.filtro == "Dia" && this.tipo == "Pie"){
+      this.servicio.getDia("Pie", this.rango).toPromise().then((data: any) => {
+        console.log(data);
+        this.posts = data["data"];
+        let dataPoints = [];
+        let y = 0;
+        let label = "";
+        for (var i = 0; i < this.posts.length; i++) {
+          y = data["data"][i]["total"];
+          label = data["data"][i]["venta"];
+          dataPoints.push({ y: y, name: label.toString() });
+        }
+        console.log(dataPoints);
+        let chart = new CanvasJS.Chart("chartContainer3", {
+          theme: "light2",
+          animationEnabled: true,
+          exportEnabled: true,
+          title: {
+            text: "REPORTE DE VENTAS",
+          },
+          data: [
+            {
+              type: "pie",
+              showInLegend: true,
+              toolTipContent: "<b>{name}</b>: ${y} (#percent%)",
+              indexLabel: "{name} - #percent%",
+              dataPoints: dataPoints,
+            },
+          ],
+        });
+    
+        chart.render();
+      });
+      
+    } else if(this.filtro == "Mes" && this.tipo == "Barras"){
 
-    chart.render();
-  }
+      this.servicio.getMes("Barras",this.evaluarMes(this.rango)).toPromise().then((data: any) => {
+        console.log(data);
+        this.posts = data["data"];
+        let dataPoints = [];
+        let y = 0;
+        let label = "";
+        for (var i = 0; i < this.posts.length; i++) {
+          y = data["data"][i]["total"];
+          label = data["data"][i]["dia"];
+          dataPoints.push({ y: y, label: label });
+        }
+        console.log(dataPoints);
+        let chart = new CanvasJS.Chart("chartContainer", {
+          animationEnabled: true,
+          exportEnabled: true,
+          title: {
+            text: "REPORTE DE VENTAS",
+          },
+          data: [
+            {
+              type: "column",
+              
+              dataPoints: dataPoints,
+            },
+          ],
+        });
+    
+        chart.render();
+      });
 
-  graficaLineal() {
-    let dataPoints = [];
-    let y = 0;
-    for (var i = 0; i < 10000; i++) {
-      y += Math.round(5 + Math.random() * (-5 - 5));
-      dataPoints.push({ y: y });
+    } else if (this.filtro == "Mes" && this.tipo == "Lineal"){
+
+      this.servicio.getMes("Lineal", this.evaluarMes(this.rango)).toPromise().then((data: any) => {
+        console.log(data);
+        this.posts = data["data"];
+        let dataPoints = [];
+        let y = 0;
+        let label = "";
+        for (var i = 0; i < this.posts.length; i++) {
+          y = data["data"][i]["total"];
+          label = data["data"][i]["dia"];
+          dataPoints.push({ y: y});
+        }
+        console.log(dataPoints);
+        let chart = new CanvasJS.Chart("chartContainer2", {
+          zoomEnabled: true,
+          animationEnabled: true,
+          exportEnabled: true,
+          title: {
+            text: "REPORTE DE VENTAS",
+          },
+          subtitles: [
+            {
+              text: "",
+            },
+          ],
+          data: [
+            {
+              type: "line",
+              dataPoints: dataPoints,
+            },
+          ],
+        });
+    
+        chart.render();
+      });
+      
+    } else if (this.filtro == "Mes" && this.tipo == "Pie"){
+      let asaber:string=this.evaluarMes(this.rango)
+      this.servicio.getMes("Pie", asaber).toPromise().then((data: any) => {
+        console.log(data);
+        this.posts = data["data"];
+        let dataPoints = [];
+        let y = 0;
+        let label = "";
+        for (var i = 0; i < this.posts.length; i++) {
+          y = data["data"][i]["total"];
+          label = data["data"][i]["dia"];
+          dataPoints.push({ y: y, name: label.toString() });
+        }
+        console.log(dataPoints);
+        let chart = new CanvasJS.Chart("chartContainer3", {
+          theme: "light2",
+          animationEnabled: true,
+          exportEnabled: true,
+          title: {
+            text: "REPORTE DE VENTAS",
+          },
+          data: [
+            {
+              type: "pie",
+              showInLegend: true,
+              toolTipContent: "<b>{name}</b>: ${y} (#percent%)",
+              indexLabel: "{name} - #percent%",
+              dataPoints: dataPoints,
+            },
+          ],
+        });
+    
+        chart.render();
+      });
+      
+    } else if(this.filtro == "Categorias" && this.tipo == "Barras"){
+
+      this.servicio.getCategorias("Barras").toPromise().then((data: any) => {
+        console.log(data);
+        this.posts = data["data"];
+        let dataPoints = [];
+        let y = 0;
+        let label = "";
+        for (var i = 0; i < this.posts.length; i++) {
+          y = data["data"][i]["cantidad"];
+          label = data["data"][i]["nombre"];
+          dataPoints.push({ y: y, label: label });
+        }
+        console.log(dataPoints);
+        let chart = new CanvasJS.Chart("chartContainer", {
+          animationEnabled: true,
+          exportEnabled: true,
+          title: {
+            text: "REPORTE DE VENTAS",
+          },
+          data: [
+            {
+              type: "column",
+              
+              dataPoints: dataPoints,
+            },
+          ],
+        });
+    
+        chart.render();
+      });
+
+    } else if (this.filtro == "Categorias" && this.tipo == "Lineal"){
+
+      this.servicio.getCategorias("Lineal").toPromise().then((data: any) => {
+        console.log(data);
+        this.posts = data["data"];
+        let dataPoints = [];
+        let y = 0;
+        let label = "";
+        for (var i = 0; i < this.posts.length; i++) {
+          y = data["data"][i]["cantidad"];
+          label = data["data"][i]["nombre"];
+          dataPoints.push({ y: y});
+        }
+        console.log(dataPoints);
+        let chart = new CanvasJS.Chart("chartContainer2", {
+          zoomEnabled: true,
+          animationEnabled: true,
+          exportEnabled: true,
+          title: {
+            text: "REPORTE DE VENTAS",
+          },
+          subtitles: [
+            {
+              text: "",
+            },
+          ],
+          data: [
+            {
+              type: "line",
+              dataPoints: dataPoints,
+            },
+          ],
+        });
+    
+        chart.render();
+      });
+      
+    } else if (this.filtro == "Categorias" && this.tipo == "Pie"){
+
+      this.servicio.getCategorias("Pie").toPromise().then((data: any) => {
+        console.log(data);
+        this.posts = data["data"];
+        let dataPoints = [];
+        let y = 0;
+        let label = "";
+        for (var i = 0; i < this.posts.length; i++) {
+          y = data["data"][i]["cantidad"];
+          label = data["data"][i]["nombre"];
+          dataPoints.push({ y: y, name: label });
+        }
+        console.log(dataPoints);
+        let chart = new CanvasJS.Chart("chartContainer3", {
+          theme: "light2",
+          animationEnabled: true,
+          exportEnabled: true,
+          title: {
+            text: "REPORTE DE VENTAS",
+          },
+          data: [
+            {
+              type: "pie",
+              showInLegend: true,
+              toolTipContent: "<b>{name}</b>: ${y} (#percent%)",
+              indexLabel: "{name} - #percent%",
+              dataPoints: dataPoints,
+            },
+          ],
+        });
+    
+        chart.render();
+      });
+      
+    } else if(this.filtro == "Productos" && this.tipo == "Barras"){
+
+      this.servicio.getProductos("Barras").toPromise().then((data: any) => {
+        console.log(data);
+        this.posts = data["data"];
+        let dataPoints = [];
+        let y = 0;
+        let label = "";
+        for (var i = 0; i < this.posts.length; i++) {
+          y = data["data"][i]["cantidad"];
+          label = data["data"][i]["nombre"];
+          dataPoints.push({ y: y, label: label });
+        }
+        console.log(dataPoints);
+        let chart = new CanvasJS.Chart("chartContainer", {
+          animationEnabled: true,
+          exportEnabled: true,
+          title: {
+            text: "REPORTE DE VENTAS",
+          },
+          data: [
+            {
+              type: "column",
+              
+              dataPoints: dataPoints,
+            },
+          ],
+        });
+    
+        chart.render();
+      });
+
+    } else if (this.filtro == "Productos" && this.tipo == "Lineal"){
+
+      this.servicio.getProductos("Lineal").toPromise().then((data: any) => {
+        console.log(data);
+        this.posts = data["data"];
+        let dataPoints = [];
+        let y = 0;
+        let label = "";
+        for (var i = 0; i < this.posts.length; i++) {
+          y = data["data"][i]["cantidad"];
+          label = data["data"][i]["nombre"];
+          dataPoints.push({ y: y});
+        }
+        console.log(dataPoints);
+        let chart = new CanvasJS.Chart("chartContainer2", {
+          zoomEnabled: true,
+          animationEnabled: true,
+          exportEnabled: true,
+          title: {
+            text: "REPORTE DE VENTAS",
+          },
+          subtitles: [
+            {
+              text: "",
+            },
+          ],
+          data: [
+            {
+              type: "line",
+              dataPoints: dataPoints,
+            },
+          ],
+        });
+    
+        chart.render();
+      });
+      
+    } else if (this.filtro == "Productos" && this.tipo == "Pie"){
+
+      this.servicio.getProductos("Pie").toPromise().then((data: any) => {
+        console.log(data);
+        this.posts = data["data"];
+        let dataPoints = [];
+        let y = 0;
+        let label = "";
+        for (var i = 0; i < this.posts.length; i++) {
+          y = data["data"][i]["cantidad"];
+          label = data["data"][i]["nombre"];
+          dataPoints.push({ y: y, name: label });
+        }
+        console.log(dataPoints);
+        let chart = new CanvasJS.Chart("chartContainer3", {
+          theme: "light2",
+          animationEnabled: true,
+          exportEnabled: true,
+          title: {
+            text: "REPORTE DE VENTAS",
+          },
+          data: [
+            {
+              type: "pie",
+              showInLegend: true,
+              toolTipContent: "<b>{name}</b>: ${y} (#percent%)",
+              indexLabel: "{name} - #percent%",
+              dataPoints: dataPoints,
+            },
+          ],
+        });
+    
+        chart.render();
+      });
+      
+    } else if(this.filtro == "Vendedor" && this.tipo == "Barras"){
+
+
+      this.servicio.getVendedor("Barras").toPromise().then((data: any) => {
+        console.log(data);
+        this.posts = data["data"];
+        let dataPoints = [];
+        let y = 0;
+        let label = "";
+        for (var i = 0; i < this.posts.length; i++) {
+          y = data["data"][i]["cantidad"];
+          label = data["data"][i]["nombre"];
+          dataPoints.push({ y: y, label: label });
+        }
+        console.log(dataPoints);
+        let chart = new CanvasJS.Chart("chartContainer", {
+          animationEnabled: true,
+          exportEnabled: true,
+          title: {
+            text: "REPORTE DE VENTAS",
+          },
+          data: [
+            {
+              type: "column",
+              
+              dataPoints: dataPoints,
+            },
+          ],
+        });
+    
+        chart.render();
+      });
+
+    } else if (this.filtro == "Vendedor" && this.tipo == "Lineal"){
+
+      this.servicio.getVendedor("Lineal").toPromise().then((data: any) => {
+        console.log(data);
+        this.posts = data["data"];
+        let dataPoints = [];
+        let y = 0;
+        let label = "";
+        for (var i = 0; i < this.posts.length; i++) {
+          y = data["data"][i]["cantidad"];
+          label = data["data"][i]["nombre"];
+          dataPoints.push({ y: y});
+        }
+        console.log(dataPoints);
+        let chart = new CanvasJS.Chart("chartContainer2", {
+          zoomEnabled: true,
+          animationEnabled: true,
+          exportEnabled: true,
+          title: {
+            text: "REPORTE DE VENTAS",
+          },
+          subtitles: [
+            {
+              text: "",
+            },
+          ],
+          data: [
+            {
+              type: "line",
+              dataPoints: dataPoints,
+            },
+          ],
+        });
+    
+        chart.render();
+      });
+      
+    } else if (this.filtro == "Vendedor" && this.tipo == "Pie"){
+
+      this.servicio.getVendedor("Pie").toPromise().then((data: any) => {
+        console.log(data);
+        this.posts = data["data"];
+        let dataPoints = [];
+        let y = 0;
+        let label = "";
+        for (var i = 0; i < this.posts.length; i++) {
+          y = data["data"][i]["cantidad"];
+          label = data["data"][i]["nombre"];
+          dataPoints.push({ y: y, name: label });
+        }
+        console.log(dataPoints);
+        let chart = new CanvasJS.Chart("chartContainer3", {
+          theme: "light2",
+          animationEnabled: true,
+          exportEnabled: true,
+          title: {
+            text: "REPORTE DE VENTAS",
+          },
+          data: [
+            {
+              type: "pie",
+              showInLegend: true,
+              toolTipContent: "<b>{name}</b>: ${y} (#percent%)",
+              indexLabel: "{name} - #percent%",
+              dataPoints: dataPoints,
+            },
+          ],
+        });
+    
+        chart.render();
+      });
+      
     }
-    let chart = new CanvasJS.Chart("chartContainer2", {
-      zoomEnabled: true,
-      animationEnabled: true,
-      exportEnabled: true,
-      title: {
-        text: "REPORTE DE VENTAS",
-      },
-      subtitles: [
-        {
-          text: "",
-        },
-      ],
-      data: [
-        {
-          type: "line",
-          dataPoints: dataPoints,
-        },
-      ],
-    });
-
-    chart.render();
   }
+
+  evaluarMes(messi:string): string{
+
+    if(messi == "Enero"){
+      
+      return "2020-01"
+
+    } else if(messi=="Febrero"){
+
+      return "2020-02"
+      
+    } else if(messi=="Marzo"){
+
+      return "2020-03"
+
+    } else if(messi=="Abril"){
+
+      return "2020-04"
+
+    } else if(messi=="Mayo"){
+
+      return "2020-05"
+
+    } else if(messi=="Junio"){
+
+      return "2020-06"
+
+    } else if(messi=="Julio"){
+
+      return "2020-07"
+
+    } else if(messi=="Agosto"){
+
+      return "2020-08"
+
+    } else if(messi=="Septiembre"){
+
+      return "2020-09"
+
+    } else if(messi=="Octubre"){
+
+      return "2020-10"
+
+    } else if(messi=="Noviembre"){
+
+      return "2020-11"
+
+    } else if(messi=="Diciembre"){
+
+      return "2020-12"
+
+    }
+  }
+
 }
