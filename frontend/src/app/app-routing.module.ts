@@ -36,7 +36,7 @@ const routes: Routes = [
   { path: 'verInventario/:id', component: VerInventarioComponent},
   { path: 'venta', component: VentaComponent},
   { path: 'detalleventa', component: DetalleVentaComponent},
-  { path: 'desgloseventa/:id', component: DesgloseVentaComponent}
+  { path: 'desgloseventa/:id', component: DesgloseVentaComponent},
   { path: 'reportesVentas', component: ReportesvComponent}
 ];
 
