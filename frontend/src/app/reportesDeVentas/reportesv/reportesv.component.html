@@ -2,12 +2,12 @@
 <div class="col-12 grid-margin">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">INFORMACION REPORTE</h4>
+            <h4 class="card-title" id="titulocarta">INFORMACION REPORTE</h4>
             <form class="form-sample">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Tipo</label>
+                            <label class="col-sm-3 col-form-label" id="tipo">Tipo</label>
                             <div class="col-sm-9">
                                 <select [(ngModel)]="tipo" name="tipo" class="form-control">
                                     <option>Pie</option>
@@ -19,7 +19,7 @@
                     </div> 
                     <div class="col-md-6">
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Filtro</label>
+                            <label class="col-sm-3 col-form-label" id="filtro">Filtro</label>
                             <div class="col-sm-9">
                                 <select [(ngModel)]="filtro" name="filtro" class="form-control">
                                     <option>Dia</option>
@@ -43,7 +43,7 @@
 <div class="col-12 grid-margin">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">GENERAR REPORTE</h4>
+            <h4 class="card-title" id="titulocarta2">GENERAR REPORTE</h4>
             <form class="form-sample">
                 <div class="row">
                     <ng-container *ngIf="show">

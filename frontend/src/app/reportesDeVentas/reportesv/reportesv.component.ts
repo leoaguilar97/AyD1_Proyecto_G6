@@ -30,7 +30,7 @@ export class ReportesvComponent implements OnInit {
   }
 
 
-  toggle() {
+  toggle(){
     if (this.filtro == "Dia") {
       this.show = true;
       this.show2 = false;
@@ -44,7 +44,6 @@ export class ReportesvComponent implements OnInit {
       this.show2 = false;
       this.show3 = true;
     } else {
-      
       this.show = false;
       this.show2 = false;
       this.show3 = false;
@@ -72,16 +71,18 @@ export class ReportesvComponent implements OnInit {
 
   
 
-  cancelar() {
+  cancelar():number {
     this.tipo = "";
     this.filtro = "";
+    return -1;
   }
 
-  cancelar2() {
-    this.rango = ""
+  cancelar2():boolean {
+    this.rango = "";
+    return true;
   }
 
-  llenarArray(){
+  llenarArray():string{
 
     if(this.filtro == "Dia" && this.tipo == "Barras"){
 
@@ -605,6 +606,8 @@ export class ReportesvComponent implements OnInit {
       });
       
     }
+
+    return "graficado";
   }
 
   evaluarMes(messi:string): string{
