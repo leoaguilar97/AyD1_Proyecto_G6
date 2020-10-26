@@ -38,7 +38,7 @@ export class DetalleVentaComponent implements OnInit {
   }
   
   verVenta(id: string) {
-    this.router.navigate(['venta', id]);
+    this.router.navigate(['desgloseventa', id]);
   }
 
   

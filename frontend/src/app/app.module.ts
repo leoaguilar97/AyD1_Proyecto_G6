@@ -27,7 +27,7 @@ import { EditarSedesComponent } from './editar-sedes/editar-sedes.component';
 import { EditarBodegasComponent } from './editar-bodegas/editar-bodegas.component';
 import { VerInventarioComponent } from './ver-inventario/ver-inventario.component';
 import { DetalleVentaComponent } from './detalle-venta/detalle-venta.component';
-import { VentaComponent } from './venta/venta.component';
+import { DesgloseVentaComponent } from './desglose-venta/desglose-venta.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +50,7 @@ import { VentaComponent } from './venta/venta.component';
     EditarBodegasComponent,
     VerInventarioComponent,
     DetalleVentaComponent,
-    VentaComponent
+    DesgloseVentaComponent
   ],
   imports: [
     BrowserModule,

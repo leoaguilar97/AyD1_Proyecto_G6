@@ -4,13 +4,12 @@ import { HttpClient } from '@angular/common/http';
 import { DetalleventaService } from '../services/detalleventa.service';
 import { ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
-
 @Component({
-  selector: 'app-venta',
-  templateUrl: './venta.component.html',
-  styleUrls: ['./venta.component.scss']
+  selector: 'app-desglose-venta',
+  templateUrl: './desglose-venta.component.html',
+  styleUrls: ['./desglose-venta.component.scss']
 })
-export class VentaComponent implements OnInit {
+export class DesgloseVentaComponent implements OnInit {
 
   constructor(private router: Router, private http: HttpClient, private DetalleventaService: DetalleventaService, private route: ActivatedRoute) { }
 
