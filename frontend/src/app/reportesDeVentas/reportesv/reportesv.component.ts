@@ -30,7 +30,7 @@ export class ReportesvComponent implements OnInit {
   }
 
 
-  toggle() {
+  toggle(){
     if (this.filtro == "Dia") {
       this.show = true;
       this.show2 = false;
@@ -44,7 +44,6 @@ export class ReportesvComponent implements OnInit {
       this.show2 = false;
       this.show3 = true;
     } else {
-      
       this.show = false;
       this.show2 = false;
       this.show3 = false;
@@ -72,16 +71,18 @@ export class ReportesvComponent implements OnInit {
 
   
 
-  cancelar() {
+  cancelar():number {
     this.tipo = "";
     this.filtro = "";
+    return -1;
   }
 
-  cancelar2() {
-    this.rango = ""
+  cancelar2():boolean {
+    this.rango = "";
+    return true;
   }
 
-  llenarArray(){
+  llenarArray():string{
 
     if(this.filtro == "Dia" && this.tipo == "Barras"){
 
@@ -267,6 +268,109 @@ export class ReportesvComponent implements OnInit {
         for (var i = 0; i < this.posts.length; i++) {
           y = data["data"][i]["total"];
           label = data["data"][i]["dia"];
+          dataPoints.push({ y: y, name: label.toString() });
+        }
+        console.log(dataPoints);
+        let chart = new CanvasJS.Chart("chartContainer3", {
+          theme: "light2",
+          animationEnabled: true,
+          exportEnabled: true,
+          title: {
+            text: "REPORTE DE VENTAS",
+          },
+          data: [
+            {
+              type: "pie",
+              showInLegend: true,
+              toolTipContent: "<b>{name}</b>: ${y} (#percent%)",
+              indexLabel: "{name} - #percent%",
+              dataPoints: dataPoints,
+            },
+          ],
+        });
+    
+        chart.render();
+      });
+      
+    } else if(this.filtro == "Anio" && this.tipo == "Barras"){
+
+      this.servicio.getAnio("Barras",this.rango).toPromise().then((data: any) => {
+        console.log(data);
+        this.posts = data["data"];
+        let dataPoints = [];
+        let y = 0;
+        let label = "";
+        for (var i = 0; i < this.posts.length; i++) {
+          y = data["data"][i]["total"];
+          label = data["data"][i]["mes"];
+          dataPoints.push({ y: y, label: label });
+        }
+        console.log(dataPoints);
+        let chart = new CanvasJS.Chart("chartContainer", {
+          animationEnabled: true,
+          exportEnabled: true,
+          title: {
+            text: "REPORTE DE VENTAS",
+          },
+          data: [
+            {
+              type: "column",
+              
+              dataPoints: dataPoints,
+            },
+          ],
+        });
+    
+        chart.render();
+      });
+
+    } else if (this.filtro == "Anio" && this.tipo == "Lineal"){
+
+      this.servicio.getAnio("Lineal", this.rango).toPromise().then((data: any) => {
+        console.log(data);
+        this.posts = data["data"];
+        let dataPoints = [];
+        let y = 0;
+        let label = "";
+        for (var i = 0; i < this.posts.length; i++) {
+          y = data["data"][i]["total"];
+          label = data["data"][i]["mes"];
+          dataPoints.push({ y: y});
+        }
+        console.log(dataPoints);
+        let chart = new CanvasJS.Chart("chartContainer2", {
+          zoomEnabled: true,
+          animationEnabled: true,
+          exportEnabled: true,
+          title: {
+            text: "REPORTE DE VENTAS",
+          },
+          subtitles: [
+            {
+              text: "",
+            },
+          ],
+          data: [
+            {
+              type: "line",
+              dataPoints: dataPoints,
+            },
+          ],
+        });
+    
+        chart.render();
+      });
+      
+    } else if (this.filtro == "Anio" && this.tipo == "Pie"){
+      this.servicio.getAnio("Pie", this.rango).toPromise().then((data: any) => {
+        console.log(data);
+        this.posts = data["data"];
+        let dataPoints = [];
+        let y = 0;
+        let label = "";
+        for (var i = 0; i < this.posts.length; i++) {
+          y = data["data"][i]["total"];
+          label = data["data"][i]["mes"];
           dataPoints.push({ y: y, name: label.toString() });
         }
         console.log(dataPoints);
@@ -605,6 +709,8 @@ export class ReportesvComponent implements OnInit {
       });
       
     }
+
+    return "graficado";
   }
 
   evaluarMes(messi:string): string{
