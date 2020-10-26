@@ -21,7 +21,10 @@ export class EditarCategoriasComponent implements OnInit {
 
   ngOnInit() {
     this.cargarCategoria();
-    console.log("id es " + this.id);
+    if(this.id==undefined){
+      this.id="Consolas";
+    }
+    //console.log("id es " + this.id);
     //console.log("nombre "+this.nuevo_nombre[0]);
   }
 
@@ -29,7 +32,7 @@ export class EditarCategoriasComponent implements OnInit {
     this.http.get('https://api-erpp.herokuapp.com/api/categoria/' + this.id)
       .toPromise().then((data: any) => {
         this.nuevo_nombre = data.categorias[0].nombre;
-        console.log("nombre es" + this.nuevo_nombre);
+        //console.log("nombre es" + this.nuevo_nombre);
       });
     return true;
   }

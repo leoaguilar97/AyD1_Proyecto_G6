@@ -14,23 +14,20 @@ export class DetalleVentaComponent implements OnInit {
 
   constructor(private router: Router, private http: HttpClient,private DetalleventaService: DetalleventaService) { }
 
-  vents = [];
+  vents;
   dataservice;
   ngOnInit() {
     this.getDetalleVentas();
   }
 
-  getDetalleVentas(){
+  getDetalleVentas() {
     this.DetalleventaService.getVentas()
     .pipe(first())
     .subscribe(
       data => {
         if (data.message == "retrieved") {
           this.vents = data.ventas;
-          console.log(this.vents);
-        } else {
-          console.log("Error")
-        }
+        } 
       },
       error => {
         console.log(error);
