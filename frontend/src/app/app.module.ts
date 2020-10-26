@@ -29,6 +29,7 @@ import { ReportesvComponent } from './reportesDeVentas/reportesv/reportesv.compo
 import { VentaComponent } from './venta/venta.component';
 import { DetalleVentaComponent } from './detalle-venta/detalle-venta.component';
 import { DesgloseVentaComponent } from './desglose-venta/desglose-venta.component';
+import { ServicioReportesService } from './reportesDeVentas/reportesv/servicioReportes/servicio-reportes.service';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,7 @@ import { DesgloseVentaComponent } from './desglose-venta/desglose-venta.componen
     NgbModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [ServicioReportesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

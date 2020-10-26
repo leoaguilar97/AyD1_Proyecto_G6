@@ -1,0 +1,83 @@
+*********************CATEGORIAS************************
+
+Yo te voy a mandar esto: {tipo:"Categorias", grafica:"Lineal",rango: "SinRango"}
+
+y vos me mandas esto: 
+
+{
+    categoria1:35,
+    categoria2:23,
+    categoria3:57
+
+}
+
+**********************PRODUCTOS***************************
+
+Yo te voy a mandar esto: {tipo:"Productos", grafica:"Pie",rango: "SinRango"}
+
+y vos me mandas esto: 
+
+{
+    producto1:35,
+    producto2:23,
+    producto3:57
+
+}
+
+
+**********************VENDEDOR*****************************
+
+Yo te voy a mandar esto: {tipo:"Vendedor", grafica:"Barras", rango: "SinRango"}
+
+y vos me mandas esto: 
+
+{
+    vendedor1:35,
+    vendedor2:23,
+    vendedor3:57
+
+}
+
+*************************FECHA POR DIA*********************
+
+Yo te voy a mandar esto: {tipo:"Dia", grafica:"Lineal", rango:"22/10/2020"}
+
+y vos me mandas esto: 
+
+{
+    ventaDelDia1:35,
+    ventaDelDia2:23,
+    ventaDelDia3:57
+
+}
+**************************FECHA POR MES********************
+
+Yo te voy a mandar esto: {tipo:"Mes", grafica:"Pie", rango:"Octubre"}
+
+y vos me mandas esto: 
+
+{
+    mes1:35,
+    mes2:23,
+    mes3:57
+
+}
+
+**************************FECHA POR AÑO********************
+
+Yo te voy a mandar esto: {tipo:"Anio", grafica:"Barras", rango:"2020"}
+
+y vos me mandas esto: 
+
+{
+    anio1:35,
+    anio2:23,
+    anio3:57
+
+}
+
+
+Recordate que en todas me tenes que devolver la cantidad de ventas hechas, no el valor de las ventas
+excepto para las ventas por dia, en ese si manda el valor de la venta. Igual cuando es grafica de Pie
+devolveme el porcentaje no el valor normal de la cantidad de ventas, para las otras 2 graficas no es
+necesario que sea en porcentaje.
