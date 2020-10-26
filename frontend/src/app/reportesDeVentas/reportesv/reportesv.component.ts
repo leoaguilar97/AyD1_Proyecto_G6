@@ -292,6 +292,109 @@ export class ReportesvComponent implements OnInit {
         chart.render();
       });
       
+    } else if(this.filtro == "Anio" && this.tipo == "Barras"){
+
+      this.servicio.getAnio("Barras",this.rango).toPromise().then((data: any) => {
+        console.log(data);
+        this.posts = data["data"];
+        let dataPoints = [];
+        let y = 0;
+        let label = "";
+        for (var i = 0; i < this.posts.length; i++) {
+          y = data["data"][i]["total"];
+          label = data["data"][i]["mes"];
+          dataPoints.push({ y: y, label: label });
+        }
+        console.log(dataPoints);
+        let chart = new CanvasJS.Chart("chartContainer", {
+          animationEnabled: true,
+          exportEnabled: true,
+          title: {
+            text: "REPORTE DE VENTAS",
+          },
+          data: [
+            {
+              type: "column",
+              
+              dataPoints: dataPoints,
+            },
+          ],
+        });
+    
+        chart.render();
+      });
+
+    } else if (this.filtro == "Anio" && this.tipo == "Lineal"){
+
+      this.servicio.getAnio("Lineal", this.rango).toPromise().then((data: any) => {
+        console.log(data);
+        this.posts = data["data"];
+        let dataPoints = [];
+        let y = 0;
+        let label = "";
+        for (var i = 0; i < this.posts.length; i++) {
+          y = data["data"][i]["total"];
+          label = data["data"][i]["mes"];
+          dataPoints.push({ y: y});
+        }
+        console.log(dataPoints);
+        let chart = new CanvasJS.Chart("chartContainer2", {
+          zoomEnabled: true,
+          animationEnabled: true,
+          exportEnabled: true,
+          title: {
+            text: "REPORTE DE VENTAS",
+          },
+          subtitles: [
+            {
+              text: "",
+            },
+          ],
+          data: [
+            {
+              type: "line",
+              dataPoints: dataPoints,
+            },
+          ],
+        });
+    
+        chart.render();
+      });
+      
+    } else if (this.filtro == "Anio" && this.tipo == "Pie"){
+      this.servicio.getAnio("Pie", this.rango).toPromise().then((data: any) => {
+        console.log(data);
+        this.posts = data["data"];
+        let dataPoints = [];
+        let y = 0;
+        let label = "";
+        for (var i = 0; i < this.posts.length; i++) {
+          y = data["data"][i]["total"];
+          label = data["data"][i]["mes"];
+          dataPoints.push({ y: y, name: label.toString() });
+        }
+        console.log(dataPoints);
+        let chart = new CanvasJS.Chart("chartContainer3", {
+          theme: "light2",
+          animationEnabled: true,
+          exportEnabled: true,
+          title: {
+            text: "REPORTE DE VENTAS",
+          },
+          data: [
+            {
+              type: "pie",
+              showInLegend: true,
+              toolTipContent: "<b>{name}</b>: ${y} (#percent%)",
+              indexLabel: "{name} - #percent%",
+              dataPoints: dataPoints,
+            },
+          ],
+        });
+    
+        chart.render();
+      });
+      
     } else if(this.filtro == "Categorias" && this.tipo == "Barras"){
 
       this.servicio.getCategorias("Barras").toPromise().then((data: any) => {
