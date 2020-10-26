@@ -19,7 +19,7 @@ describe('DetalleVentaComponent', () => {
   let location: Location;
 
   const routes: Routes = [
-    { path: 'desglose/:id', component: DesgloseVentaComponent }
+    { path: 'desgloseventa/:id', component: DesgloseVentaComponent }
   ];
 
   beforeEach(async(() => {
@@ -48,10 +48,10 @@ describe('DetalleVentaComponent', () => {
     expect(component.getDetalleVentas()).toBeTruthy;
   });
 
-  it('Debe redireccionar a editarCategorias/Consolas al recibir el id', fakeAsync(() => {
+  it('Debe redireccionar a desgloseventa/5f91145b8f444f001752d270 al recibir el id', fakeAsync(() => {
     component.verVenta("5f91145b8f444f001752d270");
     tick(50);
-    expect(location.path()).toBe('/editarCategorias/5f91145b8f444f001752d270');
+    expect(location.path()).toBe('/desgloseventa/5f91145b8f444f001752d270');
   }));
 
 
