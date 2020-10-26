@@ -44,9 +44,7 @@ describe('DetalleVentaComponent', () => {
     fixture.detectChanges();
   });
 
-  it('Debería retornar true al obtener ventas', () => {
-    expect(component.getDetalleVentas()).toBeTruthy;
-  });
+
 
 
 });
