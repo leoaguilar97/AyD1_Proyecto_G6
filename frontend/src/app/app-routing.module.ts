@@ -33,7 +33,7 @@ const routes: Routes = [
   { path: 'editarSede/:id', component: EditarSedesComponent},
   { path: 'editarBodegas/:id', component: EditarBodegasComponent},
   { path: 'verInventario/:id', component: VerInventarioComponent},
-  { path: 'venta', component: VentaComponent}
+  { path: 'venta', component: VentaComponent},
   { path: 'detalleventa', component: DetalleVentaComponent},
   { path: 'desgloseventa/:id', component: DesgloseVentaComponent}
 ];

@@ -48,10 +48,10 @@ import { DesgloseVentaComponent } from './desglose-venta/desglose-venta.componen
     EditarCategoriasComponent,
     EditarSedesComponent,
     EditarBodegasComponent,
-    ReportesvComponent
-    VentaComponent
+    ReportesvComponent,
+    VentaComponent,
     DetalleVentaComponent,
-    DesgloseVentaComponent
+    DesgloseVentaComponent,
     VerInventarioComponent,
   ],
   imports: [
