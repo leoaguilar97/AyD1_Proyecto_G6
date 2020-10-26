@@ -214,8 +214,6 @@ exports.mes = async (req, res) => {
 
     request.status = () => { return request }
 
-    const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
-
     await controllerVenta.getVentas(request);
     var ventas = [];
     reportData.ventas.forEach(venta => {
@@ -259,27 +257,25 @@ exports.ano = async (req, res) => {
         }
     };
 
-    let ano = req.body.ano
+    let ano = new Date(req.body.ano+"-10-10")
 
     request.status = () => { return request }
-
-    const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
 
     await controllerVenta.getVentas(request);
     var ventas = [];
     reportData.ventas.forEach(venta => {
-        let fecha = venta.createdAt.toLocaleDateString("es-ES", options);
+        let fecha = venta.createdAt;
         let exsteMes = true
         ventas.forEach(mes => {
-            if (mes.mes.split("-")[0] == fecha.split("-")[0] &&
-                mes.mes.split("-")[1] == fecha.split("-")[1]) {
+            if (mes.fecha.getMonth() == fecha.getMonth() &&
+                mes.fecha.getYear() == fecha.getYear()) {
                 exsteMes = false
                 mes.total += venta.total;
             }
         })
 
-        if (fecha.includes(ano) && exsteMes) {
-            ventas.push({ mes: obtenerMes(fecha.split("-")[1]), total: venta.total })
+        if (fecha.getYear()==ano.getYear() && exsteMes) {
+            ventas.push({fecha:fecha, mes: obtenerMes(fecha.getMonth()+1), total: venta.total })
         }
     });
 
@@ -299,7 +295,7 @@ exports.ano = async (req, res) => {
 
 
 function obtenerMes(mes) {
-    switch (mes) {
+    switch (mes+"") {
         case "1":
             return "Enero"
         case "2":
