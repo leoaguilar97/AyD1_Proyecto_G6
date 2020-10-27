@@ -40,11 +40,13 @@ describe('EditarCategoriasComponent', () => {
 
    //Test 1
    it('Debe retornar True al cargar los Categorías', async(() => {
+    component.id="Consolas";
     expect(component.cargarCategoria()).toBeTrue();
   }));
 
   //Test 2
   it('Titulo de formulario debe ser -MODIFICAR CATEGORIA-', async(() => {
+    component.id="Consolas";
     const title = document.getElementById('titulocategoria').innerText;
     expect(title).toContain("MODIFICAR CATEGORIA"); 
   }));

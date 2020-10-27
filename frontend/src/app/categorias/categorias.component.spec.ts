@@ -62,19 +62,20 @@ describe('CategoriasComponent', () => {
   }));
 
   //Test 5
-  it('Debe redireccionar a editarCategorias/categoria1 al recibir el id', fakeAsync(() => {
-    component.editar("categoria1");
+  it('Debe redireccionar a editarCategorias/Consolas al recibir el id', fakeAsync(() => {
+    component.editar("Consolas");
     tick(50);
-    expect(location.path()).toBe('/editarCategorias/categoria1');
+    expect(location.path()).toBe('/editarCategorias/Consolas');
   }));
 
-  //Test 6
+  /*Test 6
   it('Debe retornar True al eliminar producto', async(() => {
     try {
     expect(component.eliminar("categoriaprueba")).toBeTrue();
     } catch (error) { 
     }
   }));
+  */
 
 
 
