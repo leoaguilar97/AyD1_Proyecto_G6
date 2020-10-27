@@ -21,6 +21,7 @@ export class VerInventarioComponent implements OnInit {
   cargarProductos() {
     this.http.get('https://api-erpp.herokuapp.com/api/bodega/' + this.id)
       .toPromise().then((data: any) => {
+        console.log(data); 
         this.nombre_bodega = data.bodega.nombre;
         this.productos = data.bodega.productos;
       });
