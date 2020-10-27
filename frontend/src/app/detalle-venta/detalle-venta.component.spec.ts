@@ -55,4 +55,10 @@ describe('DetalleVentaComponent', () => {
   }));
 
 
+  it('Titulo de tabla debe ser -HISTORIAL DE VENTAS-', async(() => {
+    const title = document.getElementById('titulotabla').innerText;
+    expect(title).toContain("HISTORIAL DE VENTAS");
+  }));
+
+
 });
