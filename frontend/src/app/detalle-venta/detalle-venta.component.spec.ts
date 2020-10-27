@@ -60,5 +60,10 @@ describe('DetalleVentaComponent', () => {
     expect(title).toContain("HISTORIAL DE VENTAS");
   }));
 
+  it('Arreglo de ventas debe estar lleno al recuperar datos de la db', async(() => {
+    component.getDetalleVentas();
+    expect(component.vents).toBeDefined();
+  }));
+
 
 });
