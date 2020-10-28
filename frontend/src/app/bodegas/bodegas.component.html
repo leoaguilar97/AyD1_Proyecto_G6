@@ -9,15 +9,15 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Nombre</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" [(ngModel)]="nuevo_nombre" name="nuevo_nombre"/>
+                                <input type="text" class="form-control" [(ngModel)]="nuevo_nombre" name="nuevo_nombre" />
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label" >Dirección</label>
+                            <label class="col-sm-3 col-form-label">Dirección</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" [(ngModel)]="nuevo_direccion" name="nuevo_direccion"/>
+                                <input type="text" class="form-control" [(ngModel)]="nuevo_direccion" name="nuevo_direccion" />
                             </div>
                         </div>
                     </div>
@@ -27,7 +27,7 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Sede</label>
                             <div class="col-sm-9">
-                                <select [(ngModel)]="nuevo_sedes" name="nuevo_sede" class="form-control">
+                                <select [(ngModel)]="nuevo_sedes" name="nuevo_sedes" class="form-control">
                                     <option>Sede1</option>
                                     <option>Sede2</option>
                                     <option>Sede3</option>
@@ -37,7 +37,7 @@
                     </div>
                 </div>
                 <button type="submit" (click)="agregar()" class="btn btn-success mr-2">Agregar</button>
-                <button class="btn btn-light" (click)="cancelar()" >Cancelar</button>
+                <button class="btn btn-light" (click)="cancelar()">Cancelar</button>
             </form>
         </div>
     </div>
