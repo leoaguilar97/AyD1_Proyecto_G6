@@ -18,6 +18,7 @@ import { VentaComponent } from './venta/venta.component';
 import { DetalleVentaComponent } from './detalle-venta/detalle-venta.component';
 import { DesgloseVentaComponent } from './desglose-venta/desglose-venta.component';
 import { ReportesvComponent } from './reportesDeVentas/reportesv/reportesv.component';
+import { ModificarInventarioComponent } from './modificar-inventario/modificar-inventario.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -37,7 +38,8 @@ const routes: Routes = [
   { path: 'venta', component: VentaComponent},
   { path: 'detalleventa', component: DetalleVentaComponent},
   { path: 'desgloseventa/:id', component: DesgloseVentaComponent},
-  { path: 'reportesVentas', component: ReportesvComponent}
+  { path: 'reportesVentas', component: ReportesvComponent},
+  { path: 'modificarInventario/:id', component: ModificarInventarioComponent}
 ];
 
 @NgModule({

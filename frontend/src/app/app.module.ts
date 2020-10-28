@@ -30,6 +30,7 @@ import { VentaComponent } from './venta/venta.component';
 import { DetalleVentaComponent } from './detalle-venta/detalle-venta.component';
 import { DesgloseVentaComponent } from './desglose-venta/desglose-venta.component';
 import { ServicioReportesService } from './reportesDeVentas/reportesv/servicioReportes/servicio-reportes.service';
+import { ModificarInventarioComponent } from './modificar-inventario/modificar-inventario.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { ServicioReportesService } from './reportesDeVentas/reportesv/servicioRe
     DetalleVentaComponent,
     DesgloseVentaComponent,
     VerInventarioComponent,
+    ModificarInventarioComponent,
   ],
   imports: [
     BrowserModule,

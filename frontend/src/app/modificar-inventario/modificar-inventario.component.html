@@ -1,0 +1,88 @@
+<!-- Formulario de agregar producto-->
+<div class="col-12 grid-margin">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">AÑADIR PRODUCTO AL INVENTARIO</h4>
+            <form class="form-sample">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Producto</label>
+                            <div class="col-sm-9">
+                                <select [(ngModel)]="id_producto_nuevo" name="id_producto_nuevo" class="form-control">
+                                    <option *ngFor="let producto of todos_productos" value="{{producto.id}}">{{producto.nombre}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>       
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Cantidad</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" [(ngModel)]="cantidad_nueva" name="nuevo_nombre"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Precio</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" [(ngModel)]="precio_nuevo" name="nuevo_nombre"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" (click)="agregar()" class="btn btn-success mr-2">Agregar</button>
+                <button class="btn btn-light" (click)="cancelar()" >Cancelar</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- Tabla de Productos-->
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Inventario bodega: {{nombre_bodega}}</h4>
+            <button type="submit" (click)="guardarInventario()" class="btn btn-primary mr-2 mb-4">Guardar Inventario</button>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th> </th>
+                            <th> ID </th>
+                            <th> Nombre </th>
+                            <th> Precio </th>
+                            <th> Cantidad </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Repitencia-->
+                        <tr *ngFor="let producto of productos; let indexOfelement=index;">
+                            <td>
+                                <img class="mr-2" src="assets/images/menu_icons/88.png" alt="image" />
+                            </td>
+                            <td>
+                                {{producto.id}}
+                            </td>
+                            <td>
+                                {{producto.nombre}}
+                            </td>
+                            <td>
+                                Q. {{producto.precio| number:'1.2-2'}}
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" [(ngModel)]="cantidades[indexOfelement]" name="cantidad">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
