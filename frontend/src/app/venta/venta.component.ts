@@ -99,6 +99,10 @@ export class VentaComponent implements OnInit {
       }
     });
   }
+  cancelar() {
+    this.limpiarDatos();
+  }
+
   agregar() {
     const producto: Producto = {
       cantidad: this.cantidad_producto,
