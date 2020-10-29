@@ -7,13 +7,13 @@
                     <div class="col-md-6">
                         <div class="form-group row">
                             <label class="col-sm-6 col-form-label"><strong>Nombre Cliente: </strong></label>
-                            <label class="col-sm-6 col-form-label">{{venta.nombre_cliente}}</label>
+                            <label class="col-sm-6 col-form-label">{{nombre_cliente}}</label>
                         </div>   
                     </div>       
                     <div class="col-md-6">
                         <div class="form-group row">
                             <label class="col-sm-6 col-form-label"><strong>NIT: </strong></label>
-                            <label class="col-sm-6 col-form-label">{{venta.nit}}</label>
+                            <label class="col-sm-6 col-form-label">{{nit}}</label>
                         </div>   
                     </div>   
                 </div>
@@ -21,7 +21,7 @@
                     <div class="col-md-6">
                         <div class="form-group row">
                             <label class="col-sm-6 col-form-label"><strong>Dirección: </strong></label>
-                            <label class="col-sm-6 col-form-label">{{venta.direccion}}</label>
+                            <label class="col-sm-6 col-form-label">{{dir}}</label>
                         </div>   
                     </div> 
                     <div class="col-md-6">
@@ -35,7 +35,7 @@
                     <div class="col-md-6">
                         <div class="form-group row">
                             <label class="col-sm-6 col-form-label"><strong>Vendedor: </strong></label>
-                            <label class="col-sm-6 col-form-label">{{vendedor.nombre}} {{vendedor.apellido}}</label>
+                            <label class="col-sm-6 col-form-label">{{nombre_vend}}</label>
                         </div>   
                     </div>   
                 </div>
@@ -79,7 +79,7 @@
                                     <th> </th>
                                     <th> </th>
                                     <th> Total </th>
-                                    <th> Q. {{venta.total| number:'1.2-2'}} </th>
+                                    <th> Q. {{tot| number:'1.2-2'}} </th>
                                 </tr>
                             </tfoot>
                         </table>

@@ -13,7 +13,7 @@ export class DesgloseVentaComponent implements OnInit {
 
   constructor(private router: Router, private http: HttpClient, private DetalleventaService: DetalleventaService, private route: ActivatedRoute) { }
 
-  venta = [];
+  venta;
   productos = [];
   vendedor = [];
   id = String(this.route.snapshot.params['id']);
@@ -21,6 +21,15 @@ export class DesgloseVentaComponent implements OnInit {
   bodega;
   prodsbodega=[];
   arregloprecios=[];
+  http1;
+  nombre_cliente;
+  nit;
+  dir;
+  nombre_vend;
+  prod_nombre;
+  tot;
+
+  
   //values
 
   ngOnInit() {
@@ -34,11 +43,15 @@ export class DesgloseVentaComponent implements OnInit {
         data => {
           if (data.message == "retrieved") {
             this.venta = data.venta;
-            this.vendedor = data.venta.vendedor;
+            this.nombre_cliente=data.venta.nombre_cliente;
+            this.nit=data.venta.nit;
+            this.dir=data.venta.direccion;
+            this.nombre_vend= data.venta.vendedor.nombre +" " + data.venta.vendedor.apellido;
             this.productos = data.venta.productos;
             this.bodega = data.venta.bodega;
             this.fecha = data.venta.createdAt;
-            console.log("Data retrieved");
+            this.tot=data.venta.total;
+            //console.log("Data retrieved");
             
             this.getFecha();
             this.getProductosBodega();
@@ -53,6 +66,7 @@ export class DesgloseVentaComponent implements OnInit {
           console.log(error);
         });
   }
+ 
 
   //Obtener formato de fecha
   getFecha() {
@@ -68,7 +82,7 @@ export class DesgloseVentaComponent implements OnInit {
       .subscribe(
         data => {
           if (data.message == "retrieved") {
-            console.log("Retrieved bodega");
+            //console.log("Retrieved bodega");
             this.prodsbodega=data.bodega.productos;
             this.getPrecioProductos();
           } else {
