@@ -32,3 +32,20 @@ Característica: Un vendedor puede registrar compras
         Entonces el vendedor realiza un ticket de venta y es guardada exitosamente
 		
 		
+        Cuando el cliente intenta realizar la siguiente compra
+        
+        | Producto | Cantidad comprada  | IdProducto                |
+        | Pollo    | 200                | 5f6d138cf3e1670edc6aef07  |
+        | Carne    | 10                 | 5f6d13a29c48f710d40e1ed6  |
+		
+        Entonces el vendedor le comenta al cliente que no es posible realizar su compra
+        Y cancela la venta debido a falta de unidades en la bodega
+
+        Cuando el cliente intenta realizar otra compra
+        
+        | Producto | Cantidad comprada  | IdProducto                |
+        | Pollo    | 200                | 5f6d138cf3e1670edc6aef07  |
+        | Atun     | 10                 | 5f6d13a29c47f410d44e1ed6  |
+
+        Entonces el vendedor le comenta al cliente que no es posible realizar su compra
+        Y cancela la venta debido a que no hay atun en la bodega

@@ -1,6 +1,5 @@
 # language: es
 
-@edgar
 Característica: Un usuario genere reportes de Ventas
     Escenario: Reporte por categorias
         Cuando el usuario realiza un reporte por categorias y se devuelven los datos del reporte.
