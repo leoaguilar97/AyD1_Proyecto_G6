@@ -30,7 +30,7 @@ db.mongoose
 
 // simple route
 app.get("/", (req, res) => {
-    res.json({ mensaje: "Sitio Funcionando" });
+    res.json({ mensaje: "Sitio Funcionando V2" });
 });
 
 require("./app/routes/usuario")(app);
@@ -39,6 +39,9 @@ require("./app/routes/login")(app);
 require("./app/routes/bodega")(app);
 require("./app/routes/categoria")(app);
 require("./app/routes/sede")(app);
+require("./app/routes/venta")(app);
+require("./app/routes/reportes")(app);
+
 
 // set port, listen for requests
 const PORT = process.env.PORT || 5000;

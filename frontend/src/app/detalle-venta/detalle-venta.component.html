@@ -1,0 +1,54 @@
+<!-- Tabla de Categorias-->
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title" id="titulotabla">HISTORIAL DE VENTAS</h4>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th> </th>
+                            <th> ID Venta </th>
+                            <th> Nombre cliente</th>
+                            <th> NIT </th>
+                            <th> Dirección </th>
+                            <th> Vendedor </th>
+                            <th> Total </th>
+                            <th> Detalles </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Repitencia-->
+                        <tr *ngFor="let venta of vents">
+                            <td>
+                                <img class="mr-2" src="https://image.flaticon.com/icons/png/512/61/61584.png" alt="image" />
+                            </td>
+                            <td>
+                                {{venta.id}}
+                            </td>
+                            <td>
+                                {{venta.nombre_cliente}}
+                            </td>
+                            <td>
+                                {{venta.nit}}
+                            </td>
+                            <td>
+                                {{venta.direccion}}
+                            </td>
+                            <td>
+                                {{venta.vendedor.nombre}} {{venta.vendedor.apellido}}
+                            </td>
+                            <td>
+                                Q. {{venta.total | number:'1.2-2'}}
+                            </td>
+                            <td>
+                                <button type="button" class="btn social-btn py-0 px-0 mr-2"><i
+                                        class="mdi mdi-36px mdi-cart-plus" (click)="verVenta(venta.id)"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

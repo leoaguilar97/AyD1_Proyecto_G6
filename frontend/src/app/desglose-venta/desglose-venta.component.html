@@ -1,0 +1,91 @@
+<div class="col-12 grid-margin">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title" id="titulocategoria">DETALLES DE VENTA</h4>
+            <form class="form-sample">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-6 col-form-label"><strong>Nombre Cliente: </strong></label>
+                            <label class="col-sm-6 col-form-label">{{nombre_cliente}}</label>
+                        </div>   
+                    </div>       
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-6 col-form-label"><strong>NIT: </strong></label>
+                            <label class="col-sm-6 col-form-label">{{nit}}</label>
+                        </div>   
+                    </div>   
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-6 col-form-label"><strong>Dirección: </strong></label>
+                            <label class="col-sm-6 col-form-label">{{dir}}</label>
+                        </div>   
+                    </div> 
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-6 col-form-label"><strong>Fecha: </strong></label>
+                            <label class="col-sm-6 col-form-label">{{fecha}}</label>
+                        </div>   
+                    </div>        
+                </div>
+                <div class="row">     
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-6 col-form-label"><strong>Vendedor: </strong></label>
+                            <label class="col-sm-6 col-form-label">{{nombre_vend}}</label>
+                        </div>   
+                    </div>   
+                </div>
+                <br>
+                <h4 class="card-title" id="titulocategoria">DESCRIPCIÓN DE PRODUCTOS</h4>
+                <div class="row">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th> </th>
+                                    <th> Nombre Producto </th>
+                                    <th> Categoría </th>
+                                    <th> Precio Unitario </th>
+                                    <th> Cantidad </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Repitencia-->
+                                <tr *ngFor="let prod of productos;let i = index;">
+                                    <td>
+                                        <img class="mr-2" src="https://icons-for-free.com/iconfiles/png/512/buy+citycons+mall+shopping+icon-1320136423977087098.png" alt="image" />
+                                    </td>
+                                    <td>
+                                        {{prod.producto.nombre}}
+                                    </td>
+                                    <td>
+                                        {{prod.producto.categorias[0].nombre}}
+                                    </td>
+                                    <td>
+                                        Q. {{arregloprecios[i] | number:'1.2-2'}}
+                                    </td>
+                                    <td>
+                                        {{prod.cantidad}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th> </th>
+                                    <th> </th>
+                                    <th> </th>
+                                    <th> Total </th>
+                                    <th> Q. {{tot| number:'1.2-2'}} </th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

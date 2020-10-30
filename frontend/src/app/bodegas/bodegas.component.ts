@@ -52,6 +52,6 @@ export class BodegasComponent implements OnInit {
     this.nuevo_sedes = [];
   }
   inventario(id: string) {
-    this.router.navigate(['verInventario  ', id]);
+    this.router.navigate(['verInventario', id]);
   }
 }
