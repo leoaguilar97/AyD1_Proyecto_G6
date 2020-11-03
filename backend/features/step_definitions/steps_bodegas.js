@@ -229,7 +229,7 @@ Then('se espera un error {int} ya que la bodega no existe', function(code) {
 });
 
 Given('una bodega que se le quieren inserter ciertos productos', async function() {
-    throw "Error";
+    //throw "Error";
     post.json = {
         "bodega": bodega.id,
         "productos": [{
